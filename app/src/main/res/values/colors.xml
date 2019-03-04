@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="transparent">#00000000</color><!--透明色-->
+    <color name="white">#FFFFFFFF</color><!--白色-->
+    <color name="white_tran_87">#DEFFFFFF</color><!--半透明白色-->
+    <color name="white_tran_54">#8AFFFFFF</color><!--半透明白色-->
+    <color name="white_tran_38">#61FFFFFF</color><!--半透明白色-->
+    <color name="black">#FF000000</color><!--黑色-->
+    <color name="black_tran_87">#DE000000</color><!--半透明黑色-->
+    <color name="black_tran_54">#8A000000</color><!--半透明黑色-->
+    <color name="black_tran_38">#61000000</color><!--半透明黑色-->
+    <color name="red">#FFF33925</color><!--红色-->
+    <color name="gray">#FFDDDDDD</color><!--灰色-->
+    <color name="main">#FF04AA04</color><!--APP主色-->
+    <color name="main_tran_87">#DE04AA04</color><!--APP半透明主色-->
+    <color name="main_tran_54">#8A04AA04</color><!--APP半透明主色-->
+    <color name="main_tran_38">#6104AA04</color><!--APP半透明主色-->
+    <color name="main_tran_10">#1A04AA04</color><!--APP半透明主色-->
+    <color name="main_bg_tips">#FFFFFEEE</color><!--APP主tips背景色-->
+    <color name="main_line">#FFEEEEEE</color><!--线条颜色-->
+    <color name="main_font">#CC000000</color><!--主文字颜色-->
+    <color name="main_font_2">#99000000</color><!--主文字颜色-->
+    <color name="main_font_lv_1">#66000000</color><!--主文字颜色(一级)-->
+    <color name="main_font_lv_2">@color/main_font_lv_1</color><!--主文字颜色(二级)-->
+    <color name="main_hint">@color/main_font_lv_2</color><!--提示文字颜色-->
+    <color name="main_click">#FF5087C4</color><!--可点击颜色-->
+    <color name="main_title_bar">@color/main</color><!--APP导航栏颜色-->
+    <color name="main_status_bar">#FF1E1E1E</color><!--APP通知栏颜色-->
+    <color name="main_bg">#FFF8F8F8</color><!--APP主背景色-->
+    <color name="main_bg_lv_1">#FFF5F5F5</color><!--APP主背景色(一级)-->
+    <color name="main_unchecked">@color/gray</color><!--APP未选中色-->
+    <color name="main_unable">@color/main_font_lv_2</color><!--APP不可点色-->
+    <color name="main_success">#FF87C17D</color><!--APP成功/通过色-->
+    <color name="main_success_tran_10">#1A87C17D</color><!--APP成功/通过色-->
+    <color name="main_placeholder">@color/gray</color><!--APP占位图色-->
+
+</resources>

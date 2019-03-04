@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">CustomComponents</string>
+    <string name="title_activity_line_chart_view">折线图</string>
+</resources>
