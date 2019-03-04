@@ -39,6 +39,10 @@ public class LineChartViewActivity extends AppCompatActivity {
     }
 
     private void initData() {
+        int[] scoreArr = new int[]{80, 61, 115, 141, 110, 120};// 数值数组
+        String[] timeArr = new String[]{"6月", "7月", "8月", "9月", "10月", "11月"};// 时间数组
+
         lcv_trend.setInterceptTouch(false);
+        lcv_trend.setData(scoreArr, timeArr);
     }
 }
