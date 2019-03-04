@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RatioView">
+        <attr name="aspectX" format="integer" />
+        <attr name="aspectY" format="integer" />
+        <attr name="aspectBase" format="enum">
+            <enum name="X" value="1" />
+            <enum name="Y" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

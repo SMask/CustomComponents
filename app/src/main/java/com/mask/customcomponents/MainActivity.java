@@ -20,4 +20,8 @@ public class MainActivity extends AppCompatActivity {
         PasswordInputViewActivity.startActivity(this);
     }
 
+    public void onClickCleanEditText(View view) {
+        CleanEditTextActivity.startActivity(this);
+    }
+
 }

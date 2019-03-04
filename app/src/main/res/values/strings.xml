@@ -1,5 +1,10 @@
 <resources>
+
     <string name="app_name">CustomComponents</string>
     <string name="title_activity_line_chart_view">折线图</string>
     <string name="title_activity_password_input_view">密码输入框</string>
+    <string name="title_activity_clean_edit_text">带清空按钮的输入框</string>
+
+    <string name="search">搜索</string>
+
 </resources>

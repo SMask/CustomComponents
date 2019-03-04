@@ -27,4 +27,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_line_chart_view" />
 
+    <Button
+        android:id="@+id/btn_clean_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClickCleanEditText"
+        android:text="@string/title_activity_clean_edit_text"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_password_input_view" />
+
 </android.support.constraint.ConstraintLayout>

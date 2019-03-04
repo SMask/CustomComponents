@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.mask.customcomponents.view.LineChartView;
 
+/**
+ * 折线图
+ */
 public class LineChartViewActivity extends AppCompatActivity {
 
     private LineChartView lcv_temp;

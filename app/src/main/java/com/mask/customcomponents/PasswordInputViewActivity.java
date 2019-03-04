@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ * 不可见密码输入框
+ */
 public class PasswordInputViewActivity extends AppCompatActivity {
 
     /**
