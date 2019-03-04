@@ -5,7 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mask.customcomponents.view.LineChartView;
+
 public class LineChartViewActivity extends AppCompatActivity {
+
+    private LineChartView lcv_trend;
 
     /**
      * startActivity
@@ -21,5 +25,20 @@ public class LineChartViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_line_chart_view);
+        initView();
+        setListener();
+        initData();
+    }
+
+    private void initView() {
+        lcv_trend = findViewById(R.id.lcv_trend);
+    }
+
+    private void setListener() {
+
+    }
+
+    private void initData() {
+        lcv_trend.setInterceptTouch(false);
     }
 }

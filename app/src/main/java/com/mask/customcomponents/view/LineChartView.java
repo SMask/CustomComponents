@@ -67,6 +67,8 @@ public class LineChartView extends View {
     private int minScore;// 最小值
     private int maxScore;// 最大值
 
+    private boolean isInterceptTouch = false;// 是否拦截触摸动作
+
     private boolean isAutoMinMax = true;// 是否自动计算最小、最大值
 
     private int totalCount;// 原点数量
@@ -191,15 +193,15 @@ public class LineChartView extends View {
         }
     }
 
-//    @Override
-//    public boolean onTouchEvent(MotionEvent event) {
-//        switch (event.getAction()) {
-//            case MotionEvent.ACTION_UP:
-//                onActionUpEvent(event);
-//                break;
-//        }
-//        return true;
-//    }
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_UP:
+                onActionUpEvent(event);
+                break;
+        }
+        return true;
+    }
 
     /**
      * 抬起手指
@@ -581,4 +583,12 @@ public class LineChartView extends View {
         invalidate();
     }
 
+    /**
+     * 设置是否拦截触摸操作
+     *
+     * @param interceptTouch 是否拦截触摸动作
+     */
+    public void setInterceptTouch(boolean interceptTouch) {
+        isInterceptTouch = interceptTouch;
+    }
 }
