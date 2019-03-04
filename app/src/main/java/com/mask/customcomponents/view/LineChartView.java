@@ -27,11 +27,11 @@ public class LineChartView extends View {
     private int viewWith;// 控件宽
     private int viewHeight;// 控件高
 
-    private final int textSize = dipToPx(14);// 文字大小
+    private final int textSize = dpToPx(14);// 文字大小
 
     private int leftOffset;// 左偏移量(预留最大值、最小值显示空间)
     private int rightOffset;// 右偏移量(预留最后一个时间、最后一个ScorePop显示空间)
-    private final int topOffset = dipToPx(8);// 上间距
+    private final int topOffset = dpToPx(8);// 上间距
     private final int bottomOffset = topOffset;// 下间距
 
     private int minScoreYCoordinate;// 最小值Y轴坐标
@@ -39,11 +39,11 @@ public class LineChartView extends View {
 
     private int timeLineYCoordinate;// X轴上方直线Y坐标
 
-    private final int scoreTimeLineOffset = Math.max(dipToPx(16), textSize / 2 + bottomOffset);// 最小分数与X轴上方直线间距
-    private final int defaultOffset = dipToPx(4);// 默认间距(文字的外间距、刻度尺高度、浮窗三角箭头直角边长)
+    private final int scoreTimeLineOffset = Math.max(dpToPx(16), textSize / 2 + bottomOffset);// 最小分数与X轴上方直线间距
+    private final int defaultOffset = dpToPx(4);// 默认间距(文字的外间距、刻度尺高度、浮窗三角箭头直角边长)
     private final int popOffset = topOffset;// 浮窗与原点间距
 
-    private final int brokenLineWith = dipToPx(1);// 折线宽
+    private final int brokenLineWith = dpToPx(1);// 折线宽
 
     private int selectRingBigColor;// 选中圆环颜色(大圆环)
     private int selectRingSmallColor;// 选中圆环颜色(小圆环)
@@ -165,11 +165,11 @@ public class LineChartView extends View {
         // 数据初始化
         final int firstScorePopWidth = getTextWidth(String.valueOf(scoreArr[0])) + defaultOffset * 2;
         final int firstTimeWidth = getTextWidth(timeArr[0]);
-        leftOffset = Math.max(firstScorePopWidth, firstTimeWidth) / 2 + dipToPx(8);
+        leftOffset = Math.max(firstScorePopWidth, firstTimeWidth) / 2 + dpToPx(8);
 
         final int lastScorePopWidth = getTextWidth(String.valueOf(scoreArr[totalCount - 1])) + defaultOffset * 2;
         final int lastTimeWidth = getTextWidth(timeArr[totalCount - 1]);
-        rightOffset = Math.max(lastScorePopWidth, lastTimeWidth) / 2 + dipToPx(8);
+        rightOffset = Math.max(lastScorePopWidth, lastTimeWidth) / 2 + dpToPx(8);
 
         timeLineYCoordinate = viewHeight - bottomOffset - textSize - defaultOffset * 2;// 文字下间距、文字高度、文字上间距、刻度尺高度
 
@@ -227,10 +227,10 @@ public class LineChartView extends View {
 
         // 曲线触摸区域
         for (int i = 0; i < scorePoints.size(); i++) {
-            // dipToPx(8)乘以2为了适当增大触摸面积
+            // dpToPx(8)乘以2为了适当增大触摸面积
             Point point = scorePoints.get(i);
-            if (x > (point.x - dipToPx(8) * 2) && x < (point.x + dipToPx(8) * 2)) {
-                if (y > (point.y - dipToPx(8) * 2) && y < (point.y + dipToPx(8) * 2)) {
+            if (x > (point.x - dpToPx(8) * 2) && x < (point.x + dpToPx(8) * 2)) {
+                if (y > (point.y - dpToPx(8) * 2) && y < (point.y + dpToPx(8) * 2)) {
                     selectIndex = i;
                     return true;
                 }
@@ -239,7 +239,7 @@ public class LineChartView extends View {
 
         // 时间触摸区域
         // 计算每个时间X坐标的中心点
-        float timeTouchY = timeLineYCoordinate - dipToPx(4);// 减去dipToPx(4)增大触摸面积
+        float timeTouchY = timeLineYCoordinate - dpToPx(4);// 减去dipToPx(4)增大触摸面积
 
         float newWith = viewWith - leftOffset - rightOffset;// 折线的总宽度
         float validTouchX[] = new float[totalCount];
@@ -249,7 +249,7 @@ public class LineChartView extends View {
 
         if (y > timeTouchY) {
             for (int i = 0; i < validTouchX.length; i++) {
-                if (x < validTouchX[i] + dipToPx(8) && x > validTouchX[i] - dipToPx(8)) {
+                if (x < validTouchX[i] + dpToPx(8) && x > validTouchX[i] - dpToPx(8)) {
                     selectIndex = i;
                     return true;
                 }
@@ -380,9 +380,9 @@ public class LineChartView extends View {
             if (i == selectIndex) {
                 // 选中的圆环
                 brokenPaint.setColor(selectRingBigColor);
-                canvas.drawCircle(point.x, point.y, dipToPx(8f), brokenPaint);
+                canvas.drawCircle(point.x, point.y, dpToPx(8f), brokenPaint);
                 brokenPaint.setColor(selectRingSmallColor);
-                canvas.drawCircle(point.x, point.y, dipToPx(5f), brokenPaint);
+                canvas.drawCircle(point.x, point.y, dpToPx(5f), brokenPaint);
 
                 // 绘制浮动文本背景框
                 String scoreContent = String.valueOf(scoreArr[i]);
@@ -396,9 +396,9 @@ public class LineChartView extends View {
             }
             // 默认状态
             brokenPaint.setColor(brokenLineColor);
-            canvas.drawCircle(point.x, point.y, dipToPx(2.5f), brokenPaint);
+            canvas.drawCircle(point.x, point.y, dpToPx(2.5f), brokenPaint);
             brokenPaint.setColor(Color.WHITE);
-            canvas.drawCircle(point.x, point.y, dipToPx(1.5f), brokenPaint);
+            canvas.drawCircle(point.x, point.y, dpToPx(1.5f), brokenPaint);
         }
     }
 
@@ -462,7 +462,7 @@ public class LineChartView extends View {
      * @param dp dp
      * @return px
      */
-    private int dipToPx(float dp) {
+    private int dpToPx(float dp) {
         float density = getContext().getResources().getDisplayMetrics().density;
         return (int) (dp * density + 0.5f * (dp >= 0 ? 1 : -1));
     }
