@@ -148,8 +148,7 @@ public class LineChartView extends View {
         totalCount = Math.min(scoreArr.length, timeArr.length);
 
         // 默认选中最大值
-//        selectIndex = resultArr[1][1];
-        selectIndex = -1;
+        selectIndex = isInterceptTouch ? -1 : resultArr[1][1];
 
         // 自动计算最小、最大值
         if (isAutoMinMax) {
@@ -174,8 +173,11 @@ public class LineChartView extends View {
         timeLineYCoordinate = viewHeight - bottomOffset - textSize - defaultOffset * 2;// 文字下间距、文字高度、文字上间距、刻度尺高度
 
         minScoreYCoordinate = timeLineYCoordinate - scoreTimeLineOffset;
-//        maxScoreYCoordinate = topOffset + defaultOffset * 2 + textSize + popOffset;// 预留浮窗显示空间
-        maxScoreYCoordinate = topOffset;
+        if (isInterceptTouch) {
+            maxScoreYCoordinate = topOffset;
+        } else {
+            maxScoreYCoordinate = topOffset + defaultOffset * 2 + textSize + popOffset;// 预留浮窗显示空间
+        }
 
         // 折线原点初始化
         scorePoints.clear();
@@ -195,6 +197,9 @@ public class LineChartView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (isInterceptTouch) {
+            return super.onTouchEvent(event);
+        }
         switch (event.getAction()) {
             case MotionEvent.ACTION_UP:
                 onActionUpEvent(event);
@@ -224,8 +229,7 @@ public class LineChartView extends View {
      * @return 是否是有效的触摸范围
      */
     private boolean validateTouch(float x, float y) {
-
-        // 曲线触摸区域
+        // 折线触摸区域
         for (int i = 0; i < scorePoints.size(); i++) {
             // dpToPx(8)乘以2为了适当增大触摸面积
             Point point = scorePoints.get(i);
@@ -330,12 +334,16 @@ public class LineChartView extends View {
     }
 
     /**
-     * 绘制时间的直线(包括刻度)
+     * 绘制X轴的直线(包括刻度)
      *
      * @param canvas canvas
      */
     private void drawTimeLine(Canvas canvas) {
-        straightPaint.setStrokeWidth(brokenLineWith);
+        // 绘制虚线
+//        canvas.drawLine(0, maxScoreYCoordinate, viewWith, maxScoreYCoordinate, dottedPaint);
+//        canvas.drawLine(0, minScoreYCoordinate, viewWith, minScoreYCoordinate, dottedPaint);
+
+        // 绘制X轴的直线
         canvas.drawLine(0, timeLineYCoordinate, viewWith, timeLineYCoordinate, straightPaint);
 
         float newWith = viewWith - leftOffset - rightOffset;// 绘制X轴刻度的总宽度(和折线的总宽度一致)
@@ -372,7 +380,6 @@ public class LineChartView extends View {
      * @param canvas canvas
      */
     protected void drawPoint(Canvas canvas) {
-        brokenPaint.setStrokeWidth(brokenLineWith);
         for (int i = 0; i < scorePoints.size(); i++) {
             Point point = scorePoints.get(i);
             brokenPaint.setStyle(Paint.Style.FILL);
