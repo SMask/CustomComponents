@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/horizontal_space_small"
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/btn_line_chart_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="onClickLineChartView"
@@ -14,5 +16,15 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_password_input_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClickPasswordInputView"
+        android:text="@string/title_activity_password_input_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_line_chart_view" />
 
 </android.support.constraint.ConstraintLayout>

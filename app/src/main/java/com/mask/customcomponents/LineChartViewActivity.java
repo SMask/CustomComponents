@@ -9,7 +9,7 @@ import com.mask.customcomponents.view.LineChartView;
 
 public class LineChartViewActivity extends AppCompatActivity {
 
-    private LineChartView lcv_trend;
+    private LineChartView lcv_temp;
 
     /**
      * startActivity
@@ -31,7 +31,7 @@ public class LineChartViewActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        lcv_trend = findViewById(R.id.lcv_trend);
+        lcv_temp = findViewById(R.id.lcv_temp);
     }
 
     private void setListener() {
@@ -42,7 +42,7 @@ public class LineChartViewActivity extends AppCompatActivity {
         int[] scoreArr = new int[]{80, 61, 115, 141, 110, 120};// 数值数组
         String[] timeArr = new String[]{"6月", "7月", "8月", "9月", "10月", "11月"};// 时间数组
 
-        lcv_trend.setInterceptTouch(false);
-        lcv_trend.setData(scoreArr, timeArr);
+        lcv_temp.setInterceptTouch(false);
+        lcv_temp.setData(scoreArr, timeArr);
     }
 }

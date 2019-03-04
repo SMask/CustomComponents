@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CustomComponents</string>
     <string name="title_activity_line_chart_view">折线图</string>
+    <string name="title_activity_password_input_view">密码输入框</string>
 </resources>

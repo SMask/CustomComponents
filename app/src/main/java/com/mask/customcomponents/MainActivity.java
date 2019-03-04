@@ -16,4 +16,8 @@ public class MainActivity extends AppCompatActivity {
         LineChartViewActivity.startActivity(this);
     }
 
+    public void onClickPasswordInputView(View view) {
+        PasswordInputViewActivity.startActivity(this);
+    }
+
 }
