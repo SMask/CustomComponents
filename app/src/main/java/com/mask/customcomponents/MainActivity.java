@@ -24,4 +24,8 @@ public class MainActivity extends AppCompatActivity {
         CleanEditTextActivity.startActivity(this);
     }
 
+    public void onClickCreditView(View view) {
+        CreditViewActivity.startActivity(this);
+    }
+
 }

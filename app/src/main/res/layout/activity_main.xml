@@ -37,4 +37,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_password_input_view" />
 
+    <Button
+        android:id="@+id/btn_credit_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:onClick="onClickCreditView"
+        android:text="@string/title_activity_credit_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_clean_edit_text" />
+
 </android.support.constraint.ConstraintLayout>
