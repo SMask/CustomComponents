@@ -28,4 +28,8 @@ public class MainActivity extends AppCompatActivity {
         CreditViewActivity.startActivity(this);
     }
 
+    public void onClickRippleView(View view) {
+        RippleViewActivity.startActivity(this);
+    }
+
 }
