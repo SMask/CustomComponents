@@ -12,7 +12,7 @@ import com.mask.customcomponents.view.LineChartView;
 import java.util.Random;
 
 /**
- * 折线图
+ * 信用分仪表盘
  */
 public class CreditViewActivity extends AppCompatActivity {
 
