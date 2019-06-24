@@ -334,6 +334,13 @@ public class CreditView extends View {
      * @param tips  tips
      */
     public void setData(String time, int score, String tips) {
+        if (score < levelArr[0]) {
+            score = levelArr[0];
+        }
+        int lastIndex = levelArr.length - 1;
+        if (score > levelArr[lastIndex]) {
+            score = levelArr[lastIndex];
+        }
         this.time = time;
         this.score = score;
         this.tips = tips;
