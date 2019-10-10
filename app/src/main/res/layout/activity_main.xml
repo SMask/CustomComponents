@@ -55,6 +55,6 @@
         android:text="@string/title_activity_ripple_view"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_clean_edit_text" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_credit_view" />
 
 </android.support.constraint.ConstraintLayout>
