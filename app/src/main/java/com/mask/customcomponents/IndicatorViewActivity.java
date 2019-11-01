@@ -50,7 +50,7 @@ public class IndicatorViewActivity extends AppCompatActivity {
 
         layout_indicator.setCount(TOTAL_COUNT);
 
-        int[] colorNormalArr = new int[]{Color.parseColor("#FFE851FF"), Color.parseColor("#FF28ACFF")};
+        int[] colorNormalArr = new int[]{Color.parseColor("#FFFFFFFF"), Color.parseColor("#FFFFFFFF")};
         int[] colorSelectedArr = new int[]{Color.parseColor("#FF28ACFF"), Color.parseColor("#FFE851FF")};
         layout_indicator.setColorShader(colorNormalArr, colorSelectedArr);
     }
