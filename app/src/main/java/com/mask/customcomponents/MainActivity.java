@@ -32,4 +32,8 @@ public class MainActivity extends AppCompatActivity {
         RippleViewActivity.startActivity(this);
     }
 
+    public void onClickIndicatorView(View view) {
+        IndicatorViewActivity.startActivity(this);
+    }
+
 }

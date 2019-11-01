@@ -35,4 +35,21 @@
         <item name="textSize">@dimen/main_font</item>
     </style>
 
+    <!-- IndicatorView -->
+    <style name="IndicatorView_Base">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="indicator_margin">6dp</item>
+        <item name="indicator_colorNormal">@color/white</item>
+        <item name="indicator_colorSelected">@color/white</item>
+        <item name="indicator_style">RECT</item>
+        <item name="indicator_radiusNormal">3dp</item>
+        <item name="indicator_radiusSelected">4dp</item>
+        <item name="indicator_widthNormal">8dp</item>
+        <item name="indicator_widthSelected">22dp</item>
+        <item name="indicator_heightNormal">4dp</item>
+        <item name="indicator_heightSelected">4dp</item>
+        <item name="indicator_corners">5dp</item>
+    </style>
+
 </resources>

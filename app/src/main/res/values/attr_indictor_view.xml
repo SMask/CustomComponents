@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="IndicatorView">
+
+        <attr name="indicator_count" format="integer" />
+        <attr name="indicator_selectedPosition" format="integer" />
+
+        <attr name="indicator_margin" format="dimension" />
+        <attr name="indicator_colorNormal" format="color|reference" />
+        <attr name="indicator_colorSelected" format="color|reference" />
+        <attr name="indicator_style" format="enum">
+            <enum name="CIRCLE" value="0" />
+            <enum name="RECT" value="1" />
+        </attr>
+
+        <attr name="indicator_radiusNormal" format="dimension" />
+        <attr name="indicator_radiusSelected" format="dimension" />
+
+        <attr name="indicator_widthNormal" format="dimension" />
+        <attr name="indicator_widthSelected" format="dimension" />
+        <attr name="indicator_heightNormal" format="dimension" />
+        <attr name="indicator_heightSelected" format="dimension" />
+        <attr name="indicator_corners" format="dimension" />
+
+    </declare-styleable>
+</resources>
