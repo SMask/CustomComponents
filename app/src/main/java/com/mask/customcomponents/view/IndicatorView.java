@@ -3,6 +3,8 @@ package com.mask.customcomponents.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -26,6 +28,9 @@ public class IndicatorView extends View {
     private int margin = SizeUtils.dpToPx(6);// 点与点间距
     private int colorNormal = getResources().getColor(R.color.white);// 默认颜色
     private int colorSelected = getResources().getColor(R.color.main);// 选中颜色
+    private LinearGradient colorShaderNormal;// 默认颜色(用于渐变，优先级最高)
+    private LinearGradient colorShaderSelected;// 选中颜色(用于渐变，优先级最高)
+    private Matrix matrixShader;// 渐变矩阵(用于计算绘制渐变偏移量)
     private int style = STYLE_CIRCLE;// 样式
 
     private int radiusNormal = SizeUtils.dpToPx(3);// 默认半径(STYLE_CIRCLE 有效)
@@ -139,8 +144,6 @@ public class IndicatorView extends View {
             boolean isSelected = i == selectedPosition;// 是否是当前选中的
             boolean isBehindSelected = i > selectedPosition;// 是否在选中的后面
 
-            paint.setColor(isSelected ? colorSelected : colorNormal);
-
             switch (style) {
                 default:
                 case STYLE_CIRCLE:
@@ -150,6 +153,8 @@ public class IndicatorView extends View {
                     } else {
                         left = paddingStart + radiusNormal * 2 * (i - 1) + (isBehindSelected ? radiusSelected : radiusNormal) * 2 + margin * i;
                     }
+
+                    setColor(isSelected, left);
 
                     int radius = isSelected ? radiusSelected : radiusNormal;
                     canvas.drawCircle(left + radius, (float) (height / 2), radius, paint);
@@ -169,10 +174,35 @@ public class IndicatorView extends View {
                     int right = left + (isSelected ? widthSelected : widthNormal);
                     int bottom = top + (isSelected ? heightSelected : heightNormal);
 
+                    setColor(isSelected, left);
+
                     canvas.drawRoundRect(left, top, right, bottom, corners, corners, paint);
                     break;
             }
         }
+    }
+
+    /**
+     * 设置颜色
+     *
+     * @param isSelected isSelected
+     * @param left       left
+     */
+    private void setColor(boolean isSelected, int left) {
+        // 绘制纯色
+        if (colorShaderNormal == null || colorShaderSelected == null) {
+            paint.setColor(isSelected ? colorSelected : colorNormal);
+            return;
+        }
+
+        // 绘制渐变
+        matrixShader.setTranslate(left, 0);
+        if (isSelected) {
+            colorShaderSelected.setLocalMatrix(matrixShader);
+        } else {
+            colorShaderNormal.setLocalMatrix(matrixShader);
+        }
+        paint.setShader(isSelected ? colorShaderSelected : colorShaderNormal);
     }
 
     /**
@@ -209,4 +239,20 @@ public class IndicatorView extends View {
         this.selectedPosition = selectedPosition;
         invalidate();
     }
+
+    /**
+     * 设置颜色 用于渐变
+     *
+     * @param colorNormalArr   默认颜色
+     * @param colorSelectedArr 选中颜色
+     */
+    public void setColorShader(int[] colorNormalArr, int[] colorSelectedArr) {
+        this.colorShaderNormal = new LinearGradient(0, 0, widthNormal, 0, colorNormalArr, null, LinearGradient.TileMode.CLAMP);
+        this.colorShaderSelected = new LinearGradient(0, 0, widthSelected, 0, colorSelectedArr, null, LinearGradient.TileMode.CLAMP);
+        if (matrixShader == null) {
+            matrixShader = new Matrix();
+        }
+        invalidate();
+    }
+
 }

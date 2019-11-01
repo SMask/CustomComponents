@@ -2,6 +2,7 @@ package com.mask.customcomponents;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -46,6 +47,12 @@ public class IndicatorViewActivity extends AppCompatActivity {
     private void initView() {
         layout_indicator = findViewById(R.id.layout_indicator);
         edt_limit = findViewById(R.id.edt_limit);
+
+        layout_indicator.setCount(TOTAL_COUNT);
+
+        int[] colorNormalArr = new int[]{Color.parseColor("#FFE851FF"), Color.parseColor("#FF28ACFF")};
+        int[] colorSelectedArr = new int[]{Color.parseColor("#FF28ACFF"), Color.parseColor("#FFE851FF")};
+        layout_indicator.setColorShader(colorNormalArr, colorSelectedArr);
     }
 
     private void setListener() {
@@ -72,7 +79,7 @@ public class IndicatorViewActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        layout_indicator.setCount(TOTAL_COUNT);
+
     }
 
     public void onClickPrevious(View view) {
