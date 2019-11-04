@@ -315,7 +315,7 @@ public class CreditView extends View {
     /**
      * 开始动画
      */
-    public void startAnim() {
+    private void startAnim() {
         ValueAnimator scoreAnim = ValueAnimator.ofInt(scoreDisplay, score);
         scoreAnim.setDuration(2000);
         scoreAnim.setInterpolator(new LinearInterpolator());

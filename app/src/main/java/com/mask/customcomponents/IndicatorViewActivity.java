@@ -49,6 +49,7 @@ public class IndicatorViewActivity extends AppCompatActivity {
         edt_limit = findViewById(R.id.edt_limit);
 
         layout_indicator.setCount(TOTAL_COUNT);
+        layout_indicator.setSelectedPosition(2, false);
 
         int[] colorNormalArr = new int[]{Color.parseColor("#FFFFFFFF"), Color.parseColor("#FFFFFFFF")};
         int[] colorSelectedArr = new int[]{Color.parseColor("#FF28ACFF"), Color.parseColor("#FFE851FF")};
@@ -88,13 +89,13 @@ public class IndicatorViewActivity extends AppCompatActivity {
         while (position < 0) {
             position = position + TOTAL_COUNT;
         }
-        layout_indicator.setSelectedPosition(position);
+        layout_indicator.setSelectedPosition(position, true);
     }
 
     public void onClickNext(View view) {
         int position = layout_indicator.getSelectedPosition();
         position = (position + limit) % TOTAL_COUNT;
-        layout_indicator.setSelectedPosition(position);
+        layout_indicator.setSelectedPosition(position, true);
     }
 
 }
