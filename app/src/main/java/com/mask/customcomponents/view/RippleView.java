@@ -9,7 +9,6 @@ import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Interpolator;
-import android.view.animation.LinearInterpolator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -50,6 +49,20 @@ public class RippleView extends View {
             }
         }
     };
+
+    /**
+     * 创建圆
+     */
+    private void createCircle() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastCreateTime < speed) {
+            return;
+        }
+        Circle circle = new Circle();
+        circleList.add(circle);
+        invalidate();
+        lastCreateTime = currentTime;
+    }
 
     /**
      * 圆 实体类
@@ -93,19 +106,6 @@ public class RippleView extends View {
         init(context);
     }
 
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        radiusMax = Math.min(w, h) * radiusMaxRatio / 2.0f;
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
-        drawCircle(canvas);
-    }
-
     /**
      * 初始化
      *
@@ -123,18 +123,17 @@ public class RippleView extends View {
         isInitData = true;
     }
 
-    /**
-     * 创建圆
-     */
-    private void createCircle() {
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - lastCreateTime < speed) {
-            return;
-        }
-        Circle circle = new Circle();
-        circleList.add(circle);
-        invalidate();
-        lastCreateTime = currentTime;
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        radiusMax = Math.min(w, h) * radiusMaxRatio / 2.0f;
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        drawCircle(canvas);
     }
 
     /**
