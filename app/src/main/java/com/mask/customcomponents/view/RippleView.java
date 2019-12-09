@@ -40,16 +40,6 @@ public class RippleView extends View {
 
     private boolean isInitData;// 是否已经初始化数据
 
-    private Runnable createCircleRunnable = new Runnable() {
-        @Override
-        public void run() {
-            if (isRunning) {
-                createCircle();
-                postDelayed(createCircleRunnable, speed);
-            }
-        }
-    };
-
     /**
      * 创建圆
      */
@@ -142,6 +132,10 @@ public class RippleView extends View {
      * @param canvas canvas
      */
     private void drawCircle(Canvas canvas) {
+        if (isRunning) {
+            createCircle();
+        }
+
         Iterator<Circle> iterator = circleList.iterator();
         while (iterator.hasNext()) {
             Circle circle = iterator.next();
@@ -154,7 +148,7 @@ public class RippleView extends View {
             }
         }
         if (circleList.size() > 0) {
-            postInvalidateDelayed(10);
+            postInvalidateOnAnimation();
         }
     }
 
@@ -162,10 +156,8 @@ public class RippleView extends View {
      * 开始
      */
     public void start() {
-        if (!isRunning) {
-            isRunning = true;
-            createCircleRunnable.run();
-        }
+        isRunning = true;
+        postInvalidateOnAnimation();
     }
 
     /**
@@ -181,7 +173,6 @@ public class RippleView extends View {
     public void stopImmediately() {
         isRunning = false;
         circleList.clear();
-        invalidate();
     }
 
 }
