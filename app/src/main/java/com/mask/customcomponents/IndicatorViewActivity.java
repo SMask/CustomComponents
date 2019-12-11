@@ -6,11 +6,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
+import com.mask.customcomponents.utils.NumberUtils;
 import com.mask.customcomponents.view.IndicatorView;
 
 /**
@@ -23,7 +23,7 @@ public class IndicatorViewActivity extends AppCompatActivity {
     private IndicatorView layout_indicator;
     private EditText edt_limit;
 
-    private int limit = 1;// 每次移动的个数
+    private int limit;// 每次移动的个数
 
     /**
      * startActivity
@@ -65,11 +65,7 @@ public class IndicatorViewActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (TextUtils.isEmpty(s)) {
-                    limit = 0;
-                } else {
-                    limit = Integer.parseInt(s.toString());
-                }
+                limit = NumberUtils.parseInt(s);
             }
 
             @Override
@@ -80,7 +76,7 @@ public class IndicatorViewActivity extends AppCompatActivity {
     }
 
     private void initData() {
-
+        limit = NumberUtils.parseInt(edt_limit.getText());
     }
 
     public void onClickPrevious(View view) {

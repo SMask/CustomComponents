@@ -7,13 +7,17 @@
     <string name="title_activity_credit_view">信用分仪表盘</string>
     <string name="title_activity_ripple_view">水波纹扩散</string>
     <string name="title_activity_indicator_view">指示器</string>
+    <string name="title_activity_raykite_progress_bar">Raykite进度条</string>
 
     <string name="hint_indicator_view_limit">每次移动的个数</string>
+    <string name="hint_progress_bar_limit">每次增减的进度</string>
 
     <string name="search">搜索</string>
-    <string name="start">Start</string>
-    <string name="stop">Stop</string>
-    <string name="previous">Previous</string>
-    <string name="next">Next</string>
+    <string name="start">开始</string>
+    <string name="stop">停止</string>
+    <string name="previous">上一个</string>
+    <string name="next">下一个</string>
+    <string name="add">增加</string>
+    <string name="subtract">减少</string>
 
 </resources>

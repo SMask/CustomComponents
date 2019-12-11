@@ -12,28 +12,30 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    public void onClickLineChartView(View view) {
-        LineChartViewActivity.startActivity(this);
-    }
-
-    public void onClickPasswordInputView(View view) {
-        PasswordInputViewActivity.startActivity(this);
-    }
-
-    public void onClickCleanEditText(View view) {
-        CleanEditTextActivity.startActivity(this);
-    }
-
-    public void onClickCreditView(View view) {
-        CreditViewActivity.startActivity(this);
-    }
-
-    public void onClickRippleView(View view) {
-        RippleViewActivity.startActivity(this);
-    }
-
-    public void onClickIndicatorView(View view) {
-        IndicatorViewActivity.startActivity(this);
+    public void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_line_chart_view:
+                LineChartViewActivity.startActivity(this);
+                break;
+            case R.id.btn_password_input_view:
+                PasswordInputViewActivity.startActivity(this);
+                break;
+            case R.id.btn_clean_edit_text:
+                CleanEditTextActivity.startActivity(this);
+                break;
+            case R.id.btn_credit_view:
+                CreditViewActivity.startActivity(this);
+                break;
+            case R.id.btn_ripple_view:
+                RippleViewActivity.startActivity(this);
+                break;
+            case R.id.btn_indicator_view:
+                IndicatorViewActivity.startActivity(this);
+                break;
+            case R.id.btn_raykite_progress_bar:
+                RaykiteProgressBarActivity.startActivity(this);
+                break;
+        }
     }
 
 }
