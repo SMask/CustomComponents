@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_tran_54">
+    android:background="@color/black_tran_87">
 
     <com.mask.customcomponents.view.RaykiteProgressBar
         android:id="@+id/layout_bar"
@@ -25,8 +25,10 @@
         android:hint="@string/hint_progress_bar_limit"
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
-        android:maxLength="3"
-        android:text="8"
+        android:maxLength="7"
+        android:text="0.088"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_bar" />
@@ -52,5 +54,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_subtract"
         app:layout_constraintTop_toTopOf="@+id/btn_subtract" />
+
+    <Button
+        android:id="@+id/btn_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClickStart"
+        android:text="@string/start"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_subtract" />
 
 </android.support.constraint.ConstraintLayout>

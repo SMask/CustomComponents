@@ -1,12 +1,9 @@
 package com.mask.customcomponents.utils;
 
-import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Point;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.DisplayMetrics;
-import android.view.Display;
-import android.view.View;
-import android.view.WindowManager;
 
 public class SizeUtils {
 
@@ -20,16 +17,6 @@ public class SizeUtils {
     }
 
     /**
-     * 获取屏幕密度Dpi
-     *
-     * @return 屏幕密度Dpi
-     */
-    public static float getDensityDpi() {
-        DisplayMetrics display = getScreenDisplayMetrics();
-        return display.densityDpi;
-    }
-
-    /**
      * 获取屏幕密度
      *
      * @return 屏幕密度
@@ -37,69 +24,6 @@ public class SizeUtils {
     public static float getDensity() {
         DisplayMetrics display = getScreenDisplayMetrics();
         return display.density;
-    }
-
-    /**
-     * 获取字体密度
-     *
-     * @return 字体密度
-     */
-    public static float getDensityScaled() {
-        DisplayMetrics display = getScreenDisplayMetrics();
-        return display.scaledDensity;
-    }
-
-    /**
-     * 获取屏幕宽
-     *
-     * @return 屏幕宽
-     */
-    public static int getScreenWidth() {
-        DisplayMetrics display = getScreenDisplayMetrics();
-        return display.widthPixels;
-    }
-
-    /**
-     * 获取屏幕高
-     *
-     * @return 屏幕高
-     */
-    public static int getScreenHeight() {
-        DisplayMetrics display = getScreenDisplayMetrics();
-        return display.heightPixels;
-    }
-
-    /**
-     * 获取实际屏幕高(包括虚拟按键)
-     *
-     * @param context context
-     * @return 实际屏幕高(包括虚拟按键)
-     */
-    public static int getScreenHeightReal(Context context) {
-        int height = 0;
-
-        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        Display display = windowManager.getDefaultDisplay();
-        try {
-            Point realSize = new Point();
-            Display.class.getMethod("getRealSize", Point.class).invoke(display, realSize);
-            height = realSize.y;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return height;
-    }
-
-    /**
-     * 获取屏幕宽高比
-     *
-     * @return 屏幕宽高比
-     */
-    public static float getScreenRate() {
-        DisplayMetrics display = getScreenDisplayMetrics();
-        float height = display.heightPixels;
-        float width = display.widthPixels;
-        return (width / height);
     }
 
     /**
@@ -123,35 +47,60 @@ public class SizeUtils {
     }
 
     /**
-     * 取得状态栏高度
+     * 获取当前百分比值(根据区间获取当前所占百分比的值)
      *
-     * @return 状态栏高度
+     * @param percent    当前百分比
+     * @param valueStart 起始值
+     * @param valueEnd   结束值
+     * @return float
      */
-    public static int getStatusBarHeight() {
-        int result = 0;
-        try {
-            int resourceId = Resources.getSystem().getIdentifier("status_bar_height", "dimen", "android");
-            if (resourceId > 0) {
-                result = Resources.getSystem().getDimensionPixelSize(resourceId);
-            }
-        } catch (Resources.NotFoundException e) {
-            e.printStackTrace();
+    public static float getPercentValue(float percent, float valueStart, float valueEnd) {
+        if (percent == 0) {
+            return valueStart;
         }
-        return result;
+        if (percent == 1) {
+            return valueEnd;
+        }
+        return valueStart + (valueEnd - valueStart) * percent;
     }
 
     /**
-     * 获取ViewTop距离Screen底部距离
+     * 获取文字宽(此为贴边宽度，不需要贴边使用{@link Paint#measureText(String)} ()}来获取)
      *
-     * @param view view
-     * @return ViewTop距离Screen底部距离
+     * @param str       str
+     * @param textPaint textPaint
+     * @param rect      rect
+     * @return 文字宽
      */
-    public static int getViewTopToScreenBottom(View view) {
-        int[] location = {0, 0};
-        view.getLocationOnScreen(location);
-        int topScreen = location[1];
-        int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
-        return screenHeight - topScreen;
+    public static float getTextWidth(String str, Paint textPaint, Rect rect) {
+        textPaint.getTextBounds(str, 0, str.length(), rect);
+        return rect.right - rect.left;
+    }
+
+    /**
+     * 获取文字高(此为贴边高度，不需要贴边使用{@link Paint#getFontMetrics()}来获取)
+     *
+     * @param str       str
+     * @param textPaint textPaint
+     * @param rect      rect
+     * @return 文字高
+     */
+    public static float getTextHeight(String str, Paint textPaint, Rect rect) {
+        textPaint.getTextBounds(str, 0, str.length(), rect);
+        return rect.bottom - rect.top;
+    }
+
+    /**
+     * 获取文字基线位置(Top是相对于Baseline的值，如果不需要贴边使用{@link Paint#getFontMetrics()}来获取)
+     *
+     * @param str       str
+     * @param textPaint textPaint
+     * @param rect      rect
+     * @return 文字高
+     */
+    public static float getTextBaseline(String str, Paint textPaint, Rect rect) {
+        textPaint.getTextBounds(str, 0, str.length(), rect);
+        return -rect.top;
     }
 
 }
