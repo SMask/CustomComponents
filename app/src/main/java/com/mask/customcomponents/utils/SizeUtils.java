@@ -68,6 +68,12 @@ public class SizeUtils {
      * @return 百分比
      */
     public static float getValuePercent(float valueCurrent, float valueStart, float valueEnd, boolean isLimitInterval) {
+        if (valueCurrent == valueStart) {
+            return 0;
+        }
+        if (valueCurrent == valueEnd) {
+            return 1;
+        }
         float percent = (valueCurrent - valueStart) / (valueEnd - valueStart);
         if (!isLimitInterval) {
             return percent;
