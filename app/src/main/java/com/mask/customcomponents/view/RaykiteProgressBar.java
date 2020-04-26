@@ -159,7 +159,11 @@ public class RaykiteProgressBar extends View {
     private Matrix matrix;
 
     private float percent;// 当前进度百分比
-    private String percentStr;// 当前进度百分比字符串
+    private float percentStart;// 实际进度百分比(动画用)
+    private float percentEnd;// 实际进度百分比(动画用)
+
+    private long percentStartTime;// 进度百分比动画开始时间
+    private long percentDuration = 500;// 进度百分比动画时长
 
     private boolean isInitData;// 是否已经初始化数据
 
@@ -219,7 +223,9 @@ public class RaykiteProgressBar extends View {
         matrix = new Matrix();
 
         percent = 0;
-        percentStr = getValuePercentStr(percent);
+        percentStart = 0;
+        percentEnd = 0;
+        percentStartTime = System.currentTimeMillis();
 
         isInitData = true;
     }
@@ -244,6 +250,12 @@ public class RaykiteProgressBar extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        if (percent != percentEnd) {
+            float animPercent = SizeUtils.getValuePercent(System.currentTimeMillis() - percentStartTime, 0, percentDuration);
+            percent = SizeUtils.getPercentValue(animPercent, percentStart, percentEnd);
+        }
+
         drawBackground(canvas);
         drawParticle(canvas);
         drawBar(canvas);
@@ -281,6 +293,8 @@ public class RaykiteProgressBar extends View {
      * @param canvas canvas
      */
     private void drawText(Canvas canvas) {
+        String percentStr = getValuePercentStr(percent);
+
         float textX = width * 1.0f / 2;
         float textYOffset = height * 1.0f / 2 - SizeUtils.getTextHeight(percentStr, textPaint, rect) / 2;
         float textY = SizeUtils.getTextBaseline(percentStr, textPaint, rect) + textYOffset;
@@ -376,12 +390,24 @@ public class RaykiteProgressBar extends View {
     /* ********************************************* 外部调用 **********************************************/
 
     /**
+     * 设置 进度百分比动画时长
+     *
+     * @param duration duration
+     */
+    public void setPercentDuration(long duration) {
+        if (duration < 0) {
+            duration = 0;
+        }
+        this.percentDuration = duration;
+    }
+
+    /**
      * 获取 当前进度百分比
      *
      * @return float
      */
     public float getPercent() {
-        return percent;
+        return percentEnd;
     }
 
     /**
@@ -390,14 +416,31 @@ public class RaykiteProgressBar extends View {
      * @param percent percent
      */
     public void setPercent(@FloatRange(from = 0.0, to = 1.0) float percent) {
+        setPercent(percent, true);
+    }
+
+    /**
+     * 设置 当前进度百分比
+     *
+     * @param percent percent
+     * @param isAnim  是否需要动画
+     */
+    public void setPercent(@FloatRange(from = 0.0, to = 1.0) float percent, boolean isAnim) {
         if (percent < 0) {
             percent = 0;
         }
         if (percent > 1) {
             percent = 1;
         }
-        this.percent = percent;
-        this.percentStr = getValuePercentStr(percent);
+        if (isAnim) {
+            this.percentStart = this.percent;
+            this.percentEnd = percent;
+        } else {
+            this.percent = percent;
+            this.percentStart = this.percent;
+            this.percentEnd = percent;
+        }
+        this.percentStartTime = System.currentTimeMillis();
         postInvalidateOnAnimation();
     }
     /* ********************************************* 外部调用 **********************************************/

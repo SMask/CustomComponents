@@ -91,7 +91,7 @@ public class RaykiteProgressBarActivity extends AppCompatActivity {
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    layout_bar.setPercent((float) animation.getAnimatedValue());
+                    layout_bar.setPercent((float) animation.getAnimatedValue(), false);
                 }
             });
         }
