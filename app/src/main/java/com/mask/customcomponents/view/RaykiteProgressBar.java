@@ -8,11 +8,12 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Shader;
-import android.support.annotation.FloatRange;
-import android.support.annotation.Nullable;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
+
+import androidx.annotation.FloatRange;
+import androidx.annotation.Nullable;
 
 import com.mask.customcomponents.utils.NumberUtils;
 import com.mask.customcomponents.utils.SizeUtils;

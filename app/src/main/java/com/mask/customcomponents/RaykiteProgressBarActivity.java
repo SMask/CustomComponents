@@ -4,12 +4,13 @@ import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.EditText;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.mask.customcomponents.utils.NumberUtils;
 import com.mask.customcomponents.utils.SizeUtils;
@@ -87,7 +88,12 @@ public class RaykiteProgressBarActivity extends AppCompatActivity {
             animator = new ValueAnimator();
             animator.setInterpolator(new AccelerateDecelerateInterpolator());
 
-            animator.addUpdateListener(animation -> layout_bar.setPercent((float) animation.getAnimatedValue()));
+            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    layout_bar.setPercent((float) animation.getAnimatedValue());
+                }
+            });
         }
         if (animator.isRunning()) {
             return;

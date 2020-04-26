@@ -10,10 +10,11 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.SweepGradient;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+
+import androidx.annotation.Nullable;
 
 /**
  * 信用分仪表盘View
@@ -319,9 +320,12 @@ public class CreditView extends View {
         ValueAnimator scoreAnim = ValueAnimator.ofInt(scoreDisplay, score);
         scoreAnim.setDuration(2000);
         scoreAnim.setInterpolator(new LinearInterpolator());
-        scoreAnim.addUpdateListener(valueAnimator -> {
-            scoreDisplay = (int) valueAnimator.getAnimatedValue();
-            postInvalidate();
+        scoreAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                scoreDisplay = (int) valueAnimator.getAnimatedValue();
+                CreditView.this.postInvalidate();
+            }
         });
         scoreAnim.start();
     }
