@@ -163,7 +163,7 @@ public class RaykiteProgressBar extends View {
     private float percentEnd;// 实际进度百分比(动画用)
 
     private long percentStartTime;// 进度百分比动画开始时间
-    private long percentDuration = 500;// 进度百分比动画时长
+    private long percentDuration = 1000;// 进度百分比动画时长
 
     private boolean isInitData;// 是否已经初始化数据
 
