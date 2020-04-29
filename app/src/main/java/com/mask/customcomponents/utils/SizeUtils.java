@@ -37,6 +37,16 @@ public class SizeUtils {
     }
 
     /**
+     * dp转px
+     *
+     * @param dp dp
+     * @return px
+     */
+    public static float dpToPx(float dp) {
+        return dp * getDensity();
+    }
+
+    /**
      * px转dp
      *
      * @param px px
@@ -44,6 +54,18 @@ public class SizeUtils {
      */
     public static int pxToDp(int px) {
         return (int) (px / getDensity() + 0.5f);
+    }
+
+    /**
+     * 返回区间内数据
+     *
+     * @param value value
+     * @param min   min
+     * @param max   max
+     * @return int
+     */
+    public static int minMax(int value, int min, int max) {
+        return Math.min(Math.max(value, min), max);
     }
 
     /**

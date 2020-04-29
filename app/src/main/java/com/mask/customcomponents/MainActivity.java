@@ -1,8 +1,9 @@
 package com.mask.customcomponents;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.btn_raykite_progress_bar:
                 RaykiteProgressBarActivity.startActivity(this);
+                break;
+            case R.id.btn_caliper_view:
+                CaliperViewActivity.startActivity(this);
                 break;
         }
     }

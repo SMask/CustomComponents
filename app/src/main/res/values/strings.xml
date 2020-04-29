@@ -8,6 +8,7 @@
     <string name="title_activity_ripple_view">水波纹扩散</string>
     <string name="title_activity_indicator_view">指示器</string>
     <string name="title_activity_raykite_progress_bar">Raykite进度条</string>
+    <string name="title_activity_caliper_view">游标卡尺</string>
 
     <string name="hint_indicator_view_limit">每次移动的个数</string>
     <string name="hint_progress_bar_limit">每次增减的进度</string>
