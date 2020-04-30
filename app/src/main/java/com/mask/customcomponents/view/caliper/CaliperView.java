@@ -254,6 +254,22 @@ public class CaliperView extends View {
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int width = MeasureSpec.getSize(widthMeasureSpec);
+
+        float height = 0;
+        height += Math.max(valueRootHeight, caliperHeight);
+        height += markTextMarginTop;
+
+        textPaint.setTextSize(markTextFontSize);
+        height += SizeUtils.getTextHeight("99m 99s", textPaint, rect);
+
+        setMeasuredDimension(width, (int) (height + 1));
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         final float x = event.getX();
         final float y = event.getY();
