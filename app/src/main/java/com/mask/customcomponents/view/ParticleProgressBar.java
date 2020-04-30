@@ -23,10 +23,10 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Raykite进度条
+ * 粒子动画进度条
  * Created by lishilin on 2019/12/11
  */
-public class RaykiteProgressBar extends View {
+public class ParticleProgressBar extends View {
 
     /**
      * 粒子实体类
@@ -165,24 +165,26 @@ public class RaykiteProgressBar extends View {
     private long percentStartTime;// 进度百分比动画开始时间
     private long percentDuration = 1000;// 进度百分比动画时长
 
+    private boolean isShowParticle = true;// 是否显示粒子动画
+
     private boolean isInitData;// 是否已经初始化数据
 
-    public RaykiteProgressBar(Context context) {
+    public ParticleProgressBar(Context context) {
         super(context);
         initData(null);
     }
 
-    public RaykiteProgressBar(Context context, @Nullable AttributeSet attrs) {
+    public ParticleProgressBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initData(attrs);
     }
 
-    public RaykiteProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ParticleProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initData(attrs);
     }
 
-    public RaykiteProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ParticleProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initData(attrs);
     }
@@ -260,6 +262,10 @@ public class RaykiteProgressBar extends View {
         drawParticle(canvas);
         drawBar(canvas);
         drawText(canvas);
+
+        if (isShowParticle ? (percent < 1.0f) : (percent < percentEnd)) {
+            postInvalidateOnAnimation();
+        }
     }
 
     /**
@@ -309,6 +315,10 @@ public class RaykiteProgressBar extends View {
      * @param canvas canvas
      */
     private void drawParticle(Canvas canvas) {
+        if (!isShowParticle) {
+            return;
+        }
+
         float left = SizeUtils.getPercentValue(percent, 0, width);
         float right = left + particleContentWidth;
         float top = 0;
@@ -340,8 +350,6 @@ public class RaykiteProgressBar extends View {
         }
 
         canvas.restore();
-
-        postInvalidateOnAnimation();
     }
 
     /**
@@ -388,6 +396,15 @@ public class RaykiteProgressBar extends View {
     /* ********************************************* 内部方法 **********************************************/
 
     /* ********************************************* 外部调用 **********************************************/
+
+    /**
+     * 设置 是否显示粒子动画
+     *
+     * @param showParticle showParticle
+     */
+    public void setShowParticle(boolean showParticle) {
+        isShowParticle = showParticle;
+    }
 
     /**
      * 设置 进度百分比动画时长

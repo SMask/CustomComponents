@@ -67,9 +67,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".RaykiteProgressBarActivity"
+            android:name=".ParticleProgressBarActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/title_activity_raykite_progress_bar"
+            android:label="@string/title_activity_particle_progress_bar"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity

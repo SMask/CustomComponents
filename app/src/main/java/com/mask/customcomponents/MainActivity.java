@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_indicator_view:
                 IndicatorViewActivity.startActivity(this);
                 break;
-            case R.id.btn_raykite_progress_bar:
-                RaykiteProgressBarActivity.startActivity(this);
+            case R.id.btn_particle_progress_bar:
+                ParticleProgressBarActivity.startActivity(this);
                 break;
             case R.id.btn_caliper_view:
                 CaliperViewActivity.startActivity(this);

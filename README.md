@@ -7,7 +7,7 @@ Android自定义控件，不定时增加。
 4. 信用分仪表盘；
 5. 水波纹扩散动画；
 6. 指示器；
-7. 进度条。
+7. 粒子动画进度条。
 
 **1. 折线图**  
     随时间而变化的连续数据  
@@ -31,5 +31,5 @@ Android自定义控件，不定时增加。
     可用于ViewPager指示器  
     ![](img/IndicatorView_01.gif)  
     
-**7. 进度条**    
-    ![](img/RaykiteProgressBar_01.gif)  
+**7. 粒子动画进度条**    
+    ![](img/ParticleProgressBar_01.gif)  

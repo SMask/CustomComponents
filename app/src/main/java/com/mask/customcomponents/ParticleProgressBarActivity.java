@@ -14,14 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mask.customcomponents.utils.NumberUtils;
 import com.mask.customcomponents.utils.SizeUtils;
-import com.mask.customcomponents.view.RaykiteProgressBar;
+import com.mask.customcomponents.view.ParticleProgressBar;
 
 /**
- * Raykite进度条
+ * 粒子动画进度条
  */
-public class RaykiteProgressBarActivity extends AppCompatActivity {
+public class ParticleProgressBarActivity extends AppCompatActivity {
 
-    private RaykiteProgressBar layout_bar;
+    private ParticleProgressBar layout_bar;
     private EditText edt_limit;
 
     private float limit;// 每次增减的进度
@@ -34,14 +34,14 @@ public class RaykiteProgressBarActivity extends AppCompatActivity {
      * @param activity activity
      */
     public static void startActivity(Activity activity) {
-        Intent intent = new Intent(activity, RaykiteProgressBarActivity.class);
+        Intent intent = new Intent(activity, ParticleProgressBarActivity.class);
         activity.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_raykite_progress_bar);
+        setContentView(R.layout.activity_particle_progress_bar);
         initView();
         setListener();
         initData();

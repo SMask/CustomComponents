@@ -7,7 +7,7 @@
     <string name="title_activity_credit_view">信用分仪表盘</string>
     <string name="title_activity_ripple_view">水波纹扩散</string>
     <string name="title_activity_indicator_view">指示器</string>
-    <string name="title_activity_raykite_progress_bar">Raykite进度条</string>
+    <string name="title_activity_particle_progress_bar">粒子动画进度条</string>
     <string name="title_activity_caliper_view">游标卡尺</string>
 
     <string name="hint_indicator_view_limit">每次移动的个数</string>

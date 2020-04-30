@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/black_tran_87">
 
-    <com.mask.customcomponents.view.RaykiteProgressBar
+    <com.mask.customcomponents.view.ParticleProgressBar
         android:id="@+id/layout_bar"
         android:layout_width="0dp"
         android:layout_height="24dp"
