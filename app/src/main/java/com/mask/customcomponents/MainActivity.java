@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_caliper_view:
                 CaliperViewActivity.startActivity(this);
                 break;
+            case R.id.btn_number_view:
+                NumberViewActivity.startActivity(this);
+                break;
         }
     }
 
