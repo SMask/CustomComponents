@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_number_view:
                 NumberViewActivity.startActivity(this);
                 break;
+            case R.id.btn_color_picker_view:
+                ColorPickerViewActivity.startActivity(this);
+                break;
         }
     }
 

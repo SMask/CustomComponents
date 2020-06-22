@@ -2,6 +2,7 @@ package com.mask.customcomponents.utils;
 
 import android.content.res.Resources;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 
@@ -136,8 +137,9 @@ public class SizeUtils {
      * @return 文字宽
      */
     public static float getTextWidth(String str, Paint textPaint, Rect rect) {
-        textPaint.getTextBounds(str, 0, str.length(), rect);
-        return rect.right - rect.left;
+        return textPaint.measureText(str);
+//        textPaint.getTextBounds(str, 0, str.length(), rect);
+//        return rect.right - rect.left;
     }
 
     /**
@@ -164,6 +166,125 @@ public class SizeUtils {
     public static float getTextBaseline(String str, Paint textPaint, Rect rect) {
         textPaint.getTextBounds(str, 0, str.length(), rect);
         return -rect.top;
+    }
+
+    /**
+     * sin
+     *
+     * @param angle 角度
+     * @return 对边/斜边
+     */
+    public static float sin(float angle) {
+        return (float) Math.sin(angle * Math.PI / 180);
+    }
+
+    /**
+     * cos
+     *
+     * @param angle 角度
+     * @return 邻边/斜边
+     */
+    public static float cos(float angle) {
+        return (float) Math.cos(angle * Math.PI / 180);
+    }
+
+    /**
+     * asin
+     *
+     * @param value 对边/斜边
+     * @return 角度
+     */
+    public static float asin(float value) {
+        return (float) (Math.asin(value) * 180 / Math.PI);
+    }
+
+    /**
+     * acos
+     *
+     * @param value 邻边/斜边
+     * @return 角度
+     */
+    public static float acos(float value) {
+        return (float) (Math.acos(value) * 180 / Math.PI);
+    }
+
+    /**
+     * 格式化 角度
+     * <p>
+     * 小于0或者大于等于360度的角度格式化为0-360
+     *
+     * @param angle 角度
+     * @return 角度
+     */
+    public static float formatAngle(float angle) {
+        if (angle >= 360) {
+            return angle % 360;
+        }
+        while (angle < 0) {
+            angle += 360;
+        }
+        return angle;
+    }
+
+    /**
+     * 获取 角度
+     * <p>
+     * 默认圆心坐标(0, 0)
+     *
+     * @param x x
+     * @param y y
+     * @return 角度
+     */
+    public static float getAngle(float x, float y) {
+        return (float) (Math.atan2(y, x) * 180 / Math.PI);
+    }
+
+    /**
+     * 获取 角度
+     * <p>
+     * 指定圆心坐标
+     *
+     * @param x       x
+     * @param y       y
+     * @param centerX 圆心坐标
+     * @param centerY 圆心坐标
+     * @return 角度
+     */
+    public static float getAngle(float x, float y, float centerX, float centerY) {
+        return getAngle(x - centerX, y - centerY);
+    }
+
+    /**
+     * 获取 圆上某个角度的坐标
+     *
+     * @param pointF 圆心的坐标
+     * @param radius 半径
+     * @param angle  角度
+     * @return PointF
+     */
+    public static PointF getCirclePoint(PointF pointF, float radius, float angle) {
+        pointF.offset(radius * cos(angle), radius * sin(angle));
+        return pointF;
+    }
+
+    /**
+     * 获取 正方形映射为圆形的坐标
+     *
+     * @param pointF 圆心的坐标
+     * @param radius 半径
+     * @param x      待映射坐标
+     * @param y      待映射坐标
+     * @return PointF
+     */
+    public static PointF getPointSquareToCircle(PointF pointF, float radius, float x, float y) {
+        final float centerX = pointF.x;
+        final float centerY = pointF.y;
+        final float xScale = (x - centerX) / radius;
+        final float yScale = (y - centerY) / radius;
+        final float xResult = (float) (xScale * Math.sqrt(1.0 - yScale * yScale / 2.0));
+        final float yResult = (float) (yScale * Math.sqrt(1.0 - xScale * xScale / 2.0));
+        pointF.set(xResult * radius + centerX, yResult * radius + centerY);
+        return pointF;
     }
 
 }

@@ -22,7 +22,6 @@
             android:name=".MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,43 +33,36 @@
             android:name=".LineChartViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_line_chart_view"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".PasswordInputViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_password_input_view"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".CleanEditTextActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_clean_edit_text"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".CreditViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_credit_view"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".RippleViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_ripple_view"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".IndicatorViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_indicator_view"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".ParticleProgressBarActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_particle_progress_bar"
-            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".CaliperViewActivity"
@@ -82,7 +74,11 @@
             android:name=".NumberViewActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_number_view"
-            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".ColorPickerViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_color_picker_view"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 

@@ -12,7 +12,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.mask.customcomponents.utils.LogUtil;
 import com.mask.customcomponents.utils.SizeUtils;
 
 import java.util.ArrayList;
@@ -126,8 +125,6 @@ public class NumberView extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        LogUtil.i("onMeasure");
-
         refreshDimen();
 
         float width;
@@ -149,8 +146,6 @@ public class NumberView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        LogUtil.i("onSizeChanged");
-
         width = w;
         height = h;
     }
@@ -158,8 +153,6 @@ public class NumberView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        LogUtil.i("onDraw");
 
         borderPaint.setStrokeWidth(borderWidth);
         borderPaint.setColor(borderColor);

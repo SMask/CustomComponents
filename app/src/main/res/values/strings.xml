@@ -10,6 +10,7 @@
     <string name="title_activity_particle_progress_bar">粒子动画进度条</string>
     <string name="title_activity_caliper_view">游标卡尺</string>
     <string name="title_activity_number_view">单个数字边框</string>
+    <string name="title_activity_color_picker_view">颜色拾取器</string>
 
     <string name="hint_indicator_view_limit">每次移动的个数</string>
     <string name="hint_progress_bar_limit">每次增减的进度</string>

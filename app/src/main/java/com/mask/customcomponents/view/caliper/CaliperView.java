@@ -109,11 +109,11 @@ public class CaliperView extends View {
     private int markTextAlpha;// 刻度值透明度
 
     // 手势
-    private boolean isHandled = false;
-    private boolean isHandledCaliperLeft = false;
-    private boolean isHandledCaliperRight = false;
-    private boolean isHandledValue = false;
-    private boolean isHandledChange = false;
+    private boolean isHandle = false;
+    private boolean isHandleCaliperLeft = false;
+    private boolean isHandleCaliperRight = false;
+    private boolean isHandleValue = false;
+    private boolean isHandleChange = false;
     private float touchMoveStartX;// 开始滑动的X
     private float touchMoveOffsetX;// X轴滑动偏移量
 
@@ -273,41 +273,41 @@ public class CaliperView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         final float x = event.getX();
         final float y = event.getY();
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+        switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
-                isHandledCaliperLeft = false;
-                isHandledCaliperRight = false;
-                isHandledValue = false;
+                isHandleCaliperLeft = false;
+                isHandleCaliperRight = false;
+                isHandleValue = false;
 
-                isHandledCaliperLeft = isHandledCaliperLeft(x, y);
-                if (!isHandledCaliperLeft) {
-                    isHandledCaliperRight = isHandledCaliperRight(x, y);
-                    if (!isHandledCaliperRight) {
-                        isHandledValue = isHandledValue(x, y);
+                isHandleCaliperLeft = isHandleCaliperLeft(x, y);
+                if (!isHandleCaliperLeft) {
+                    isHandleCaliperRight = isHandleCaliperRight(x, y);
+                    if (!isHandleCaliperRight) {
+                        isHandleValue = isHandleValue(x, y);
                     }
                 }
-                if (isHandledCaliperLeft || isHandledCaliperRight || isHandledValue) {
-                    isHandled = true;
+                if (isHandleCaliperLeft || isHandleCaliperRight || isHandleValue) {
+                    isHandle = true;
                     touchMoveStartX = x;
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (isHandled) {
+                if (isHandle) {
                     touchMoveOffsetX = x - touchMoveStartX;
-                    if (isHandledCaliperLeft) {
-                        isHandledChange = handleCaliperLeft();
+                    if (isHandleCaliperLeft) {
+                        isHandleChange = handleCaliperLeft();
                     }
-                    if (isHandledCaliperRight) {
-                        isHandledChange = handleCaliperRight();
+                    if (isHandleCaliperRight) {
+                        isHandleChange = handleCaliperRight();
                     }
-                    if (isHandledValue) {
-                        isHandledChange = handleValue();
+                    if (isHandleValue) {
+                        isHandleChange = handleValue();
                     }
                 }
                 break;
         }
 
-        if (isHandledChange) {
+        if (isHandleChange) {
             refreshDimen();
 
             postInvalidateOnAnimation();
@@ -315,7 +315,7 @@ public class CaliperView extends View {
             notifyOnSelected();
         }
 
-        return isHandled || super.onTouchEvent(event);
+        return isHandle || super.onTouchEvent(event);
     }
 
     @Override
@@ -511,7 +511,7 @@ public class CaliperView extends View {
      * @param y y
      * @return boolean
      */
-    private boolean isHandledValue(float x, float y) {
+    private boolean isHandleValue(float x, float y) {
         return valueRootRectF.contains(x, y);
     }
 
@@ -556,7 +556,7 @@ public class CaliperView extends View {
      * @param y y
      * @return boolean
      */
-    private boolean isHandledCaliperLeft(float x, float y) {
+    private boolean isHandleCaliperLeft(float x, float y) {
         rectF.set(caliperLeftRectF);
         rectF.inset(-(valueItemWidth - rectF.width()) / 2, 0);
         return rectF.contains(x, y);
@@ -603,7 +603,7 @@ public class CaliperView extends View {
      * @param y y
      * @return boolean
      */
-    private boolean isHandledCaliperRight(float x, float y) {
+    private boolean isHandleCaliperRight(float x, float y) {
         rectF.set(caliperRightRectF);
         rectF.inset(-(valueItemWidth - rectF.width()) / 2, 0);
         return rectF.contains(x, y);
