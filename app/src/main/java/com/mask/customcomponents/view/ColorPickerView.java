@@ -36,6 +36,21 @@ import com.mask.customcomponents.utils.SizeUtils;
  */
 public class ColorPickerView extends View {
 
+    public static abstract class OnColorChangeListener {
+
+        /**
+         * 颜色改变
+         *
+         * @param hsvArr   HSV数组
+         * @param color    颜色
+         * @param colorStr 颜色
+         */
+        public void onColorChange(@Size(3) float[] hsvArr, @ColorInt int color, @Size(min = 1) String colorStr) {
+
+        }
+
+    }
+
     // 基础数据(用于计算等比例后的真实数据)
     private static final float BASE_SIDE = 1000;
 
@@ -95,6 +110,11 @@ public class ColorPickerView extends View {
     // 颜色
     private final float[] hueArr = new float[]{0, 1, 1};// 色相颜色数组(圆环相关)
     private final float[] hsvArr = new float[]{0, 0, 0};// 实际颜色数组(圆环、中心圆相关)
+
+    // 监听
+    private OnColorChangeListener onColorChangeListener;// 监听
+    private boolean isOnlyUpCallback = false;// 是否只有手指抬起才回调监听
+    private float[] hsvArrCallback;// 监听回调HSV颜色数组
 
     private boolean isInitData;// 是否已经初始化数据
 
@@ -196,6 +216,8 @@ public class ColorPickerView extends View {
             handleCircle(event);
         }
         if (isHandleRing || isHandleCircle) {
+            notifyColorChange(event);
+
             postInvalidateOnAnimation();
             return true;
         }
@@ -288,6 +310,12 @@ public class ColorPickerView extends View {
         float radius = selectorRadius - selectorStrokeWidth / 2;
 
         canvas.drawCircle(circlePointF.x, circlePointF.y, radius, selectorPaint);
+
+        // 圆形在正方形上的映射点
+//        selectorPaint.setColor(Color.BLUE);
+//        pointF.set(centerX, centerY);
+//        SizeUtils.getPointCircleToSquare(pointF, circleRadius, circlePointF.x, circlePointF.y);
+//        canvas.drawCircle(pointF.x, pointF.y, selectorStrokeWidth, selectorPaint);
     }
 
     /* ******************************************** 内部调用 **********************************************/
@@ -457,7 +485,7 @@ public class ColorPickerView extends View {
         circlePaint.setShader(valShader);
         canvas.drawRect(rectF, circlePaint);
 
-        // 正方形映射为圆形
+        // 正方形在圆形上的映射点
         satValBitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);
         float centerX = bitmapWidth / 2.0f;
         float centerY = bitmapHeight / 2.0f;
@@ -518,6 +546,12 @@ public class ColorPickerView extends View {
         }
         if (isChangeCircle) {
             isChangeCircle = false;
+
+            // 正方形在圆形上的映射点
+            float x = SizeUtils.getPercentValue(hsvArr[1], centerX - circleRadius, centerX + circleRadius);
+            float y = SizeUtils.getPercentValue(hsvArr[2], centerY + circleRadius, centerY - circleRadius);
+            circlePointF.set(centerX, centerY);
+            SizeUtils.getPointSquareToCircle(circlePointF, circleRadius, x, y);
         }
     }
 
@@ -533,7 +567,35 @@ public class ColorPickerView extends View {
         }
         if (isChangeCircle) {
             isChangeCircle = false;
+
+            // 圆形在正方形上的映射点
+            pointF.set(centerX, centerY);
+            SizeUtils.getPointCircleToSquare(pointF, circleRadius, circlePointF.x, circlePointF.y);
+
+            float sat = SizeUtils.getValuePercent(pointF.x, centerX - circleRadius, centerX + circleRadius);
+            float val = SizeUtils.getValuePercent(pointF.y, centerY + circleRadius, centerY - circleRadius);
+            hsvArr[1] = SizeUtils.minMax(sat, 0, 1.0f);
+            hsvArr[2] = SizeUtils.minMax(val, 0, 1.0f);
         }
+    }
+
+    /**
+     * 通知 颜色改变
+     *
+     * @param event event
+     */
+    private void notifyColorChange(MotionEvent event) {
+        if (onColorChangeListener == null) {
+            return;
+        }
+        if (isOnlyUpCallback && (event.getActionMasked() != MotionEvent.ACTION_UP)) {
+            return;
+        }
+
+        System.arraycopy(hsvArr, 0, hsvArrCallback, 0, hsvArrCallback.length);
+        int color = Color.HSVToColor(hsvArrCallback);
+        String colorStr = String.format("#%06X", (0xFFFFFF & color));
+        onColorChangeListener.onColorChange(hsvArrCallback, color, colorStr);
     }
     /* ******************************************** 内部调用 **********************************************/
 
@@ -542,10 +604,10 @@ public class ColorPickerView extends View {
     /**
      * 设置 颜色
      *
-     * @param colorString colorString
+     * @param colorStr colorStr
      */
-    public void setColor(@Size(min = 1) String colorString) {
-        setColor(Color.parseColor(colorString));
+    public void setColor(@Size(min = 1) String colorStr) {
+        setColor(Color.parseColor(colorStr));
     }
 
     /**
@@ -581,5 +643,27 @@ public class ColorPickerView extends View {
             postInvalidateOnAnimation();
         }
     }
+
+    /**
+     * 设置 是否只有手指抬起才回调监听
+     *
+     * @param onlyUpCallback onlyUpCallback
+     */
+    public void setOnlyUpCallback(boolean onlyUpCallback) {
+        isOnlyUpCallback = onlyUpCallback;
+    }
+
+    /**
+     * 设置 监听
+     *
+     * @param onColorChangeListener onColorChangeListener
+     */
+    public void setOnColorChangeListener(OnColorChangeListener onColorChangeListener) {
+        this.onColorChangeListener = onColorChangeListener;
+        if (hsvArrCallback == null) {
+            hsvArrCallback = new float[3];
+        }
+    }
+
     /* ******************************************** 外部调用 **********************************************/
 }

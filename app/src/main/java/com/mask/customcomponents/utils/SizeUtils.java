@@ -70,6 +70,18 @@ public class SizeUtils {
     }
 
     /**
+     * 返回区间内数据
+     *
+     * @param value value
+     * @param min   min
+     * @param max   max
+     * @return int
+     */
+    public static float minMax(float value, float min, float max) {
+        return Math.min(Math.max(value, min), max);
+    }
+
+    /**
      * 获取当前值百分比(根据区间获取当前值的所占百分比)
      *
      * @param valueCurrent 当前值
@@ -276,13 +288,48 @@ public class SizeUtils {
      * @param y      待映射坐标
      * @return PointF
      */
-    public static PointF getPointSquareToCircle(PointF pointF, float radius, float x, float y) {
+    public static PointF getPointSquareToCircle(final PointF pointF, final float radius, final float x, float y) {
         final float centerX = pointF.x;
         final float centerY = pointF.y;
         final float xScale = (x - centerX) / radius;
         final float yScale = (y - centerY) / radius;
+
+        // 具体映射逻辑
         final float xResult = (float) (xScale * Math.sqrt(1.0 - yScale * yScale / 2.0));
         final float yResult = (float) (yScale * Math.sqrt(1.0 - xScale * xScale / 2.0));
+
+        pointF.set(xResult * radius + centerX, yResult * radius + centerY);
+        return pointF;
+    }
+
+    /**
+     * 获取 圆形映射为正方形的坐标
+     *
+     * @param pointF 圆心的坐标
+     * @param radius 半径
+     * @param x      待映射坐标
+     * @param y      待映射坐标
+     * @return PointF
+     */
+    public static PointF getPointCircleToSquare(final PointF pointF, final float radius, final float x, final float y) {
+        final float centerX = pointF.x;
+        final float centerY = pointF.y;
+        final float xScale = (x - centerX) / radius;
+        final float yScale = (y - centerY) / radius;
+
+        // 具体映射逻辑
+        final double xScale2 = xScale * xScale;
+        final double yScale2 = yScale * yScale;
+        final double twoSqrt2 = 2.0 * Math.sqrt(2.0);
+        final double subTermX = 2.0 + xScale2 - yScale2;
+        final double subTermY = 2.0 - xScale2 + yScale2;
+        final double termX1 = subTermX + xScale * twoSqrt2;
+        final double termX2 = subTermX - xScale * twoSqrt2;
+        final double termY1 = subTermY + yScale * twoSqrt2;
+        final double termY2 = subTermY - yScale * twoSqrt2;
+        final float xResult = (float) (0.5 * Math.sqrt(termX1) - 0.5 * Math.sqrt(termX2));
+        final float yResult = (float) (0.5 * Math.sqrt(termY1) - 0.5 * Math.sqrt(termY2));
+
         pointF.set(xResult * radius + centerX, yResult * radius + centerY);
         return pointF;
     }
