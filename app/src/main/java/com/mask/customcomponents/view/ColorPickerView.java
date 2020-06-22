@@ -290,6 +290,7 @@ public class ColorPickerView extends View {
      * @param canvas canvas
      */
     private void drawRingSelector(Canvas canvas) {
+        selectorPaint.setStyle(Paint.Style.STROKE);
         selectorPaint.setStrokeWidth(selectorStrokeWidth);
         selectorPaint.setColor(selectorColor);
 
@@ -304,10 +305,20 @@ public class ColorPickerView extends View {
      * @param canvas canvas
      */
     private void drawCircleSelector(Canvas canvas) {
-        selectorPaint.setStrokeWidth(selectorStrokeWidth);
+        selectorPaint.setStyle(Paint.Style.FILL);
+
+        // 底色
         selectorPaint.setColor(selectorColor);
 
-        float radius = selectorRadius - selectorStrokeWidth / 2;
+        float radius = selectorRadius;
+
+        canvas.drawCircle(circlePointF.x, circlePointF.y, radius, selectorPaint);
+
+        // 选中的颜色
+        int color = Color.HSVToColor(hsvArr);
+        selectorPaint.setColor(color);
+
+        radius = selectorRadius - selectorStrokeWidth;
 
         canvas.drawCircle(circlePointF.x, circlePointF.y, radius, selectorPaint);
 
@@ -360,6 +371,13 @@ public class ColorPickerView extends View {
     private boolean isHandleCircle(MotionEvent event) {
         final float x = event.getX();
         final float y = event.getY();
+
+        // 如果触摸的是中心圆选择器范围
+        float length = PointF.length(x - circlePointF.x, y - circlePointF.y);
+        if (length < selectorRadius) {
+            return true;
+        }
+
         return circleRegion.contains((int) x, (int) y);
     }
 
