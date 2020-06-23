@@ -28,6 +28,9 @@ import androidx.annotation.Size;
 
 import com.mask.customcomponents.utils.SizeUtils;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * 颜色拾取器
  * 参考资料：https://zh.wikipedia.org/wiki/HSL%E5%92%8CHSV%E8%89%B2%E5%BD%A9%E7%A9%BA%E9%97%B4
@@ -87,7 +90,8 @@ public class ColorPickerView extends View {
     private PointF ringPointF;
 
     // 中心圆
-    private Thread circleThread;// 主要是创建Bitmap耗时
+    private Runnable circleRunnable;// 主要是创建Bitmap耗时
+    private ExecutorService circleExecutorService;// 线程池
     private int circleRadius;// 中心圆半径
     private Shader satShader;// 饱和度渐变
     private Shader valShader;// 明度渐变
@@ -178,6 +182,7 @@ public class ColorPickerView extends View {
         ringRegion = new Region();
         ringPointF = new PointF();
 
+        circleExecutorService = Executors.newSingleThreadExecutor();
         satShader = new LinearGradient(0, 0, 1, 0, new int[]{0xFFFFFFFF, 0x00FFFFFF}, null, Shader.TileMode.CLAMP);
         valShader = new LinearGradient(0, 0, 0, 1, new int[]{0x00000000, 0xFF000000}, null, Shader.TileMode.CLAMP);
         circlePath = new Path();
@@ -426,15 +431,15 @@ public class ColorPickerView extends View {
         selectorRadius = getValueRatio(selectorRadiusRatioValue);
 
         refreshPath();
-        if (circleThread == null) {
-            circleThread = new Thread(new Runnable() {
+        if (circleRunnable == null) {
+            circleRunnable = new Runnable() {
                 @Override
                 public void run() {
                     refreshSatValShader();
                 }
-            });
+            };
         }
-        circleThread.start();
+        circleExecutorService.execute(circleRunnable);
 
         colorToPoint();
     }
@@ -467,17 +472,18 @@ public class ColorPickerView extends View {
         int bitmapWidth = circleRadius * 2;
         int bitmapHeight = circleRadius * 2;
 
+        if (satValShader != null && satValBitmap != null && satValBitmap.getWidth() == bitmapWidth && satValBitmap.getHeight() == bitmapHeight) {
+            return;
+        }
+
         if (satValBitmap != null) {
-            if (satValBitmap.getWidth() == bitmapWidth && satValBitmap.getHeight() == bitmapHeight) {
-                return;
-            }
             satValBitmap.recycle();
             satValBitmap = null;
-
-            satValShader = null;
-
-            circleShaderMap.clear();
         }
+
+        satValShader = null;
+
+        circleShaderMap.clear();
 
         // 正方形
         Bitmap satValBitmapSquare = Bitmap.createBitmap(bitmapWidth, bitmapHeight, Bitmap.Config.ARGB_8888);

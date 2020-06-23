@@ -78,7 +78,7 @@ public class ColorPickerViewActivity extends AppCompatActivity {
     }
 
     private void initData() {
-
+        color_picker.setOnlyUpCallback(false);
     }
 
     private void refreshInfo(float[] hsvArr, int color, String colorStr) {

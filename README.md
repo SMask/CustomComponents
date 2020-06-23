@@ -9,7 +9,8 @@ Android自定义控件，不定时增加。
 6. 指示器；
 7. 粒子动画进度条；
 8. 游标卡尺；
-9. 单个数字边框。
+9. 单个数字边框；
+10. 颜色拾取器；
 
 **1. 折线图**  
     随时间而变化的连续数据  
@@ -40,4 +41,7 @@ Android自定义控件，不定时增加。
     ![](img/CaliperView_01.gif)  
       
 **9. 单个数字边框**    
-    ![](img/NumberView_01.png)  
+    ![](img/NumberView_01.png) 
+          
+**10. 颜色拾取器**    
+    ![](img/ColorPickerView_01.gif)  
