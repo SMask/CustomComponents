@@ -8,11 +8,12 @@ import android.graphics.Canvas;
 import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
+
+import androidx.annotation.Nullable;
 
 import com.mask.customcomponents.R;
 import com.mask.customcomponents.utils.SizeUtils;
@@ -158,11 +159,11 @@ public class IndicatorView extends View implements ValueAnimator.AnimatorUpdateL
             default:
             case STYLE_CIRCLE:
                 width = paddingStart + paddingEnd + radiusNormal * 2 * (count - 1) + radiusSelected * 2 + margin * (count - 1);
-                height = paddingTop + paddingBottom + (radiusNormal < radiusSelected ? radiusSelected : radiusNormal) * 2;
+                height = paddingTop + paddingBottom + Math.max(radiusNormal, radiusSelected) * 2;
                 break;
             case STYLE_RECT:
                 width = paddingStart + paddingEnd + widthNormal * (count - 1) + widthSelected + margin * (count - 1);
-                height = paddingTop + paddingBottom + (heightNormal >= heightSelected ? heightNormal : heightSelected);
+                height = paddingTop + paddingBottom + Math.max(heightNormal, heightSelected);
                 break;
         }
 

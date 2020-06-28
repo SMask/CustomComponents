@@ -375,6 +375,11 @@ public class CaliperView extends View {
         for (int i = 0; i < valueList.size(); i++) {
             RectF itemRectF = valueRectFList.get(i);
 
+            // 内容容器外的不绘制
+            if (itemRectF.right <= valueRootRectF.left || itemRectF.left >= valueRootRectF.right) {
+                continue;
+            }
+
             String text = valueList.get(i);
             if (TextUtils.isEmpty(text)) {
                 continue;
