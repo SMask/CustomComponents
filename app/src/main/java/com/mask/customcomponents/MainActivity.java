@@ -45,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_color_picker_view:
                 ColorPickerViewActivity.startActivity(this);
                 break;
+            case R.id.btn_gradient_rotate_view:
+                GradientRotateViewActivity.startActivity(this);
+                break;
         }
     }
 

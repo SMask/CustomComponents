@@ -80,6 +80,11 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_color_picker_view"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".GradientRotateViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_gradient_rotate_view"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>
