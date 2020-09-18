@@ -133,6 +133,17 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_color_picker_view" />
 
+        <Button
+            android:id="@+id/btn_round_bevel_rect_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"
+            android:text="@string/title_activity_round_bevel_rect_view"
+            android:textAllCaps="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_gradient_rotate_view" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

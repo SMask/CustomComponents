@@ -85,6 +85,11 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_gradient_rotate_view"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".RoundBevelRectActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_round_bevel_rect_view"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>
