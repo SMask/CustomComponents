@@ -95,10 +95,10 @@ public class RoundBevelRectActivity extends AppCompatActivity {
 
         widthRatio = Math.max(widthRatio, 0);
         heightRatio = Math.max(heightRatio, 0);
-        leftTopRatio = Math.max(leftTopRatio, 0);
-        rightTopRatio = Math.max(rightTopRatio, 0);
-        rightBottomRatio = Math.max(rightBottomRatio, 0);
-        leftBottomRatio = Math.max(leftBottomRatio, 0);
+        leftTopRatio = Math.min(Math.max(leftTopRatio, 0), 100);
+        rightTopRatio = Math.min(Math.max(rightTopRatio, 0), 100);
+        rightBottomRatio = Math.min(Math.max(rightBottomRatio, 0), 100);
+        leftBottomRatio = Math.min(Math.max(leftBottomRatio, 0), 100);
 
         round_bevel_rect_view.refreshRatio(widthRatio, heightRatio, leftTopRatio, rightTopRatio, rightBottomRatio, leftBottomRatio);
     }
