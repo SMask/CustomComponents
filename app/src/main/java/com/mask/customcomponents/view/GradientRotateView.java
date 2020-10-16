@@ -103,7 +103,9 @@ public class GradientRotateView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        rectF.set(0, 0, width, height);
+        canvas.drawColor(Color.RED);
+
+        rectF.set(20, 20, width - 20, height - 20);
         float length = getShaderLength(rectF, angle);
 
         path.reset();
@@ -111,7 +113,7 @@ public class GradientRotateView extends View {
 
         matrix.reset();
         matrix.postScale(length, 1);
-        matrix.postTranslate((rectF.width() - length) / 2, 0);
+        matrix.postTranslate(rectF.left + (rectF.width() - length) / 2, 0);
         matrix.postRotate(angle, rectF.centerX(), rectF.centerY());
         shader.setLocalMatrix(matrix);
         shaderPaint.setShader(shader);
