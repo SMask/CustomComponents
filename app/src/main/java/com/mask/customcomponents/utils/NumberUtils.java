@@ -11,31 +11,94 @@ import java.math.BigDecimal;
 public class NumberUtils {
 
     /**
-     * 格式化(默认格式化方法)
+     * 转换String
      *
-     * @param num num
+     * @param value value
      * @return String
      */
-    public static String format(float num) {
-        if (Float.isNaN(num)) {
-            return String.valueOf(0);
-        }
-        int intValue = (int) num;
-        float decimal = num - intValue;
-        if (decimal == 0) {
-            return String.valueOf(intValue);
-        }
-        return String.valueOf(getRoundDecimal(num, 2));
+    public static String valueOf(int value) {
+        return String.valueOf(value);
     }
 
     /**
-     * 解析(默认解析方法)
+     * 转换String
      *
-     * @param str str
-     * @return float
+     * @param value value
+     * @return String
      */
-    public static float parse(CharSequence str) {
-        return parseFloat(str);
+    public static String valueOf(long value) {
+        return String.valueOf(value);
+    }
+
+    /**
+     * 转换String
+     *
+     * @param value value
+     * @return String
+     */
+    public static String valueOf(float value) {
+        return valueOf(value, true);
+    }
+
+    /**
+     * 转换String
+     *
+     * @param value      value
+     * @param isKeepZero 是否保存".0"
+     * @return String
+     */
+    public static String valueOf(float value, boolean isKeepZero) {
+        return valueOf(parseDouble(String.valueOf(value)), isKeepZero);
+    }
+
+    /**
+     * 转换String(不会表示为科学计数法，并且小数点末尾多余的0会被清除)
+     *
+     * @param value value
+     * @return String
+     */
+    public static String valueOf(double value) {
+        return valueOf(value, true);
+    }
+
+    /**
+     * 转换String(不会表示为科学计数法，并且小数点末尾多余的0会被清除)
+     * ex:
+     * isKeepZero true
+     * 0 -> 0.0
+     * 0.0 -> 0.0
+     * 0.00 -> 0.0
+     * 100 -> 100.0
+     * 100.0 -> 100.0
+     * 100.00 -> 100.0
+     * 0.0000003 -> 0.0000003
+     * 0.00000030 -> 0.0000003
+     * 0.000000300 -> 0.0000003
+     * <p>
+     * isKeepZero false
+     * 0 -> 0
+     * 0.0 -> 0
+     * 0.00 -> 0
+     * 100 -> 100
+     * 100.0 -> 100
+     * 100.00 -> 100
+     * 0.0000003 -> 0.0000003
+     * 0.00000030 -> 0.0000003
+     * 0.000000300 -> 0.0000003
+     *
+     * @param value      value
+     * @param isKeepZero 是否保存".0"
+     * @return String
+     */
+    public static String valueOf(double value, boolean isKeepZero) {
+        BigDecimal bigDecimal = new BigDecimal(String.valueOf(value));
+        if (isKeepZero) {
+            double decimal = value - bigDecimal.longValue();
+            if (decimal == 0) {
+                return bigDecimal.toPlainString();
+            }
+        }
+        return bigDecimal.stripTrailingZeros().toPlainString();
     }
 
     /**
@@ -50,7 +113,7 @@ public class NumberUtils {
         }
         try {
             return Integer.parseInt(str.toString());
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return 0;
@@ -68,7 +131,7 @@ public class NumberUtils {
         }
         try {
             return Float.parseFloat(str.toString());
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return 0.0f;
@@ -86,10 +149,44 @@ public class NumberUtils {
         }
         try {
             return Double.parseDouble(str.toString());
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return 0.00;
+    }
+
+    /**
+     * 获取数字整数位数
+     *
+     * @param value value
+     * @return int
+     */
+    public static int getIntegerDigits(float value) {
+        if (value == 0) {
+            return 0;
+        }
+        int count = (int) Math.log10(Math.abs(value));
+        if (count < 0) {
+            return 0;
+        }
+        return count + 1;
+    }
+
+    /**
+     * 获取数字小数位数
+     *
+     * @param value value
+     * @return int
+     */
+    public static int getDecimalDigits(float value) {
+        BigDecimal bigDecimal = new BigDecimal(String.valueOf(value));
+        String numStr = bigDecimal.stripTrailingZeros().toPlainString();
+        int pointIndex = numStr.lastIndexOf(".");
+        if (pointIndex < 0 || pointIndex >= (numStr.length() - 1)) {
+            return 0;
+        }
+        numStr = numStr.substring(pointIndex + 1);
+        return numStr.length();
     }
 
     /**
@@ -100,7 +197,7 @@ public class NumberUtils {
      * @return 小数
      */
     public static float getRoundDecimal(float num, int count) {
-        return new BigDecimal(num).setScale(count, BigDecimal.ROUND_HALF_UP).floatValue();
+        return new BigDecimal(String.valueOf(num)).setScale(count, BigDecimal.ROUND_HALF_UP).floatValue();
     }
 
     /**
@@ -143,6 +240,26 @@ public class NumberUtils {
     }
 
     /**
+     * 乘
+     *
+     * @param num1  num1
+     * @param num2  num2
+     * @param count 小数位数
+     * @return float
+     */
+    public static String multiply(String num1, String num2, int count) {
+        if (TextUtils.isEmpty(num1) || (num1.length() == 1 && ".".equals(num1))) {
+            num1 = "0";
+        }
+        if (TextUtils.isEmpty(num2) || (num2.length() == 1 && ".".equals(num2))) {
+            num2 = "0";
+        }
+        BigDecimal temp1 = new BigDecimal(num1);
+        BigDecimal temp2 = new BigDecimal(num2);
+        return temp1.multiply(temp2).setScale(count, BigDecimal.ROUND_HALF_UP).toPlainString();
+    }
+
+    /**
      * 除
      *
      * @param num1  被除数
@@ -151,9 +268,32 @@ public class NumberUtils {
      * @return float
      */
     public static float divide(float num1, float num2, int count) {
+        if (num2 == 0) {
+            return 0;
+        }
         BigDecimal temp1 = new BigDecimal(String.valueOf(num1));
         BigDecimal temp2 = new BigDecimal(String.valueOf(num2));
         return temp1.divide(temp2, count, BigDecimal.ROUND_HALF_UP).floatValue();
+    }
+
+    /**
+     * 除
+     *
+     * @param num1  被除数
+     * @param num2  除数
+     * @param count 小数位数
+     * @return float
+     */
+    public static String divide(String num1, String num2, int count) {
+        if (TextUtils.isEmpty(num1) || (num1.length() == 1 && ".".equals(num1))) {
+            num1 = "0";
+        }
+        if (parseDouble(num2) == 0) {
+            return "0";
+        }
+        BigDecimal temp1 = new BigDecimal(num1);
+        BigDecimal temp2 = new BigDecimal(num2);
+        return temp1.divide(temp2, count, BigDecimal.ROUND_HALF_UP).toPlainString();
     }
 
 }
