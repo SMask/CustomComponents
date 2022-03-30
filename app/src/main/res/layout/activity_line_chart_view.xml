@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".LineChartViewActivity">
 
-    <com.mask.customcomponents.view.LineChartView
-        android:id="@+id/lcv_temp"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
+    <com.mask.customcomponents.view.chart.LineChartView
+        android:id="@+id/chart_line"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="@dimen/horizontal_space"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="400:250"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

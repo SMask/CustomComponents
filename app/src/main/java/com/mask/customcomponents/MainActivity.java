@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btn_line_chart_view:
                 LineChartViewActivity.startActivity(this);
                 break;
+            case R.id.btn_curve_chart_view:
+                CurveChartViewActivity.startActivity(this);
+                break;
             case R.id.btn_password_input_view:
                 PasswordInputViewActivity.startActivity(this);
                 break;

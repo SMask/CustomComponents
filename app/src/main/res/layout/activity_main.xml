@@ -24,6 +24,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/btn_curve_chart_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"
+            android:text="@string/title_activity_curve_chart_view"
+            android:textAllCaps="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_line_chart_view" />
+
+        <Button
             android:id="@+id/btn_password_input_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -32,7 +43,7 @@
             android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_line_chart_view" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_curve_chart_view" />
 
         <Button
             android:id="@+id/btn_clean_edit_text"

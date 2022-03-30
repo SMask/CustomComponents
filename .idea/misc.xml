@@ -5,6 +5,16 @@
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Workspace/AndroidStudio/Project/CustomComponents/app/src/main/res/layout/activity_credit_view.xml" value="0.1765625" />
+        <entry key="..\:/Workspace/AndroidStudio/Project/CustomComponents/app/src/main/res/layout/activity_curve_chart_view.xml" value="0.3536458333333333" />
+        <entry key="..\:/Workspace/AndroidStudio/Project/CustomComponents/app/src/main/res/layout/activity_line_chart_view.xml" value="0.3536458333333333" />
+        <entry key="..\:/Workspace/AndroidStudio/Project/CustomComponents/app/src/main/res/layout/activity_main.xml" value="0.22509057971014493" />
+      </map>
+    </option>
+  </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>

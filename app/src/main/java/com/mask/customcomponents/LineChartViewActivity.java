@@ -5,14 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mask.customcomponents.view.LineChartView;
+import com.mask.customcomponents.view.chart.LineChartView;
 
 /**
  * 折线图
  */
 public class LineChartViewActivity extends AppCompatActivity {
 
-    private LineChartView lcv_temp;
+    private LineChartView chart_line;
 
     /**
      * startActivity
@@ -34,7 +34,7 @@ public class LineChartViewActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        lcv_temp = findViewById(R.id.lcv_temp);
+        chart_line = findViewById(R.id.chart_line);
     }
 
     private void setListener() {
@@ -45,7 +45,7 @@ public class LineChartViewActivity extends AppCompatActivity {
         int[] scoreArr = new int[]{80, 61, 115, 141, 110, 120};// 数值数组
         String[] timeArr = new String[]{"6月", "7月", "8月", "9月", "10月", "11月"};// 时间数组
 
-        lcv_temp.setInterceptTouch(false);
-        lcv_temp.setData(scoreArr, timeArr);
+        chart_line.setInterceptTouch(false);
+        chart_line.setData(scoreArr, timeArr);
     }
 }

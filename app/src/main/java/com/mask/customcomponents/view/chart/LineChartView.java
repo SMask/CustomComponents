@@ -1,4 +1,4 @@
-package com.mask.customcomponents.view;
+package com.mask.customcomponents.view.chart;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -8,10 +8,11 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.graphics.Rect;
-import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
+import androidx.core.content.ContextCompat;
 
 import com.mask.customcomponents.R;
 
