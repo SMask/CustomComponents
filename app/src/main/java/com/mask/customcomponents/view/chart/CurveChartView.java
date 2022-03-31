@@ -61,7 +61,7 @@ public class CurveChartView extends View {
     private final PointF markMinPoint = new PointF();// 最小刻度 坐标
     private float markMax;// 最大刻度
     private final PointF markMaxPoint = new PointF();// 最大刻度 坐标
-    private final int markNum = 6;// 刻度的数量(水平线的数量)
+    private final int markNum = 6;// 刻度线的数量(水平线的数量)
     private final List<PointF> markPointList = new ArrayList<>();// 刻度的坐标集合
 
 
@@ -119,11 +119,11 @@ public class CurveChartView extends View {
         initAnim();
 
         paintMark = new Paint();
-        paintMark.setAntiAlias(true);
-        paintMark.setStyle(Paint.Style.STROKE);
-        paintMark.setStrokeWidth(ChartUtils.dpToPx(1));
-        paintMark.setColor(0x80FFFFFF);
-        paintMark.setPathEffect(new DashPathEffect(new float[]{ChartUtils.dpToPx(3), ChartUtils.dpToPx(3)}, 0));
+        paintMark.setAntiAlias(true);// 设置抗锯齿
+        paintMark.setStyle(Paint.Style.STROKE);// 设置线模式
+        paintMark.setStrokeWidth(ChartUtils.dpToPx(1));// 设置线宽
+        paintMark.setColor(0x80FFFFFF);// 设置画笔颜色，也就是绘制线的颜色
+        paintMark.setPathEffect(new DashPathEffect(new float[]{ChartUtils.dpToPx(3), ChartUtils.dpToPx(3)}, 0));// 设置虚线样式
 
         paintGraph = new Paint();
         paintGraph.setAntiAlias(true);
@@ -156,6 +156,7 @@ public class CurveChartView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        // 设置背景色，方便查看
         canvas.drawColor(0xFF212833);
 
         drawMark(canvas);
