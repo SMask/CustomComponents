@@ -14,20 +14,24 @@ android {
         versionName "1.0"
     }
 
-    buildFeatures {
-        buildConfig = true  // 启用 BuildConfig 生成
-    }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 
+    buildFeatures {
+        buildConfig = true  // 启用 BuildConfig 生成
+    }
 }
 
 dependencies {
