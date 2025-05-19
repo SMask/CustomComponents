@@ -59,13 +59,11 @@ public class CurveChartViewActivity extends AppCompatActivity {
     }
 
     public void onAnimClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_anim_enter:
-                chart_curve.startAnimEnter();
-                break;
-            case R.id.btn_anim_exit:
-                chart_curve.startAnimExit();
-                break;
+        final int viewId = view.getId();
+        if (viewId == R.id.btn_anim_enter) {
+            chart_curve.startAnimEnter();
+        } else if (viewId == R.id.btn_anim_exit) {
+            chart_curve.startAnimExit();
         }
     }
 }
