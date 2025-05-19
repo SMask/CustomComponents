@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--高度-->
-    <dimen name="line_width">1px</dimen><!--APP线宽-->
-    <dimen name="line_width_bold">2dp</dimen><!--APP粗线宽-->
-    <dimen name="dot_size">10dp</dimen><!--APP点大小(红点等)-->
-    <dimen name="title_height">56dp</dimen><!--APP标题栏高度(具体和代码同步)-->
-    <dimen name="list_height_single">44dp</dimen><!--APP单行列表高度-->
-    <dimen name="list_height_two">56dp</dimen><!--APP两行列表高度-->
-    <dimen name="button_width">270dp</dimen><!--APP按钮宽度(登录等按钮)-->
-    <dimen name="button_height">44dp</dimen><!--APP按钮高度(登录等按钮)-->
-    <dimen name="button_height_small">34dp</dimen><!--APP按钮高度小(子项等按钮)-->
-    <dimen name="label_width">60dp</dimen><!--APP标签宽度(评论标签等)-->
-    <dimen name="label_height">24dp</dimen><!--APP标签高度(评论标签等)-->
-    <dimen name="wheel_height">210dp</dimen><!--APP滚动WheelView高度-->
+    <!-- 高度 -->
+    <dimen name="line_width">1px</dimen><!-- APP线宽 -->
+    <dimen name="line_width_bold">2dp</dimen><!-- APP粗线宽 -->
+    <dimen name="dot_size">10dp</dimen><!-- APP点大小(红点等) -->
+    <dimen name="title_height">56dp</dimen><!-- APP标题栏高度(具体和代码同步) -->
+    <dimen name="list_height_single">44dp</dimen><!-- APP单行列表高度 -->
+    <dimen name="list_height_two">56dp</dimen><!-- APP两行列表高度 -->
+    <dimen name="button_width">270dp</dimen><!-- APP按钮宽度(登录等按钮) -->
+    <dimen name="button_height">44dp</dimen><!-- APP按钮高度(登录等按钮) -->
+    <dimen name="button_height_small">34dp</dimen><!-- APP按钮高度小(子项等按钮) -->
+    <dimen name="label_width">60dp</dimen><!-- APP标签宽度(评论标签等) -->
+    <dimen name="label_height">24dp</dimen><!-- APP标签高度(评论标签等) -->
+    <dimen name="wheel_height">210dp</dimen><!-- APP滚动WheelView高度 -->
 
-    <!--圆角-->
-    <dimen name="corners">2dp</dimen><!--APP圆角半径(如果修改，Transform下也记得修改，全局搜索SizeUtils.dpToPx方法)-->
-    <dimen name="corners_type_sub">6dp</dimen><!--APP圆角半径(首页子分类)-->
-    <dimen name="corners_round">100dp</dimen><!--APP圆形-->
+    <!-- 圆角 -->
+    <dimen name="corners">2dp</dimen><!-- APP圆角半径(如果修改，Transform下也记得修改，全局搜索SizeUtils.dpToPx方法) -->
+    <dimen name="corners_type_sub">6dp</dimen><!-- APP圆角半径(首页子分类) -->
+    <dimen name="corners_round">100dp</dimen><!-- APP圆形 -->
 
-    <!--图标大小-->
-    <dimen name="icon_small">40dp</dimen><!--APP小icon(头像等)-->
-    <dimen name="icon_big">60dp</dimen><!--APP大icon(头像等)-->
-    <dimen name="icon_bigger">82dp</dimen><!--APP更大icon-->
-    <dimen name="arrow_width">12dp</dimen><!--APP箭头宽-->
-    <dimen name="arrow_height">12dp</dimen><!--APP箭头高-->
-    <dimen name="list_icon">24dp</dimen><!--APP列表icon-->
-    <dimen name="list_icon_small">16dp</dimen><!--APP列表小icon-->
-    <dimen name="icon_null_data">200dp</dimen><!--APP空内容icon-->
+    <!-- 图标大小 -->
+    <dimen name="icon_small">40dp</dimen><!-- APP小icon(头像等) -->
+    <dimen name="icon_big">60dp</dimen><!-- APP大icon(头像等) -->
+    <dimen name="icon_bigger">82dp</dimen><!-- APP更大icon -->
+    <dimen name="arrow_width">12dp</dimen><!-- APP箭头宽 -->
+    <dimen name="arrow_height">12dp</dimen><!-- APP箭头高 -->
+    <dimen name="list_icon">24dp</dimen><!-- APP列表icon -->
+    <dimen name="list_icon_small">16dp</dimen><!-- APP列表小icon -->
+    <dimen name="icon_null_data">200dp</dimen><!-- APP空内容icon -->
 
-    <!--文字大小-->
-    <dimen name="font_title_bar">18dp</dimen><!--APP导航栏标题(一级标题)-->
-    <dimen name="font_title_action">16dp</dimen><!--APP导航栏动作按钮-->
-    <dimen name="font_title_subtitle">10dp</dimen><!--APP副标题-->
-    <dimen name="main_font">16dp</dimen><!--APP主文字-->
-    <dimen name="main_font_content">14dp</dimen><!--APP内容-->
-    <dimen name="main_font_tips">12dp</dimen><!--APP提示文字-->
-    <dimen name="main_font_line_space">4dp</dimen><!--APP正文行间距)-->
+    <!-- 文字大小 -->
+    <dimen name="font_title_bar">18dp</dimen><!-- APP导航栏标题(一级标题) -->
+    <dimen name="font_title_action">16dp</dimen><!-- APP导航栏动作按钮 -->
+    <dimen name="font_title_subtitle">10dp</dimen><!-- APP副标题 -->
+    <dimen name="main_font">16dp</dimen><!-- APP主文字 -->
+    <dimen name="main_font_content">14dp</dimen><!-- APP内容 -->
+    <dimen name="main_font_tips">12dp</dimen><!-- APP提示文字 -->
+    <dimen name="main_font_line_space">4dp</dimen><!-- APP正文行间距 -->
 
-    <!--控件间距-->
-    <dimen name="list_icon_text_space">12dp</dimen><!--APP列表icon和文字间距)-->
-    <dimen name="list_text_space">16dp</dimen><!--APP列表文字和文字间距)-->
-    <dimen name="grid_view_space">6dp</dimen><!--APPGridView间距)-->
+    <!-- 控件间距 -->
+    <dimen name="list_icon_text_space">12dp</dimen><!-- APP列表icon和文字间距 -->
+    <dimen name="list_text_space">16dp</dimen><!-- APP列表文字和文字间距 -->
+    <dimen name="grid_view_space">6dp</dimen><!-- APPGridView间距 -->
 
-    <!--内外间距-->
-    <dimen name="horizontal_space">16dp</dimen><!--APP水平间距)-->
-    <dimen name="vertical_space">@dimen/horizontal_space</dimen><!--APP垂直间距)-->
-    <dimen name="horizontal_space_small">8dp</dimen><!--APP水平间距小)-->
-    <dimen name="vertical_space_small">@dimen/horizontal_space_small</dimen><!--APP垂直间距小)-->
-    <dimen name="horizontal_space_smaller">4dp</dimen><!--APP水平间距更小)-->
-    <dimen name="vertical_space_smaller">@dimen/horizontal_space_smaller</dimen><!--APP垂直间距更小)-->
-    <dimen name="horizontal_space_smallest">3dp</dimen><!--APP水平间距最小)-->
-    <dimen name="vertical_space_smallest">@dimen/horizontal_space_smallest</dimen><!--APP垂直间距最小)-->
+    <!-- 内外间距 -->
+    <dimen name="horizontal_space">16dp</dimen><!-- APP水平间距 -->
+    <dimen name="vertical_space">@dimen/horizontal_space</dimen><!-- APP垂直间距 -->
+    <dimen name="horizontal_space_small">8dp</dimen><!-- APP水平间距小 -->
+    <dimen name="vertical_space_small">@dimen/horizontal_space_small</dimen><!-- APP垂直间距小 -->
+    <dimen name="horizontal_space_smaller">4dp</dimen><!-- APP水平间距更小 -->
+    <dimen name="vertical_space_smaller">@dimen/horizontal_space_smaller</dimen><!-- APP垂直间距更小 -->
+    <dimen name="horizontal_space_smallest">3dp</dimen><!-- APP水平间距最小 -->
+    <dimen name="vertical_space_smallest">@dimen/horizontal_space_smallest</dimen><!-- APP垂直间距最小 -->
 
 </resources>
