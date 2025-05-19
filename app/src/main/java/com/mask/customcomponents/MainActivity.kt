@@ -64,6 +64,10 @@ class MainActivity : AppCompatActivity() {
             R.id.btn_round_bevel_rect_view -> {
                 RoundBevelRectActivity.startActivity(this)
             }
+
+            R.id.btn_alphabet_index_bar -> {
+                AlphabetIndexBarActivity.startActivity(this)
+            }
         }
     }
 }
