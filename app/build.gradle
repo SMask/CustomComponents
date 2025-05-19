@@ -31,6 +31,7 @@ android {
 
     buildFeatures {
         buildConfig = true  // 启用 BuildConfig 生成
+        viewBinding = true  // 启用 ViewBinding 生成
     }
 }
 
