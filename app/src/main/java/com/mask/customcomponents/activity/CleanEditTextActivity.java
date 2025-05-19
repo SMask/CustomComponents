@@ -1,4 +1,4 @@
-package com.mask.customcomponents;
+package com.mask.customcomponents.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mask.customcomponents.R;
 import com.mask.customcomponents.view.CleanEditText;
 
 /**

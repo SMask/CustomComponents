@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#CC000000"
-    tools:context=".CurveChartViewActivity">
+    tools:context=".activity.CurveChartViewActivity">
 
     <com.mask.customcomponents.view.chart.CurveChartView
         android:id="@+id/chart_curve"

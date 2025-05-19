@@ -1,4 +1,4 @@
-package com.mask.customcomponents;
+package com.mask.customcomponents.activity;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mask.customcomponents.R;
 import com.mask.customcomponents.utils.NumberUtils;
 import com.mask.customcomponents.utils.SizeUtils;
 import com.mask.customcomponents.view.ParticleProgressBar;

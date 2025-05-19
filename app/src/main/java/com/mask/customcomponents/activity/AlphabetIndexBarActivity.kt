@@ -1,4 +1,4 @@
-package com.mask.customcomponents
+package com.mask.customcomponents.activity
 
 import android.app.Activity
 import android.content.Intent

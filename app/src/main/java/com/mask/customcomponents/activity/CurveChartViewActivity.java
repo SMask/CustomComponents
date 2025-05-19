@@ -1,4 +1,4 @@
-package com.mask.customcomponents;
+package com.mask.customcomponents.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.mask.customcomponents.R;
 import com.mask.customcomponents.view.chart.ChartData;
 import com.mask.customcomponents.view.chart.CurveChartView;
 

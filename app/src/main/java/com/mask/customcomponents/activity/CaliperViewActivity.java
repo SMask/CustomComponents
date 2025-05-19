@@ -1,4 +1,4 @@
-package com.mask.customcomponents;
+package com.mask.customcomponents.activity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.mask.customcomponents.R;
 import com.mask.customcomponents.view.caliper.CaliperAdapter;
 import com.mask.customcomponents.view.caliper.CaliperView;
 

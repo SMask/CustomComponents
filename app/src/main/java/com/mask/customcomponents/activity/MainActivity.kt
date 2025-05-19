@@ -1,8 +1,9 @@
-package com.mask.customcomponents
+package com.mask.customcomponents.activity
 
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.mask.customcomponents.R
 
 class MainActivity : AppCompatActivity() {
 
