@@ -41,4 +41,9 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'androidx.recyclerview:recyclerview:1.4.0'
     implementation 'androidx.core:core-ktx:1.16.0'
+
+    // TinyPinyin核心包
+    implementation 'com.github.promeg:tinypinyin:2.0.3'
+    // 可选，适用于Android的中国地区词典
+//    implementation 'com.github.promeg:tinypinyin-lexicons-android-cncity:2.0.3'
 }

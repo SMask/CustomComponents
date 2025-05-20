@@ -1,4 +1,4 @@
-package com.mask.customcomponents.view;
+package com.mask.customcomponents.decoration;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;

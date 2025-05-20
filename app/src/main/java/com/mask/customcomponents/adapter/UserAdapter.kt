@@ -12,26 +12,16 @@ import com.mask.customcomponents.vo.UserVo
  *
  * Create by lishilin on 2025-05-19
  */
-class UserAdapter(
-    private val dataList: List<UserVo?>?
-) : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
-    inner class ViewHolder(val binding: ItemUserListBinding) : RecyclerView.ViewHolder(binding.root) {
-        init {
-            binding.root.setOnClickListener {
-                val data = getItem(bindingAdapterPosition)
-                val msg = "${data?.id} - ${data?.name}"
-                ToastUtils.show(itemView.context, msg)
-            }
-        }
-    }
+    private val dataList = mutableListOf<UserVo>()
 
     private fun getItem(position: Int): UserVo? {
-        return dataList?.getOrNull(position)
+        return dataList.getOrNull(position)
     }
 
     override fun getItemCount(): Int {
-        return dataList?.size ?: 0
+        return dataList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,4 +34,24 @@ class UserAdapter(
 
         holder.binding.tvName.text = data?.name
     }
+
+    inner class ViewHolder(val binding: ItemUserListBinding) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                val data = getItem(bindingAdapterPosition)
+                val msg = "${data?.id} - ${data?.name}"
+                ToastUtils.show(itemView.context, msg)
+            }
+        }
+    }
+
+    /************************************************************ S 外部调用 ************************************************************/
+
+    fun setDataList(dataList: MutableList<UserVo>) {
+        this.dataList.clear()
+        this.dataList.addAll(dataList)
+        notifyDataSetChanged()
+    }
+
+    /************************************************************ E 外部调用 ************************************************************/
 }

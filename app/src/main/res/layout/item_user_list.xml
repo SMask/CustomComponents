@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:minHeight="@dimen/list_height_single"
-    tools:background="#80FF0000">
+    tools:background="#40FF0000">
 
     <TextView
         android:id="@+id/tv_name"

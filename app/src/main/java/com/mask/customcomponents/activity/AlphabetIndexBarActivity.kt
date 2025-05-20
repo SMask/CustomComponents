@@ -8,8 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mask.customcomponents.adapter.UserAdapter
 import com.mask.customcomponents.databinding.ActivityAlphabetIndexBarBinding
+import com.mask.customcomponents.decoration.DividerItemDecoration
 import com.mask.customcomponents.utils.SizeUtils
-import com.mask.customcomponents.view.DividerItemDecoration
+import com.mask.customcomponents.view.index.decoration.HoverDecoration
 import com.mask.customcomponents.vo.UserVo
 
 /**
@@ -33,13 +34,29 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
             "天斗", "如路", "分通", "想门", "能入", "主强", "将先", "外山", "但治", "些代",
             "把合", "见名", "次利", "现水", "身内", "己相", "又由", "平口", "动月", "两化",
             "知军", "明公", "日事", "间马", "真情", "实立", "力处", "样世", "长市", "见展",
-            "把合何合", "把合何", "把合何1", "把合何2", "把合何11", "把合何12"
+            "把合何合", "把合何", "把合何1", "把合何2", "把合何11", "把合何12", "把合何A",
+            "1234", "@%#%^$^%&", "null"
         )
         val userList = mutableListOf<UserVo>()
+        userList.add(UserVo("10000", "置顶用户 01", true))
+        userList.add(UserVo("10001", "置顶用户 02", true))
+        userList.add(UserVo("10002", "置顶用户 03", true))
         nameArr.forEachIndexed { index, data ->
             userList.add(UserVo(index.toString(), data))
         }
         userList
+    }
+
+    private val layoutManager by lazy {
+        LinearLayoutManager(this)
+    }
+
+    private val hoverDecoration by lazy {
+        HoverDecoration(this)
+    }
+
+    private val userAdapter by lazy {
+        UserAdapter()
     }
 
     companion object {
@@ -58,14 +75,22 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        binding.rvUser.layoutManager = LinearLayoutManager(this)
+        binding.rvUser.layoutManager = layoutManager
         binding.rvUser.addItemDecoration(DividerItemDecoration.getInstance(SizeUtils.dpToPx(0.5f).toInt(), Color.LTGRAY))
+        binding.rvUser.addItemDecoration(hoverDecoration)
+        binding.rvUser.adapter = userAdapter
+
+        binding.indexBar.setRealIndex(false)
+            .setLayoutManager(layoutManager)
+            .setPressDisplayTextView(binding.tvIndexBarTag)
     }
 
     private fun setListener() {
     }
 
     private fun initData() {
-        binding.rvUser.adapter = UserAdapter(userList)
+        binding.indexBar.setSourceDataList(userList)
+        hoverDecoration.setSourceDataList(userList)
+        userAdapter.setDataList(userList)
     }
 }

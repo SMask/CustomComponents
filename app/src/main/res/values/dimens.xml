@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- 高度 -->
+    <!-- 宽高 -->
     <dimen name="line_width">1px</dimen><!-- APP线宽 -->
     <dimen name="line_width_bold">2dp</dimen><!-- APP粗线宽 -->
     <dimen name="dot_size">10dp</dimen><!-- APP点大小(红点等) -->
