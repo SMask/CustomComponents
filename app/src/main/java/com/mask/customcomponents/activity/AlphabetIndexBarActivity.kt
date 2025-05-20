@@ -39,8 +39,8 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
         )
         val userList = mutableListOf<UserVo>()
         userList.add(UserVo("10000", "置顶用户 01", true))
-        userList.add(UserVo("10001", "置顶用户 02", true))
         userList.add(UserVo("10002", "置顶用户 03", true))
+        userList.add(UserVo("10001", "置顶用户 02", true))
         nameArr.forEachIndexed { index, data ->
             userList.add(UserVo(index.toString(), data))
         }

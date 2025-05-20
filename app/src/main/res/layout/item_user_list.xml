@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:minHeight="@dimen/list_height_single"
+    android:paddingHorizontal="@dimen/horizontal_space"
     tools:background="#40FF0000">
 
     <TextView
@@ -13,10 +14,23 @@
         style="@style/TextView_Base"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/horizontal_space"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Name" />
+
+    <TextView
+        android:id="@+id/tv_desc"
+        style="@style/TextView_Base"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_space_small"
+        android:textColor="@color/main_font_2"
+        android:textSize="@dimen/main_font_tips"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_name"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Tips" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

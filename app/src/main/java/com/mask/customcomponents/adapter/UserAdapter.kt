@@ -33,6 +33,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
         val data = getItem(position)
 
         holder.binding.tvName.text = data?.name
+        holder.binding.tvDesc.text = "id: ${data?.id} - isTop: ${data?.isTop} - indexTag: ${data?.indexTag} - sortText: ${data?.sortText}"
     }
 
     inner class ViewHolder(val binding: ItemUserListBinding) : RecyclerView.ViewHolder(binding.root) {
