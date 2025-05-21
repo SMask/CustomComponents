@@ -81,7 +81,7 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
         binding.rvUser.adapter = userAdapter
 
         binding.indexBar.setRealIndex(false)
-            .setLayoutManager(layoutManager)
+            .setRecyclerView(binding.rvUser)
             .setPressDisplayTextView(binding.tvIndexBarTag)
     }
 

@@ -12,6 +12,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mask.customcomponents.view.index.interfaces.IIndexBarVo
 import com.mask.customcomponents.view.index.interfaces.OnIndexBarPressedListener
 import com.mask.customcomponents.view.index.utils.AlphabetIndexBarDataHelper
@@ -47,8 +48,9 @@ class AlphabetIndexBar @JvmOverloads constructor(
 
     private val tagList = mutableListOf<String>() // 字母索引数据
 
-    private var sourceDataList: MutableList<out IIndexBarVo>? = null // 列表实际数据
-    private var layoutManager: LinearLayoutManager? = null // 列表布局管理器
+    private var sourceDataList: MutableList<out IIndexBarVo>? = null // 实际列表数据
+
+    private var rvContent: RecyclerView? = null // 需要联动的列表
 
     private var pressDisplayTextView: TextView? = null // 按下时需要显示的 TextView
 
@@ -69,10 +71,12 @@ class AlphabetIndexBar @JvmOverloads constructor(
                 pressDisplayTextView?.isVisible = true
                 pressDisplayTextView?.text = tag
 
-                val layoutManager = layoutManager
-                if (layoutManager != null) {
+                val rvContent = rvContent
+                val layoutManager = rvContent?.layoutManager
+                if (layoutManager is LinearLayoutManager) {
                     val position = getPositionByTag(tag)
                     if (position >= 0) {
+                        rvContent.stopScroll()
                         layoutManager.scrollToPositionWithOffset(position, 0)
                     }
                 }
@@ -293,8 +297,8 @@ class AlphabetIndexBar @JvmOverloads constructor(
         return this
     }
 
-    fun setLayoutManager(layoutManager: LinearLayoutManager): AlphabetIndexBar {
-        this.layoutManager = layoutManager
+    fun setRecyclerView(rvContent: RecyclerView): AlphabetIndexBar {
+        this.rvContent = rvContent
         return this
     }
 
