@@ -1,6 +1,7 @@
 package com.mask.customcomponents.view.index.utils
 
 import com.github.promeg.pinyinhelper.Pinyin
+import com.mask.customcomponents.view.index.enums.IndexTag
 import com.mask.customcomponents.view.index.interfaces.IIndexBarVo
 
 /**
@@ -9,8 +10,6 @@ import com.mask.customcomponents.view.index.interfaces.IIndexBarVo
  * Create by lishilin on 2025-05-20
  */
 object AlphabetIndexBarDataHelper {
-
-    private val alphabetRegex = "[A-Z]".toRegex()
 
     fun convert(dataList: MutableList<out IIndexBarVo>) {
         dataList.forEach { data ->
@@ -28,14 +27,10 @@ object AlphabetIndexBarDataHelper {
 
                 // 索引 Tag
                 if (sortText.isEmpty()) {
-                    data.indexTag = IIndexBarVo.INDEX_TAG_OTHER
+                    data.indexTag = IndexTag.OTHER
                 } else {
                     val indexTag = sortText.substring(0, 1)
-                    if (indexTag.matches(alphabetRegex)) {
-                        data.indexTag = indexTag
-                    } else {
-                        data.indexTag = IIndexBarVo.INDEX_TAG_OTHER
-                    }
+                    data.indexTag = IndexTag.getInstance(indexTag)
                 }
             }
         }
@@ -58,9 +53,9 @@ object AlphabetIndexBarDataHelper {
                 1
             } else {
                 // 再比较 indexTag，判断特殊值的顺序
-                if (leftIndexTag == IIndexBarVo.INDEX_TAG_OTHER && rightIndexTag != IIndexBarVo.INDEX_TAG_OTHER) {
+                if (leftIndexTag == IndexTag.OTHER && rightIndexTag != IndexTag.OTHER) {
                     1
-                } else if (leftIndexTag != IIndexBarVo.INDEX_TAG_OTHER && rightIndexTag == IIndexBarVo.INDEX_TAG_OTHER) {
+                } else if (leftIndexTag != IndexTag.OTHER && rightIndexTag == IndexTag.OTHER) {
                     -1
                 }
                 // 最后比较 sortText，按内容排序（此时其他排序相关字段肯定相同）

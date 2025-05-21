@@ -36,7 +36,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
         holder.binding.tvDesc.text = "id: ${data?.id}" +
                 " timestamp: ${data?.timestamp}" +
                 " isTop: ${data?.isTop}" +
-                " indexTag: ${data?.indexTag}" +
+                " indexTag: ${data?.indexTag?.value}" +
                 " sortText: ${data?.sortText}"
     }
 

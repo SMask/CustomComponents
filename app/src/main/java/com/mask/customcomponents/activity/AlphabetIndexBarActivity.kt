@@ -38,7 +38,7 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
             "23456", "2345", "1234", "2", "@%#%^$^%&", "null", "dsfsfds", "A-干哈的",
             "癌细胞", "不好好", "保护好1", "不后悔2", "吧哈哈11", "不回话12", "不会哈A",
             "23456", "2345", "1234", "2", "@%#%^$^%&", "null", "dsfsfds", "A-干哈的",
-            "单雄信"
+            "单雄信", ""
         )
         val userList = mutableListOf<UserVo>()
         userList.add(UserVo("10000", "置顶用户_01", 10000, true))

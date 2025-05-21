@@ -24,5 +24,14 @@ enum class IndexTag(val value: String) {
             U, V, W, X, Y, Z,
             OTHER
         )
+
+        fun getInstance(value: String): IndexTag {
+            entries.forEach { tag ->
+                if (tag.value == value) {
+                    return tag
+                }
+            }
+            return OTHER
+        }
     }
 }

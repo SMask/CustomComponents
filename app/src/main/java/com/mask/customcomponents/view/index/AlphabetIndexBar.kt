@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.mask.customcomponents.view.index.enums.IndexTag
 import com.mask.customcomponents.view.index.interfaces.IIndexBarVo
 import com.mask.customcomponents.view.index.interfaces.OnIndexBarPressedListener
 import com.mask.customcomponents.view.index.utils.AlphabetIndexBarDataHelper
@@ -46,7 +47,7 @@ class AlphabetIndexBar @JvmOverloads constructor(
 
     private var isRealIndex = false // 是否使用真实的字母索引（根据数据内容生成字母索引）
 
-    private val tagList = mutableListOf<String>() // 字母索引数据
+    private val tagList = mutableListOf<IndexTag>() // 字母索引数据
 
     private var sourceDataList: MutableList<out IIndexBarVo>? = null // 实际列表数据
 
@@ -67,9 +68,9 @@ class AlphabetIndexBar @JvmOverloads constructor(
         initTagList()
 
         setOnIndexBarPressedListener(object : OnIndexBarPressedListener {
-            override fun onIndexPressed(index: Int, tag: String) {
+            override fun onIndexPressed(index: Int, tag: IndexTag) {
                 pressDisplayTextView?.isVisible = true
-                pressDisplayTextView?.text = tag
+                pressDisplayTextView?.text = tag.value
 
                 val rvContent = rvContent
                 val layoutManager = rvContent?.layoutManager
@@ -102,7 +103,8 @@ class AlphabetIndexBar @JvmOverloads constructor(
         var measuredHeight = 0
 
         tagList.forEach { tag ->
-            tagPaint.getTextBounds(tag, 0, tag.length, tagBounds)
+            val tagStr = tag.value
+            tagPaint.getTextBounds(tagStr, 0, tagStr.length, tagBounds)
             measuredWidth = measuredWidth.coerceAtLeast(tagBounds.width())
             measuredHeight = measuredHeight.coerceAtLeast(tagBounds.height())
         }
@@ -147,7 +149,8 @@ class AlphabetIndexBar @JvmOverloads constructor(
         val paddingTop = paddingTop
 
         tagList.forEachIndexed { index, tag ->
-            tagPaint.getTextBounds(tag, 0, tag.length, tagBounds)
+            val tagStr = tag.value
+            tagPaint.getTextBounds(tagStr, 0, tagStr.length, tagBounds)
             // 居中绘制，不需要再计算文本宽度
 //            val textWidth = tagPaint.measureText(tag) // 采用这种方式计算宽度，是避免文字默认间距影响左右居中效果
             val textHeight = tagBounds.height() // 采用这种方式计算高度，是希望文字上下绝对居中，不受默认间距影响
@@ -156,7 +159,7 @@ class AlphabetIndexBar @JvmOverloads constructor(
             val textX = width / 2f
             val textYOffset = paddingTop + index * tagHeight + (tagHeight - textHeight) / 2f
             val textY = textYOffset + baseline
-            canvas.drawText(tag, textX, textY, tagPaint)
+            canvas.drawText(tagStr, textX, textY, tagPaint)
         }
     }
 
@@ -219,7 +222,7 @@ class AlphabetIndexBar @JvmOverloads constructor(
         tagList.clear()
 
         if (!isRealIndex) {
-            tagList.addAll(IIndexBarVo.INDEX_TAG_ARR)
+            tagList.addAll(IndexTag.ARR)
         } else {
             sourceDataList?.forEach { data ->
                 val tag = data.indexTag
@@ -263,12 +266,9 @@ class AlphabetIndexBar @JvmOverloads constructor(
         AlphabetIndexBarDataHelper.sort(sourceDataList)
     }
 
-    private fun getPositionByTag(tag: String): Int {
+    private fun getPositionByTag(tag: IndexTag): Int {
         val sourceDataList = sourceDataList
         if (sourceDataList.isNullOrEmpty()) {
-            return -1
-        }
-        if (tag.isEmpty()) {
             return -1
         }
         sourceDataList.forEachIndexed { index, data ->
