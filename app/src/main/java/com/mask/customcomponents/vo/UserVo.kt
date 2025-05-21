@@ -1,9 +1,8 @@
 package com.mask.customcomponents.vo
 
+import com.mask.customcomponents.view.index.enums.IndexTag
 import com.mask.customcomponents.view.index.interfaces.IHoverVo
 import com.mask.customcomponents.view.index.interfaces.IIndexBarVo
-import com.mask.customcomponents.view.index.interfaces.IIndexBarVo.Companion.INDEX_TAG_OTHER
-import com.mask.customcomponents.view.index.interfaces.IIndexBarVo.Companion.INDEX_TAG_TOP
 
 /**
  * 用户 实体类
@@ -17,7 +16,7 @@ data class UserVo(
     val isTop: Boolean = false,
 ) : IHoverVo, IIndexBarVo {
 
-    override var indexTag: String = if (isTop) INDEX_TAG_TOP else INDEX_TAG_OTHER
+    override var indexTag: IndexTag = if (isTop) IndexTag.TOP else IndexTag.OTHER
     override var sortText: String? = null
 
     override fun isShowHover(): Boolean {
@@ -25,7 +24,7 @@ data class UserVo(
     }
 
     override fun getHoverText(): String {
-        return indexTag
+        return indexTag.value
     }
 
     override fun isSortConvert(): Boolean {

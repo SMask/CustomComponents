@@ -26,7 +26,7 @@ object AlphabetIndexBarDataHelper {
                 }
                 data.sortText = sortText.toString()
 
-                // 索引栏 Tag
+                // 索引 Tag
                 if (sortText.isEmpty()) {
                     data.indexTag = IIndexBarVo.INDEX_TAG_OTHER
                 } else {
