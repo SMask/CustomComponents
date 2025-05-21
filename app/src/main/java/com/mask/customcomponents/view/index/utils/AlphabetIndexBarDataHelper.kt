@@ -21,7 +21,7 @@ object AlphabetIndexBarDataHelper {
                 sortConvertTarget.forEach { char ->
                     val pinyin = Pinyin.toPinyin(char).uppercase()
                     if (pinyin.isNotEmpty()) {
-                        sortText.append(pinyin.substring(0, 1))
+                        sortText.append(pinyin)
                     }
                 }
                 data.sortText = sortText.toString()
@@ -63,9 +63,15 @@ object AlphabetIndexBarDataHelper {
                 } else if (leftIndexTag != IIndexBarVo.INDEX_TAG_OTHER && rightIndexTag == IIndexBarVo.INDEX_TAG_OTHER) {
                     -1
                 }
-                // 最后比较 sortText，按内容排序（此时其他排序相关字段肯定相等）
+                // 最后比较 sortText，按内容排序（此时其他排序相关字段肯定相同）
                 else {
-                    leftSortText.compareTo(rightSortText)
+                    val result = leftSortText.compareTo(rightSortText)
+                    // 如果 sortText 相同，则比较额外数据
+                    if (result == 0) {
+                        leftData.compareToExtra(rightData)
+                    } else {
+                        result
+                    }
                 }
             }
         }

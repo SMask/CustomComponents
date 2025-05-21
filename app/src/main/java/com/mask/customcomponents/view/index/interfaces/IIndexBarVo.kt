@@ -30,4 +30,5 @@ interface IIndexBarVo {
 
     fun getSortConvertTarget(): String // 转换为排序文本的目标数据
 
+    fun compareToExtra(other: IIndexBarVo): Int // 额外排序逻辑（主要用于 sortText 相同时的排序逻辑）
 }

@@ -34,15 +34,23 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
             "天斗", "如路", "分通", "想门", "能入", "主强", "将先", "外山", "但治", "些代",
             "把合", "见名", "次利", "现水", "身内", "己相", "又由", "平口", "动月", "两化",
             "知军", "明公", "日事", "间马", "真情", "实立", "力处", "样世", "长市", "见展",
-            "把合何合", "把合何", "把合何1", "把合何2", "把合何11", "把合何12", "把合何A",
-            "23456", "2345", "1234", "2", "@%#%^$^%&", "null"
+            "阿西吧", "把合何", "把合何1", "把合何2", "把合何11", "把合何12", "把合何A",
+            "23456", "2345", "1234", "2", "@%#%^$^%&", "null", "dsfsfds", "A-干哈的",
+            "癌细胞", "不好好", "保护好1", "不后悔2", "吧哈哈11", "不回话12", "不会哈A",
+            "23456", "2345", "1234", "2", "@%#%^$^%&", "null", "dsfsfds", "A-干哈的",
+            "单雄信"
         )
         val userList = mutableListOf<UserVo>()
-        userList.add(UserVo("10000", "置顶用户 01", true))
-        userList.add(UserVo("10002", "置顶用户 03", true))
-        userList.add(UserVo("10001", "置顶用户 02", true))
+        userList.add(UserVo("10000", "置顶用户_01", 10000, true))
+        userList.add(UserVo("10002", "置顶用户_03", 10002, true))
+        userList.add(UserVo("10001", "置顶用户_02", 10001, true))
+
+        userList.add(UserVo("1004", "姓名相同_01", 1004))
+        userList.add(UserVo("1001", "姓名相同_01", null))
+        userList.add(UserVo("1002", "姓名相同_01", 1002))
+        userList.add(UserVo("1003", "姓名相同_01", null))
         nameArr.forEachIndexed { index, data ->
-            userList.add(UserVo(index.toString(), data))
+            userList.add(UserVo(index.toString(), data, (nameArr.size - index).toLong()))
         }
         userList
     }

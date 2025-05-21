@@ -13,6 +13,7 @@ import com.mask.customcomponents.view.index.interfaces.IIndexBarVo.Companion.IND
 data class UserVo(
     val id: String?,
     val name: String?,
+    val timestamp: Long?,
     val isTop: Boolean = false,
 ) : IHoverVo, IIndexBarVo {
 
@@ -33,5 +34,19 @@ data class UserVo(
 
     override fun getSortConvertTarget(): String {
         return name ?: ""
+    }
+
+    override fun compareToExtra(other: IIndexBarVo): Int {
+        val otherTimestamp = (other as? UserVo)?.timestamp
+
+        return if (timestamp == null && otherTimestamp == null) {
+            0
+        } else if (timestamp == null) {
+            -1
+        } else if (otherTimestamp == null) {
+            1
+        } else {
+            timestamp.compareTo(otherTimestamp)
+        }
     }
 }
