@@ -42,15 +42,14 @@ object AlphabetIndexBarDataHelper {
     }
 
     fun sort(dataList: MutableList<out IIndexBarVo>) {
-        dataList.sortWith(Comparator { leftData, rightData ->
-            val leftIndexTag = leftData.indexTag
+        dataList.sortWith { leftData, rightData ->
             val leftSortText = leftData.sortText
-            val isLeftSortConvert = leftData.isSortConvert()
+            val leftIndexTag = leftData.indexTag
 
-            val rightIndexTag = rightData.indexTag
             val rightSortText = rightData.sortText
-            val isRightSortConvert = rightData.isSortConvert()
+            val rightIndexTag = rightData.indexTag
 
+            // 先比较 sortText，为 null 的在前面
             if (leftSortText == null && rightSortText == null) {
                 0
             } else if (leftSortText == null) {
@@ -58,16 +57,17 @@ object AlphabetIndexBarDataHelper {
             } else if (rightSortText == null) {
                 1
             } else {
-                if (!isLeftSortConvert || !isRightSortConvert) {
-                    0
-                } else if (leftIndexTag == IIndexBarVo.INDEX_TAG_OTHER && rightIndexTag != IIndexBarVo.INDEX_TAG_OTHER) {
+                // 再比较 indexTag，判断特殊值的顺序
+                if (leftIndexTag == IIndexBarVo.INDEX_TAG_OTHER && rightIndexTag != IIndexBarVo.INDEX_TAG_OTHER) {
                     1
                 } else if (leftIndexTag != IIndexBarVo.INDEX_TAG_OTHER && rightIndexTag == IIndexBarVo.INDEX_TAG_OTHER) {
                     -1
-                } else {
+                }
+                // 最后比较 sortText，按内容排序（此时其他排序相关字段肯定相等）
+                else {
                     leftSortText.compareTo(rightSortText)
                 }
             }
-        })
+        }
     }
 }
