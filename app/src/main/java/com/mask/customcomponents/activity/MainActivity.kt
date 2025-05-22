@@ -69,6 +69,10 @@ class MainActivity : AppCompatActivity() {
             R.id.btn_alphabet_index_bar -> {
                 AlphabetIndexBarActivity.startActivity(this)
             }
+
+            R.id.btn_draggable_view -> {
+                DraggableViewActivity.startActivity(this)
+            }
         }
     }
 }

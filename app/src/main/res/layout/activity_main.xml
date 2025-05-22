@@ -166,6 +166,17 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_round_bevel_rect_view" />
 
+        <Button
+            android:id="@+id/btn_draggable_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"
+            android:text="@string/title_activity_draggable_view"
+            android:textAllCaps="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_alphabet_index_bar" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

@@ -102,6 +102,11 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/title_activity_alphabet_index_bar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.DraggableViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_draggable_view"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>
