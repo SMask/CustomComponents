@@ -5,9 +5,13 @@ package com.mask.customcomponents.view.index.enums
  *
  * Create by lishilin on 2025-05-21
  */
-enum class IndexTag(val value: String) {
+enum class IndexTag(
+    val value: String, // 索引栏显示的文本
+    val text: String = value // Hover 显示的文本
+) {
 
-    TOP("↑"), // 返回顶部
+    TOP("↑"), // 置顶
+    STAR("🌟", "星标朋友"), // 星标
     OTHER("#"), // 其他
 
     A("A"), B("B"), C("C"), D("D"), E("E"), F("F"), G("G"),
@@ -17,7 +21,7 @@ enum class IndexTag(val value: String) {
 
     companion object {
         val ARR = arrayOf(
-            TOP,
+            TOP, STAR,
             A, B, C, D, E, F, G,
             H, I, J, K, L, M, N,
             O, P, Q, R, S, T,

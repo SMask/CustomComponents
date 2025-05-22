@@ -40,18 +40,27 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
             "23456", "2345", "1234", "2", "@%#%^$^%&", "null", "dsfsfds", "A-干哈的",
             "单雄信", ""
         )
+
         val userList = mutableListOf<UserVo>()
-        userList.add(UserVo("10000", "置顶用户_01", 10000, true))
-        userList.add(UserVo("10002", "置顶用户_03", 10002, true))
-        userList.add(UserVo("10001", "置顶用户_02", 10001, true))
+        nameArr.forEachIndexed { index, data ->
+            userList.add(UserVo(index.toString(), data, (nameArr.size - index).toLong()))
+        }
+
+        userList.add(UserVo("10000", "置顶用户_01", 10000, isTop = true))
+        userList.add(UserVo("10002", "置顶用户_03", 10002, isTop = true))
+        userList.add(UserVo("10001", "置顶用户_02", 10001, isTop = true))
 
         userList.add(UserVo("1004", "姓名相同_01", 1004))
         userList.add(UserVo("1001", "姓名相同_01", null))
         userList.add(UserVo("1002", "姓名相同_01", 1002))
         userList.add(UserVo("1003", "姓名相同_01", null))
-        nameArr.forEachIndexed { index, data ->
-            userList.add(UserVo(index.toString(), data, (nameArr.size - index).toLong()))
-        }
+
+        userList.add(UserVo("1006", "姓名相同_01", 1006, isStar = true))
+        userList.add(UserVo("1005", "姓名相同_01", 1005, isStar = true))
+        userList.add(UserVo("1007", "刘备", 1007, isStar = true))
+        userList.add(UserVo("1008", "关羽", 1008, isStar = true))
+        userList.add(UserVo("1009", "张飞", 1009, isStar = true))
+
         userList
     }
 

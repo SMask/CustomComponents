@@ -13,7 +13,9 @@ interface IIndexBarVo {
 
     var sortText: String? // 排序文本（主要用于列表排序使用，为 null 则在列表顶部）
 
-    fun isSortConvert(): Boolean // 是否参与排序（false 则不会生成 indexTag 及 sortText）
+    fun isIndexTagConvert(): Boolean // 是否转换索引相关字段（false 则不会重新生成 indexTag）
+
+    fun isSortConvert(): Boolean // 是否转换排序相关字段（false 则不会重新生成 sortText）
 
     fun getSortConvertTarget(): String // 转换为排序文本的目标数据
 

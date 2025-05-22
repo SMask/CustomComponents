@@ -13,8 +13,8 @@ object AlphabetIndexBarDataHelper {
 
     fun convert(dataList: MutableList<out IIndexBarVo>) {
         dataList.forEach { data ->
+            // 排序文本
             if (data.isSortConvert()) {
-                // 生成用来排序的值
                 val sortText = StringBuilder()
                 val sortConvertTarget = data.getSortConvertTarget()
                 sortConvertTarget.forEach { char ->
@@ -24,9 +24,12 @@ object AlphabetIndexBarDataHelper {
                     }
                 }
                 data.sortText = sortText.toString()
+            }
 
-                // 索引 Tag
-                if (sortText.isEmpty()) {
+            // 索引 Tag
+            if (data.isIndexTagConvert()) {
+                val sortText = data.sortText
+                if (sortText.isNullOrEmpty()) {
                     data.indexTag = IndexTag.OTHER
                 } else {
                     val indexTag = sortText.substring(0, 1)
@@ -53,7 +56,20 @@ object AlphabetIndexBarDataHelper {
                 1
             } else {
                 // 再比较 indexTag，判断特殊值的顺序
-                if (leftIndexTag == IndexTag.OTHER && rightIndexTag != IndexTag.OTHER) {
+                // 置顶
+                if (leftIndexTag == IndexTag.TOP && rightIndexTag != IndexTag.TOP) {
+                    -1
+                } else if (leftIndexTag != IndexTag.TOP && rightIndexTag == IndexTag.TOP) {
+                    1
+                }
+                // 星标
+                else if (leftIndexTag == IndexTag.STAR && rightIndexTag != IndexTag.STAR) {
+                    -1
+                } else if (leftIndexTag != IndexTag.STAR && rightIndexTag == IndexTag.STAR) {
+                    1
+                }
+                // 其他
+                else if (leftIndexTag == IndexTag.OTHER && rightIndexTag != IndexTag.OTHER) {
                     1
                 } else if (leftIndexTag != IndexTag.OTHER && rightIndexTag == IndexTag.OTHER) {
                     -1
