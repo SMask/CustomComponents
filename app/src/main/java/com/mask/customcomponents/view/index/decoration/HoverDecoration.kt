@@ -63,7 +63,7 @@ class HoverDecoration(context: Context) : RecyclerView.ItemDecoration() {
 
     override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDrawOver(canvas, parent, state)
-        val position = (parent.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+        val position = (parent.layoutManager as? LinearLayoutManager)?.findFirstVisibleItemPosition() ?: return
 
         val sourceDataList = sourceDataList
         val data = sourceDataList?.getOrNull(position) ?: return
@@ -130,15 +130,15 @@ class HoverDecoration(context: Context) : RecyclerView.ItemDecoration() {
         canvas.drawRect(left.toFloat(), top.toFloat(), right.toFloat(), bottom.toFloat(), bgPaint)
 
         // 绘制文字
-        val hoverText = data.getHoverText()
-        textPaint.getTextBounds(hoverText, 0, hoverText.length, textBounds)
+        val text = data.getHoverText()
+        textPaint.getTextBounds(text, 0, text.length, textBounds)
         val textHeight = textBounds.height()
         val baseline = -textBounds.top
 
         val textX = parent.paddingStart + hoverPaddingStart
         val textYOffset = top + (hoverHeight - textHeight) / 2f
         val textY = textYOffset + baseline
-        canvas.drawText(hoverText, textX.toFloat(), textY, textPaint)
+        canvas.drawText(text, textX.toFloat(), textY, textPaint)
     }
 
     /************************************************************ S 外部调用 ************************************************************/

@@ -29,4 +29,6 @@
     <string name="anim_enter">入场动画</string>
     <string name="anim_exit">退场动画</string>
 
+    <string name="alphabet_index_bar_footer_text">%d个朋友</string>
+
 </resources>

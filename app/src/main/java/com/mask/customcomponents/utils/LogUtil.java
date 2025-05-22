@@ -17,7 +17,7 @@ import java.util.Locale;
  */
 public class LogUtil {
 
-    private static final String customTagPrefix = "x_log";
+    private static final String customTagPrefix = "Mask_log";
 
     private static final boolean isDebug = BuildConfig.DEBUG;
 

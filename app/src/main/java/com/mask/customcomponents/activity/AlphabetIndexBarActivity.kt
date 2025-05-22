@@ -11,6 +11,7 @@ import com.mask.customcomponents.databinding.ActivityAlphabetIndexBarBinding
 import com.mask.customcomponents.decoration.DividerItemDecoration
 import com.mask.customcomponents.utils.SizeUtils
 import com.mask.customcomponents.view.index.decoration.HoverDecoration
+import com.mask.customcomponents.view.index.decoration.TotalFooterDecoration
 import com.mask.customcomponents.vo.UserVo
 
 /**
@@ -72,6 +73,10 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
         HoverDecoration(this)
     }
 
+    private val totalFooterDecoration by lazy {
+        TotalFooterDecoration(this)
+    }
+
     private val userAdapter by lazy {
         UserAdapter()
     }
@@ -95,6 +100,7 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
         binding.rvUser.layoutManager = layoutManager
         binding.rvUser.addItemDecoration(DividerItemDecoration.getInstance(SizeUtils.dpToPx(0.5f).toInt(), Color.LTGRAY))
         binding.rvUser.addItemDecoration(hoverDecoration)
+        binding.rvUser.addItemDecoration(totalFooterDecoration)
         binding.rvUser.adapter = userAdapter
 
         binding.indexBar.setRealIndex(false)
@@ -108,6 +114,7 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
     private fun initData() {
         binding.indexBar.setSourceDataList(userList)
         hoverDecoration.setSourceDataList(userList)
+        totalFooterDecoration.setSourceDataList(userList)
         userAdapter.setDataList(userList)
     }
 }
