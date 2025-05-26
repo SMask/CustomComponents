@@ -29,6 +29,10 @@
     <string name="subtract">减少</string>
     <string name="anim_enter">入场动画</string>
     <string name="anim_exit">退场动画</string>
+    <string name="anim">动画</string>
+    <string name="snap_horizontal">水平吸附</string>
+    <string name="snap_vertical">垂直吸附</string>
+    <string name="out_of_bounds">允许超出边界</string>
 
     <string name="alphabet_index_bar_footer_text">%d个朋友</string>
 
