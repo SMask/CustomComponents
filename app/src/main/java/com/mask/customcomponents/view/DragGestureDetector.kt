@@ -21,6 +21,20 @@ import androidx.constraintlayout.widget.ConstraintSet
 class DragGestureDetector(val view: View) {
 
     /**
+     * 监听器
+     */
+    abstract class OnDragListener {
+
+        open fun onDragStart(view: View, rawX: Float, rawY: Float) {}
+
+        open fun onDragging(view: View, rawX: Float, rawY: Float, dx: Float, dy: Float) {}
+
+        open fun onDragEnd(view: View, rawX: Float, rawY: Float) {}
+
+        open fun onUpdateLayoutParamsComplete(view: View, layoutParams: ViewGroup.LayoutParams) {}
+    }
+
+    /**
      * 位置
      */
     private enum class Location {
@@ -50,14 +64,16 @@ class DragGestureDetector(val view: View) {
     private var isVerticalSnapEnabled = false // 是否开启垂直吸附
     private var isAnimEnabled = true // 是否开启动画
 
+    private var onDragListener: OnDragListener? = null // 监听器
+
     private fun init() {
         val layoutParams = view.layoutParams as? ViewGroup.MarginLayoutParams
-        if (layoutParams != null) {
-            leftMargin = layoutParams.leftMargin
-            topMargin = layoutParams.topMargin
-            rightMargin = layoutParams.rightMargin
-            bottomMargin = layoutParams.bottomMargin
-        }
+            ?: throw IllegalStateException("调用 attach 方法前需要先给 View 设置 MarginLayoutParams")
+
+        leftMargin = layoutParams.leftMargin
+        topMargin = layoutParams.topMargin
+        rightMargin = layoutParams.rightMargin
+        bottomMargin = layoutParams.bottomMargin
     }
 
     private fun onTouchEvent(event: MotionEvent): Boolean {
@@ -76,10 +92,12 @@ class DragGestureDetector(val view: View) {
 
                 if (!isDragging && ((dx * dx + dy * dy) > touchSlop * touchSlop)) {
                     isDragging = true
+                    onDragListener?.onDragStart(view, rawX, rawY)
                 }
 
                 if (isDragging) {
                     onDragging(dx, dy)
+                    onDragListener?.onDragging(view, rawX, rawY, dx, dy)
                     lastRawX = rawX
                     lastRawY = rawY
                 }
@@ -87,7 +105,7 @@ class DragGestureDetector(val view: View) {
 
             MotionEvent.ACTION_UP -> {
                 if (isDragging) {
-                    onDragEnd()
+                    onDragEnd(event)
                     isDragging = false
                     return true
                 }
@@ -95,7 +113,7 @@ class DragGestureDetector(val view: View) {
 
             MotionEvent.ACTION_CANCEL -> {
                 if (isDragging) {
-                    onDragEnd()
+                    onDragEnd(event)
                     isDragging = false
                 }
             }
@@ -121,7 +139,7 @@ class DragGestureDetector(val view: View) {
     /**
      * 拖拽结束
      */
-    private fun onDragEnd() {
+    private fun onDragEnd(event: MotionEvent) {
         // 获取 View 最终的位置，吸附等逻辑
         val location = getLocation()
         val x = if (isHorizontalSnapEnabled) {
@@ -142,6 +160,8 @@ class DragGestureDetector(val view: View) {
         } else {
             view.y
         }
+
+        onDragListener?.onDragEnd(view, event.rawX, event.rawY)
 
         // 判断是否需要移动 View
         if (x == view.x && y == view.y) {
@@ -262,6 +282,8 @@ class DragGestureDetector(val view: View) {
 
         // 重新设置 LayoutParams，不然 ConstraintLayout 布局不会生效
         view.layoutParams = layoutParams
+
+        onDragListener?.onUpdateLayoutParamsComplete(view, generateLayoutParams())
     }
 
     private fun updateLayoutParamsGravity(layoutParams: FrameLayout.LayoutParams) {
@@ -384,6 +406,22 @@ class DragGestureDetector(val view: View) {
         }
     }
 
+    private fun generateLayoutParams(): ViewGroup.LayoutParams {
+        return when (val layoutParams = view.layoutParams) {
+            is FrameLayout.LayoutParams -> {
+                FrameLayout.LayoutParams(layoutParams)
+            }
+
+            is ConstraintLayout.LayoutParams -> {
+                ConstraintLayout.LayoutParams(layoutParams)
+            }
+
+            else -> {
+                ViewGroup.LayoutParams(view.width, view.height)
+            }
+        }
+    }
+
     /************************************************************ S 外部调用 ************************************************************/
 
     @SuppressLint("ClickableViewAccessibility")
@@ -411,6 +449,11 @@ class DragGestureDetector(val view: View) {
 
     fun setAnimEnabled(isAnimEnabled: Boolean): DragGestureDetector {
         this.isAnimEnabled = isAnimEnabled
+        return this
+    }
+
+    fun setOnDragListener(onDragListener: OnDragListener): DragGestureDetector {
+        this.onDragListener = onDragListener
         return this
     }
 

@@ -55,10 +55,11 @@
 
     </FrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/layout_config"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:flexWrap="wrap"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -67,38 +68,32 @@
             android:id="@+id/cb_out_of_bounds"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height"
-            android:text="@string/out_of_bounds"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/out_of_bounds" />
 
         <CheckBox
             android:id="@+id/cb_anim"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height"
-            android:text="@string/anim"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cb_out_of_bounds"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/anim" />
 
         <CheckBox
             android:id="@+id/cb_snap_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height"
-            android:text="@string/snap_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cb_anim"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/snap_horizontal" />
 
         <CheckBox
             android:id="@+id/cb_snap_vertical"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/button_height"
-            android:text="@string/snap_vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cb_snap_horizontal"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/snap_vertical" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <CheckBox
+            android:id="@+id/cb_save_layout_params"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/button_height"
+            android:text="@string/draggable_view_save_layout_params" />
+
+    </com.google.android.flexbox.FlexboxLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
