@@ -53,9 +53,9 @@ class DragGestureDetector(val view: View) {
     private var isDragging = false // 是否正在拖拽
 
     // 内部配置项
-    private val touchSlop by lazy {
+    private val touchSlop by lazy { // 拖拽阈值（系统默认触摸敏感度）
         ViewConfiguration.get(view.context).scaledTouchSlop
-    } // 拖拽阈值（系统默认触摸敏感度）
+    }
     private val animDuration = 150L // 动画时长
 
     // 外部可修改配置项
