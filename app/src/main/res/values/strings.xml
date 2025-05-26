@@ -34,6 +34,9 @@
     <string name="snap_vertical">垂直吸附</string>
     <string name="out_of_bounds">允许超出边界</string>
 
+    <string name="constraint_layout">ConstraintLayout</string>
+    <string name="frame_layout">FrameLayout</string>
+
     <string name="alphabet_index_bar_footer_text">%d个朋友</string>
 
     <string name="draggable_view_save_layout_params">退出页面自动保存 LayoutParams</string>
