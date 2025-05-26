@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.mask.customcomponents.databinding.ActivityDraggableViewBinding
 import com.mask.customcomponents.utils.LogUtil
+import com.mask.customcomponents.utils.SizeUtils
 import com.mask.customcomponents.utils.ToastUtils
 import com.mask.customcomponents.view.DragGestureDetector
 
@@ -49,7 +50,7 @@ class DraggableViewActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        dragGestureDetectorConstraint.attach()
+        dragGestureDetectorConstraint.setBoundMargin(SizeUtils.dpToPx(8)).attach()
         dragGestureDetectorFrame.attach()
     }
 

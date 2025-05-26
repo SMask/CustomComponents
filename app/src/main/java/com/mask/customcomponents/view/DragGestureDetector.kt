@@ -41,12 +41,6 @@ class DragGestureDetector(val view: View) {
         LEFT_TOP, LEFT_BOTTOM, RIGHT_TOP, RIGHT_BOTTOM
     }
 
-    // 初始数据
-    private var leftMargin = 0
-    private var topMargin = 0
-    private var rightMargin = 0
-    private var bottomMargin = 0
-
     // 手势操作中数据
     private var lastRawX = 0f
     private var lastRawY = 0f
@@ -59,22 +53,16 @@ class DragGestureDetector(val view: View) {
     private val animDuration = 150L // 动画时长
 
     // 外部可修改配置项
+    private var boundMarginLeft = 0 // 距离边界的间距
+    private var boundMarginTop = 0 // 距离边界的间距
+    private var boundMarginRight = 0 // 距离边界的间距
+    private var boundMarginBottom = 0 // 距离边界的间距
     private var isOutOfBoundsEnabled = false // 是否允许超出边界
     private var isHorizontalSnapEnabled = true // 是否开启水平吸附
     private var isVerticalSnapEnabled = false // 是否开启垂直吸附
     private var isAnimEnabled = true // 是否开启动画
 
     private var onDragListener: OnDragListener? = null // 监听器
-
-    private fun init() {
-        val layoutParams = view.layoutParams as? ViewGroup.MarginLayoutParams
-            ?: throw IllegalStateException("调用 attach 方法前需要先给 View 设置 MarginLayoutParams")
-
-        leftMargin = layoutParams.leftMargin
-        topMargin = layoutParams.topMargin
-        rightMargin = layoutParams.rightMargin
-        bottomMargin = layoutParams.bottomMargin
-    }
 
     private fun onTouchEvent(event: MotionEvent): Boolean {
         val rawX = event.rawX
@@ -140,7 +128,8 @@ class DragGestureDetector(val view: View) {
      * 拖拽结束
      */
     private fun onDragEnd(event: MotionEvent) {
-        // 获取 View 最终的位置，吸附等逻辑
+        // 获取 View 最终的位置
+        // 吸附需要贴边
         val location = getLocation()
         val x = if (isHorizontalSnapEnabled) {
             if (location == Location.LEFT_TOP || location == Location.LEFT_BOTTOM) {
@@ -196,7 +185,7 @@ class DragGestureDetector(val view: View) {
      */
     private fun getBoundHorizontalMin(): Float {
         val parentView = view.parent as? ViewGroup ?: return 0f
-        return (parentView.paddingLeft + leftMargin).toFloat()
+        return (parentView.paddingLeft + boundMarginLeft).toFloat()
     }
 
     /**
@@ -204,7 +193,7 @@ class DragGestureDetector(val view: View) {
      */
     private fun getBoundHorizontalMax(): Float {
         val parentView = view.parent as? ViewGroup ?: return 0f
-        return (parentView.width - parentView.paddingRight - rightMargin - view.width).toFloat()
+        return (parentView.width - parentView.paddingRight - boundMarginRight - view.width).toFloat()
     }
 
     /**
@@ -212,7 +201,7 @@ class DragGestureDetector(val view: View) {
      */
     private fun getBoundVerticalMin(): Float {
         val parentView = view.parent as? ViewGroup ?: return 0f
-        return (parentView.paddingTop + topMargin).toFloat()
+        return (parentView.paddingTop + boundMarginTop).toFloat()
     }
 
     /**
@@ -220,7 +209,7 @@ class DragGestureDetector(val view: View) {
      */
     private fun getBoundVerticalMax(): Float {
         val parentView = view.parent as? ViewGroup ?: return 0f
-        return (parentView.height - parentView.paddingBottom - bottomMargin - view.height).toFloat()
+        return (parentView.height - parentView.paddingBottom - boundMarginBottom - view.height).toFloat()
     }
 
     /**
@@ -383,6 +372,12 @@ class DragGestureDetector(val view: View) {
         val rightMargin = (parentWidth - right - parentPaddingRight).toInt()
         val bottomMargin = (parentHeight - bottom - parentPaddingBottom).toInt()
 
+        // 重置 Margin 为 0，避免异常情况出现
+        layoutParams.leftMargin = 0
+        layoutParams.topMargin = 0
+        layoutParams.rightMargin = 0
+        layoutParams.bottomMargin = 0
+        // 根据位置重新设置 Margin
         when (getLocation()) {
             Location.LEFT_TOP -> {
                 layoutParams.leftMargin = leftMargin
@@ -426,10 +421,25 @@ class DragGestureDetector(val view: View) {
 
     @SuppressLint("ClickableViewAccessibility")
     fun attach() {
-        init()
         view.setOnTouchListener { _, event ->
             onTouchEvent(event)
         }
+    }
+
+    fun setBoundMargin(boundMargin: Int): DragGestureDetector {
+        return setBoundMargin(boundMargin, boundMargin)
+    }
+
+    fun setBoundMargin(horizontal: Int, vertical: Int): DragGestureDetector {
+        return setBoundMargin(horizontal, vertical, horizontal, vertical)
+    }
+
+    fun setBoundMargin(left: Int, top: Int, right: Int, bottom: Int): DragGestureDetector {
+        this.boundMarginLeft = left
+        this.boundMarginTop = top
+        this.boundMarginRight = right
+        this.boundMarginBottom = bottom
+        return this
     }
 
     fun setOutOfBoundsEnabled(isOutOfBoundsEnabled: Boolean): DragGestureDetector {
