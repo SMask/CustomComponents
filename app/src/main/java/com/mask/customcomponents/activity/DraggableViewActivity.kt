@@ -49,6 +49,8 @@ class DraggableViewActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        dragGestureDetectorConstraint.attach()
+        dragGestureDetectorFrame.attach()
     }
 
     private fun setListener() {
@@ -84,30 +86,26 @@ class DraggableViewActivity : AppCompatActivity() {
             }
         }
 
-        dragGestureDetectorConstraint
-            .setOnDragListener(object : DragGestureDetector.OnDragListener() {
-                override fun onUpdateLayoutParamsComplete(view: View, layoutParams: ViewGroup.LayoutParams) {
-                    super.onUpdateLayoutParamsComplete(view, layoutParams)
-                    LogUtil.i("onUpdateLayoutParamsComplete ConstraintLayout")
+        dragGestureDetectorConstraint.setOnDragListener(object : DragGestureDetector.OnDragListener() {
+            override fun onUpdateLayoutParamsComplete(view: View, layoutParams: ViewGroup.LayoutParams) {
+                super.onUpdateLayoutParamsComplete(view, layoutParams)
+                LogUtil.i("onUpdateLayoutParamsComplete ConstraintLayout")
 
-                    if (isSaveLayoutParams) {
-                        layoutParamsMap[binding.viewConstraint.id.toString()] = layoutParams
-                    }
+                if (isSaveLayoutParams) {
+                    layoutParamsMap[binding.viewConstraint.id.toString()] = layoutParams
                 }
-            })
-            .attach()
-        dragGestureDetectorFrame
-            .setOnDragListener(object : DragGestureDetector.OnDragListener() {
-                override fun onUpdateLayoutParamsComplete(view: View, layoutParams: ViewGroup.LayoutParams) {
-                    super.onUpdateLayoutParamsComplete(view, layoutParams)
-                    LogUtil.i("onUpdateLayoutParamsComplete FrameLayout")
+            }
+        })
+        dragGestureDetectorFrame.setOnDragListener(object : DragGestureDetector.OnDragListener() {
+            override fun onUpdateLayoutParamsComplete(view: View, layoutParams: ViewGroup.LayoutParams) {
+                super.onUpdateLayoutParamsComplete(view, layoutParams)
+                LogUtil.i("onUpdateLayoutParamsComplete FrameLayout")
 
-                    if (isSaveLayoutParams) {
-                        layoutParamsMap[binding.viewFrame.id.toString()] = layoutParams
-                    }
+                if (isSaveLayoutParams) {
+                    layoutParamsMap[binding.viewFrame.id.toString()] = layoutParams
                 }
-            })
-            .attach()
+            }
+        })
     }
 
     private fun initData() {
