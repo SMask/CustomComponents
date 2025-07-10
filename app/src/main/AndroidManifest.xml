@@ -111,6 +111,7 @@
             android:name=".activity.TitleBarLayoutActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/title_activity_title_bar_layout"
+            android:theme="@style/AppTheme_NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 

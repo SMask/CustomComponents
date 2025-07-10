@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mask.customcomponents.databinding.ActivityTitleBarLayoutBinding
+import com.mask.customcomponents.utils.ToastUtils
 
 /**
  * 标题栏
@@ -31,9 +32,20 @@ class TitleBarLayoutActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        binding.layoutTitle2.setBackVisible(false)
     }
 
     private fun setListener() {
+        binding.layoutTitle1.setBackOnClickListener {
+            ToastUtils.show("自定义返回按钮")
+        }
+        binding.layoutTitle1.setActionOnClickListener {
+            ToastUtils.show("自定义操作按钮")
+        }
+
+        binding.layoutDown.setOnClickListener {
+            ToastUtils.show("自定义操作View")
+        }
     }
 
     private fun initData() {

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TitleBarLayout">
+        <attr name="backVisibility">
+            <enum name="visible" value="0x00000000" />
+            <enum name="invisible" value="0x00000004" />
+            <enum name="gone" value="0x00000008" />
+        </attr>
+        <attr name="backRes" format="reference" />
+        <attr name="backTint" format="color|reference" />
+
+        <attr name="titleText" format="string|reference" />
+        <attr name="titleTextColor" format="color|reference" />
+
+        <attr name="actionVisibility">
+            <enum name="visible" value="0x00000000" />
+            <enum name="invisible" value="0x00000004" />
+            <enum name="gone" value="0x00000008" />
+        </attr>
+        <attr name="actionText" format="string|reference" />
+        <attr name="actionTextColor" format="color|reference" />
+
+    </declare-styleable>
+
+</resources>

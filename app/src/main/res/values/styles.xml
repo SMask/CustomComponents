@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme_NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <!-- TextView -->
     <style name="TextView_Base">
         <item name="android:layout_width">match_parent</item>
@@ -50,6 +55,20 @@
         <item name="indicator_heightNormal">4dp</item>
         <item name="indicator_heightSelected">4dp</item>
         <item name="indicator_corners">4dp</item>
+    </style>
+
+    <!-- 分隔线 水平 -->
+    <style name="DividerLineH">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/line_width</item>
+        <item name="android:background">@color/main_line</item>
+    </style>
+
+    <!-- 分隔线 垂直 -->
+    <style name="DividerLineV">
+        <item name="android:layout_width">@dimen/line_width</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/main_line</item>
     </style>
 
 </resources>
