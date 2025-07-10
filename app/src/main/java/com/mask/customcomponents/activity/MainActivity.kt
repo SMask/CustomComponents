@@ -73,6 +73,10 @@ class MainActivity : AppCompatActivity() {
             R.id.btn_draggable_view -> {
                 DraggableViewActivity.startActivity(this)
             }
+
+            R.id.btn_title_bar_layout -> {
+                TitleBarLayoutActivity.startActivity(this)
+            }
         }
     }
 }
