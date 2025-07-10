@@ -142,7 +142,7 @@ class TitleBarLayout @JvmOverloads constructor(
         binding.imgBack.setOnClickListener(listener)
     }
 
-    fun setTitleText(title: CharSequence) {
+    fun setTitleText(title: CharSequence?) {
         binding.tvTitle.text = title
     }
 
@@ -162,7 +162,7 @@ class TitleBarLayout @JvmOverloads constructor(
         binding.tvAction.isVisible = isVisible
     }
 
-    fun setActionText(title: CharSequence) {
+    fun setActionText(title: CharSequence?) {
         binding.tvAction.text = title
     }
 
