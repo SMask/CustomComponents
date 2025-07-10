@@ -22,9 +22,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.annotation.Size;
+import androidx.annotation.StyleRes;
 
 import com.mask.customcomponents.utils.SizeUtils;
 
@@ -132,12 +134,12 @@ public class ColorPickerView extends View {
         init(context, attrs);
     }
 
-    public ColorPickerView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ColorPickerView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
-    public ColorPickerView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ColorPickerView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }

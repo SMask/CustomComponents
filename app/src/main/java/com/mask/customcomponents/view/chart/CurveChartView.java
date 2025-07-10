@@ -17,7 +17,9 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.PathInterpolator;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 
 import com.mask.customcomponents.view.bezier.BezierUtils;
 import com.mask.customcomponents.view.bezier.CtrlPoint;
@@ -93,12 +95,12 @@ public class CurveChartView extends View {
         init(context, attrs);
     }
 
-    public CurveChartView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CurveChartView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
-    public CurveChartView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CurveChartView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }

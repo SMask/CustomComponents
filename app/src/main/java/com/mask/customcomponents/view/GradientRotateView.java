@@ -12,7 +12,9 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 
 /**
  * 渐变旋转 View
@@ -48,12 +50,12 @@ public class GradientRotateView extends View {
         init(context, attrs);
     }
 
-    public GradientRotateView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public GradientRotateView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
-    public GradientRotateView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public GradientRotateView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }

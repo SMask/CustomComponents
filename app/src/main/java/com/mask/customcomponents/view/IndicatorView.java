@@ -13,7 +13,9 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 
 import com.mask.customcomponents.R;
 import com.mask.customcomponents.utils.SizeUtils;
@@ -81,12 +83,12 @@ public class IndicatorView extends View implements ValueAnimator.AnimatorUpdateL
         setup(context, attrs);
     }
 
-    public IndicatorView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public IndicatorView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setup(context, attrs);
     }
 
-    public IndicatorView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public IndicatorView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         setup(context, attrs);
     }

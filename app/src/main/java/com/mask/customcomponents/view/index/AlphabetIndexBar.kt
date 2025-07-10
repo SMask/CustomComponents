@@ -10,6 +10,8 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.AttrRes
+import androidx.annotation.StyleRes
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,8 +28,8 @@ import com.mask.customcomponents.view.index.utils.AlphabetIndexBarDataHelper
 class AlphabetIndexBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0,
-    defStyleRes: Int = 0
+    @AttrRes defStyleAttr: Int = 0,
+    @StyleRes defStyleRes: Int = 0
 ) : View(context, attrs, defStyleAttr, defStyleRes) {
 
     private var width = 0 // View的宽度
@@ -35,7 +37,11 @@ class AlphabetIndexBar @JvmOverloads constructor(
 
     private var tagHeight = 0 // 每个字母索引的高度
 
-    private val textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 12f, resources.displayMetrics) // 字母索引文字大小
+    private val textSize = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_SP,
+        12f,
+        resources.displayMetrics
+    ) // 字母索引文字大小
     private val textColor = Color.GRAY // 字母索引文字颜色
 
     private val bgColorNormal = 0x00000000 // 正常时的背景色

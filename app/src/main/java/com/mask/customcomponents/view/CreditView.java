@@ -14,7 +14,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 
 /**
  * 信用分仪表盘View
@@ -90,12 +92,12 @@ public class CreditView extends View {
         init(context);
     }
 
-    public CreditView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CreditView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context);
     }
 
-    public CreditView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CreditView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context);
     }

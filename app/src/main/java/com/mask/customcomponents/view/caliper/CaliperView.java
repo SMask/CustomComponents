@@ -13,7 +13,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 
 import com.mask.customcomponents.utils.SizeUtils;
 
@@ -146,12 +148,12 @@ public class CaliperView extends View {
         init(context, attrs);
     }
 
-    public CaliperView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public CaliperView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
-    public CaliperView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public CaliperView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }

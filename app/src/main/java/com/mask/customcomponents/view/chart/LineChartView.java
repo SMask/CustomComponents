@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.AttrRes;
 import androidx.core.content.ContextCompat;
 
 import com.mask.customcomponents.R;
@@ -85,7 +86,7 @@ public class LineChartView extends View {
         init();
     }
 
-    public LineChartView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public LineChartView(Context context, AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }

@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.AttrRes;
+
 import com.mask.customcomponents.R;
 
 
@@ -46,7 +48,7 @@ public class CleanEditText extends LinearLayout {
         setup(context, attrs);
     }
 
-    public CleanEditText(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CleanEditText(Context context, AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setup(context, attrs);
     }

@@ -2,8 +2,10 @@ package com.mask.customcomponents.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
+
+import androidx.annotation.AttrRes;
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.mask.customcomponents.R;
 
@@ -26,8 +28,8 @@ public class RatioImageView extends AppCompatImageView {
         setup(attrs);
     }
 
-    public RatioImageView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+    public RatioImageView(Context context, AttributeSet attrs, @AttrRes int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         setup(attrs);
     }
 

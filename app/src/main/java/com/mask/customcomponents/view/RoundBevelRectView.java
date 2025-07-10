@@ -9,7 +9,9 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 
 /**
  * 圆角/平角矩形(四个角单独半径) View
@@ -47,12 +49,12 @@ public class RoundBevelRectView extends View {
         init(context, attrs);
     }
 
-    public RoundBevelRectView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public RoundBevelRectView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
 
-    public RoundBevelRectView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public RoundBevelRectView(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(context, attrs);
     }

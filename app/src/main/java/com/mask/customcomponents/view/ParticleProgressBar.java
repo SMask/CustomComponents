@@ -12,8 +12,10 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.FloatRange;
 import androidx.annotation.Nullable;
+import androidx.annotation.StyleRes;
 
 import com.mask.customcomponents.utils.NumberUtils;
 import com.mask.customcomponents.utils.SizeUtils;
@@ -179,12 +181,12 @@ public class ParticleProgressBar extends View {
         initData(attrs);
     }
 
-    public ParticleProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public ParticleProgressBar(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initData(attrs);
     }
 
-    public ParticleProgressBar(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public ParticleProgressBar(Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr, @StyleRes int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initData(attrs);
     }
