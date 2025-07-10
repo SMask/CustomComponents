@@ -2,6 +2,8 @@
 <resources>
 
     <declare-styleable name="TitleBarLayout">
+        <attr name="fitStatusBar" format="boolean" />
+
         <attr name="backVisibility">
             <enum name="visible" value="0x00000000" />
             <enum name="invisible" value="0x00000004" />

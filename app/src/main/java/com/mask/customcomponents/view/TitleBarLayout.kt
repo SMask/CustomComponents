@@ -17,6 +17,7 @@ import androidx.core.view.isVisible
 import com.mask.customcomponents.R
 import com.mask.customcomponents.databinding.LayoutTitleBarLayoutBinding
 import com.mask.customcomponents.utils.ActivityUtils
+import com.mask.customcomponents.utils.StatusBarHelper
 
 /**
  * 标题栏
@@ -49,6 +50,12 @@ class TitleBarLayout @JvmOverloads constructor(
         try {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBarLayout)
             typedArray.use {
+                val isFitStatusBar =
+                    typedArray.getBoolean(R.styleable.TitleBarLayout_fitStatusBar, true)
+                if (isFitStatusBar) {
+                    StatusBarHelper.setPaddingTop(this)
+                }
+
                 val backVisibility =
                     typedArray.getInt(R.styleable.TitleBarLayout_backVisibility, View.VISIBLE)
                 binding.imgBack.visibility = backVisibility
