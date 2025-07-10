@@ -31,7 +31,7 @@
     <style name="CleanEditText_Base">
         <item name="textColor">@color/main_font</item>
         <item name="textColorHint">@color/main_hint</item>
-        <item name="clean_res">@mipmap/icon_delete</item>
+        <item name="clean_res">@drawable/icon_delete</item>
         <item name="textSize">@dimen/main_font</item>
     </style>
 

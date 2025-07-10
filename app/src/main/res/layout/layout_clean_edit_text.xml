@@ -14,7 +14,7 @@
         android:contentDescription="@string/app_name"
         android:scaleType="fitCenter"
         tools:layout_width="@dimen/list_icon_small"
-        tools:src="@mipmap/icon_search" />
+        tools:src="@drawable/icon_search" />
 
     <EditText
         android:id="@+id/edt_content"
@@ -39,7 +39,7 @@
             android:contentDescription="@string/app_name"
             android:scaleType="fitCenter"
             tools:layout_width="@dimen/list_icon_small"
-            tools:src="@mipmap/icon_delete" />
+            tools:src="@drawable/icon_delete" />
 
     </FrameLayout>
 
