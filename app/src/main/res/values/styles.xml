@@ -13,6 +13,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme_TranslucentStatus" parent="AppTheme_NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
     <!-- TextView -->
     <style name="TextView_Base">
         <item name="android:layout_width">match_parent</item>

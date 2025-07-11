@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.mask.customcomponents.databinding.ActivityTitleBarLayoutBinding
+import com.mask.customcomponents.utils.StatusBarHelper
 import com.mask.customcomponents.utils.ToastUtils
 
 /**
@@ -24,6 +25,8 @@ class TitleBarLayoutActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        StatusBarHelper.setStatusBarTranslucent(window)
+        StatusBarHelper.setStatusBarDarkMode(window, true)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initView()
