@@ -52,7 +52,7 @@ class TitleBarLayout @JvmOverloads constructor(
             typedArray.use {
                 val isFitStatusBar =
                     typedArray.getBoolean(R.styleable.TitleBarLayout_fitStatusBar, true)
-                if (isFitStatusBar) {
+                if (isFitStatusBar && !isInEditMode) {
                     StatusBarHelper.setPaddingTop(this)
                 }
 

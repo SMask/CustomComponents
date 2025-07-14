@@ -22,7 +22,7 @@ object ActivityUtils {
             }
 
             if (currentContext is ContextWrapper) {
-                currentContext = currentContext.baseContext;
+                currentContext = currentContext.baseContext
             } else {
                 return null
             }
