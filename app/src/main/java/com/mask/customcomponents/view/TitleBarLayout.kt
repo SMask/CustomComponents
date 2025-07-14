@@ -169,6 +169,10 @@ class TitleBarLayout @JvmOverloads constructor(
         binding.tvAction.isVisible = isVisible
     }
 
+    fun setActionEnabled(isEnabled: Boolean) {
+        binding.tvAction.isEnabled = isEnabled
+    }
+
     fun setActionText(title: CharSequence?) {
         binding.tvAction.text = title
     }
