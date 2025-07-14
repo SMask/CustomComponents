@@ -106,7 +106,7 @@ class TitleBarLayout @JvmOverloads constructor(
 
     private fun setListener() {
         binding.imgBack.setOnClickListener {
-            finish()
+            onBackClick()
         }
     }
 
@@ -123,8 +123,8 @@ class TitleBarLayout @JvmOverloads constructor(
         return ""
     }
 
-    private fun finish() {
-        ActivityUtils.getActivity(context)?.finish()
+    private fun onBackClick() {
+        ActivityUtils.getActivity(context)?.onBackPressed()
     }
 
     /************************************************************ S 外部调用 ************************************************************/
