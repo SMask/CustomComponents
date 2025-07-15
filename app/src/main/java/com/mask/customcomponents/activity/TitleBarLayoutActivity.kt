@@ -35,19 +35,36 @@ class TitleBarLayoutActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        binding.layoutTitle2.setBackVisible(false)
+        binding.layoutTitle4.setBackVisible(false)
     }
 
     private fun setListener() {
         binding.layoutTitle1.setBackOnClickListener {
-            ToastUtils.show("自定义返回按钮")
+            ToastUtils.show("1 自定义返回按钮")
         }
-        binding.layoutTitle1.setActionOnClickListener {
-            ToastUtils.show("自定义操作按钮")
+        binding.layoutTitle1.setActionBtnOnClickListener {
+            ToastUtils.show("1 自定义操作按钮")
+        }
+        binding.layoutTitle1.setActionIconOnClickListener {
+            ToastUtils.show("1 自定义操作图标")
         }
 
-        binding.layoutDown.setOnClickListener {
-            ToastUtils.show("自定义操作View")
+        binding.layoutTitle2.setBackOnClickListener {
+            ToastUtils.show("2 自定义返回按钮")
+        }
+        binding.layoutTitle2.setActionIconOnClickListener {
+            ToastUtils.show("2 自定义操作图标")
+        }
+
+        binding.layoutTitle3.setBackOnClickListener {
+            ToastUtils.show("3 自定义返回按钮")
+        }
+        binding.layoutTitle3.setActionBtnOnClickListener {
+            ToastUtils.show("3 自定义操作按钮")
+        }
+
+        binding.layoutCustom.setOnClickListener {
+            ToastUtils.show("自定义添加View")
         }
     }
 

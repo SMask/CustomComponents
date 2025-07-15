@@ -56,6 +56,7 @@ class TitleBarLayout @JvmOverloads constructor(
                     StatusBarHelper.setPaddingTop(this)
                 }
 
+                // S 返回图标
                 val backVisibility =
                     typedArray.getInt(R.styleable.TitleBarLayout_backVisibility, View.VISIBLE)
                 binding.imgBack.visibility = backVisibility
@@ -70,7 +71,9 @@ class TitleBarLayout @JvmOverloads constructor(
                 if (backTint != null) {
                     setBackTint(backTint)
                 }
+                // E 返回图标
 
+                // S 标题
                 val titleText = typedArray.getText(R.styleable.TitleBarLayout_titleText)
                 setTitleText(
                     if (titleText.isNullOrEmpty()) {
@@ -85,19 +88,40 @@ class TitleBarLayout @JvmOverloads constructor(
                 if (titleTextColor != null) {
                     setTitleTextColor(titleTextColor)
                 }
+                // E 标题
 
-                val actionVisibility =
-                    typedArray.getInt(R.styleable.TitleBarLayout_actionVisibility, View.GONE)
-                binding.tvAction.visibility = actionVisibility
+                // S 操作按钮
+                val actionBtnVisibility =
+                    typedArray.getInt(R.styleable.TitleBarLayout_actionBtnVisibility, View.GONE)
+                binding.tvAction.visibility = actionBtnVisibility
 
-                val actionText = typedArray.getText(R.styleable.TitleBarLayout_actionText)
-                setActionText(actionText)
+                val actionBtnText = typedArray.getText(R.styleable.TitleBarLayout_actionBtnText)
+                setActionBtnText(actionBtnText)
 
-                val actionTextColor =
-                    typedArray.getColorStateList(R.styleable.TitleBarLayout_actionTextColor)
-                if (actionTextColor != null) {
-                    setActionTextColor(actionTextColor)
+                val actionBtnTextColor =
+                    typedArray.getColorStateList(R.styleable.TitleBarLayout_actionBtnTextColor)
+                if (actionBtnTextColor != null) {
+                    setActionBtnTextColor(actionBtnTextColor)
                 }
+                // E 操作按钮
+
+                // S 操作图标
+                val actionIconVisibility =
+                    typedArray.getInt(R.styleable.TitleBarLayout_actionIconVisibility, View.GONE)
+                binding.imgAction.visibility = actionIconVisibility
+
+                val actionIconRes =
+                    typedArray.getResourceId(R.styleable.TitleBarLayout_actionIconRes, RES_NULL)
+                if (actionIconRes != RES_NULL) {
+                    setActionIconImageRes(actionIconRes)
+                }
+
+                val actionIconTint =
+                    typedArray.getColorStateList(R.styleable.TitleBarLayout_actionIconTint)
+                if (actionIconTint != null) {
+                    setActionIconTint(actionIconTint)
+                }
+                // E 操作图标
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -105,7 +129,7 @@ class TitleBarLayout @JvmOverloads constructor(
     }
 
     private fun setListener() {
-        binding.imgBack.setOnClickListener {
+        setBackOnClickListener {
             onBackClick()
         }
     }
@@ -129,6 +153,7 @@ class TitleBarLayout @JvmOverloads constructor(
 
     /************************************************************ S 外部调用 ************************************************************/
 
+    /**** S 返回图标 ****/
     fun setBackVisible(isVisible: Boolean) {
         binding.imgBack.isVisible = isVisible
     }
@@ -148,9 +173,11 @@ class TitleBarLayout @JvmOverloads constructor(
     fun setBackOnClickListener(listener: OnClickListener) {
         binding.imgBack.setOnClickListener(listener)
     }
+    /**** E 返回图标 ****/
 
-    fun setTitleText(title: CharSequence?) {
-        binding.tvTitle.text = title
+    /**** S 标题 ****/
+    fun setTitleText(text: CharSequence?) {
+        binding.tvTitle.text = text
     }
 
     fun setTitleText(@StringRes resId: Int) {
@@ -164,34 +191,59 @@ class TitleBarLayout @JvmOverloads constructor(
     fun setTitleTextColor(color: ColorStateList) {
         binding.tvTitle.setTextColor(color)
     }
+    /****  E 标题 ****/
 
-    fun setActionVisible(isVisible: Boolean) {
+    /**** S 操作按钮 ****/
+    fun setActionBtnVisible(isVisible: Boolean) {
         binding.tvAction.isVisible = isVisible
     }
 
-    fun setActionEnabled(isEnabled: Boolean) {
+    fun setActionBtnEnabled(isEnabled: Boolean) {
         binding.tvAction.isEnabled = isEnabled
     }
 
-    fun setActionText(title: CharSequence?) {
-        binding.tvAction.text = title
+    fun setActionBtnText(text: CharSequence?) {
+        binding.tvAction.text = text
     }
 
-    fun setActionText(@StringRes resId: Int) {
+    fun setActionBtnText(@StringRes resId: Int) {
         binding.tvAction.setText(resId)
     }
 
-    fun setActionTextColor(@ColorInt color: Int) {
+    fun setActionBtnTextColor(@ColorInt color: Int) {
         binding.tvAction.setTextColor(color)
     }
 
-    fun setActionTextColor(color: ColorStateList) {
+    fun setActionBtnTextColor(color: ColorStateList) {
         binding.tvAction.setTextColor(color)
     }
 
-    fun setActionOnClickListener(listener: OnClickListener) {
+    fun setActionBtnOnClickListener(listener: OnClickListener) {
         binding.tvAction.setOnClickListener(listener)
     }
+    /**** E 操作按钮 ****/
+
+    /**** S 操作图标 ****/
+    fun setActionIconVisible(isVisible: Boolean) {
+        binding.imgAction.isVisible = isVisible
+    }
+
+    fun setActionIconImageRes(@DrawableRes resId: Int) {
+        binding.imgAction.setImageResource(resId)
+    }
+
+    fun setActionIconTint(@ColorInt color: Int) {
+        setActionIconTint(ColorStateList.valueOf(color))
+    }
+
+    fun setActionIconTint(tint: ColorStateList?) {
+        binding.imgAction.setImageTintList(tint)
+    }
+
+    fun setActionIconOnClickListener(listener: OnClickListener) {
+        binding.imgAction.setOnClickListener(listener)
+    }
+    /**** E 操作图标 ****/
 
     /************************************************************ E 外部调用 ************************************************************/
 

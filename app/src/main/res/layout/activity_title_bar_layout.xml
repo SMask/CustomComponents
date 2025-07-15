@@ -33,15 +33,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@color/black"
-        app:actionText="保存"
-        app:actionTextColor="@color/white"
-        app:actionVisibility="visible"
+        app:actionBtnText="保存"
+        app:actionBtnTextColor="@color/white"
+        app:actionBtnVisibility="visible"
+        app:actionIconRes="@drawable/icon_more_white"
+        app:actionIconTint="#FF00FF00"
+        app:actionIconVisibility="visible"
         app:backRes="@drawable/icon_back_white"
         app:backTint="#FF00FF00"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_bar_1"
-        app:titleText="自定义标题"
+        app:titleText="自定义样式"
         app:titleTextColor="@color/white" />
 
     <TextView
@@ -49,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="自定义按钮"
+        android:text="自定义样式"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_title_1" />
 
@@ -58,20 +61,76 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="@color/black"
+        app:actionIconRes="@drawable/icon_more_white"
+        app:actionIconTint="#FF00FF00"
+        app:actionIconVisibility="visible"
+        app:backRes="@drawable/icon_back_white"
+        app:backTint="#FF00FF00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_bar_2"
+        app:titleText="自定义样式"
+        app:titleTextColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_title_bar_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="自定义样式"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title_2" />
+
+    <com.mask.customcomponents.view.TitleBarLayout
+        android:id="@+id/layout_title_3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/black"
+        app:actionBtnText="保存"
+        app:actionBtnTextColor="@color/white"
+        app:actionBtnVisibility="visible"
+        app:backRes="@drawable/icon_back_white"
+        app:backTint="#FF00FF00"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_bar_3"
+        app:titleText="自定义样式"
+        app:titleTextColor="@color/white" />
+
+    <TextView
+        android:id="@+id/tv_title_bar_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="自定义添加"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title_3" />
+
+    <com.mask.customcomponents.view.TitleBarLayout
+        android:id="@+id/layout_title_4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:background="@color/black_tran_38"
         app:fitStatusBar="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_bar_2"
-        app:titleText="自定义标题"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_bar_4"
+        app:titleText="自定义添加"
         app:titleTextColor="@color/white">
 
-        <ImageView
-            android:id="@+id/layout_down"
-            style="@style/TitleBar_Icon"
-            android:layout_gravity="end"
-            android:rotation="-90"
-            android:src="@drawable/icon_back_white" />
+        <TextView
+            android:id="@+id/layout_custom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/shape_corners_bg_main_bg"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="4dp"
+            android:text="自定义添加" />
 
     </com.mask.customcomponents.view.TitleBarLayout>
 

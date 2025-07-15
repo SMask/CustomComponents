@@ -2,8 +2,10 @@
 <resources>
 
     <declare-styleable name="TitleBarLayout">
+
         <attr name="fitStatusBar" format="boolean" />
 
+        <!-- S 返回图标 -->
         <attr name="backVisibility">
             <enum name="visible" value="0x00000000" />
             <enum name="invisible" value="0x00000004" />
@@ -11,17 +13,32 @@
         </attr>
         <attr name="backRes" format="reference" />
         <attr name="backTint" format="color|reference" />
+        <!-- E 返回图标 -->
 
+        <!-- S 标题 -->
         <attr name="titleText" format="string|reference" />
         <attr name="titleTextColor" format="color|reference" />
+        <!-- E 标题 -->
 
-        <attr name="actionVisibility">
+        <!-- S 操作按钮 -->
+        <attr name="actionBtnVisibility">
             <enum name="visible" value="0x00000000" />
             <enum name="invisible" value="0x00000004" />
             <enum name="gone" value="0x00000008" />
         </attr>
-        <attr name="actionText" format="string|reference" />
-        <attr name="actionTextColor" format="color|reference" />
+        <attr name="actionBtnText" format="string|reference" />
+        <attr name="actionBtnTextColor" format="color|reference" />
+        <!-- E 操作按钮 -->
+
+        <!-- S 操作图标 -->
+        <attr name="actionIconVisibility">
+            <enum name="visible" value="0x00000000" />
+            <enum name="invisible" value="0x00000004" />
+            <enum name="gone" value="0x00000008" />
+        </attr>
+        <attr name="actionIconRes" format="reference" />
+        <attr name="actionIconTint" format="color|reference" />
+        <!-- E 操作图标 -->
 
     </declare-styleable>
 

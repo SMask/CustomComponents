@@ -6,13 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_bar_height">
 
+    <!-- S 返回图标 -->
     <ImageView
         android:id="@+id/img_back"
         style="@style/TitleBar_Icon_Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <!-- E 返回图标 -->
 
+    <!-- S 标题 -->
     <TextView
         android:id="@+id/tv_title"
         style="@style/TitleBar_Title"
@@ -21,21 +24,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Title" />
+    <!-- E 标题 -->
 
+    <!-- S 操作按钮 -->
     <TextView
         android:id="@+id/tv_action"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:gravity="center"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"
         android:textColor="@color/black"
         android:textSize="@dimen/title_bar_text_size_action"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/img_action"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_goneMarginEnd="16dp"
         tools:text="Action"
         tools:visibility="visible" />
+    <!-- E 操作按钮 -->
+
+    <!-- S 操作图标 -->
+    <ImageView
+        android:id="@+id/img_action"
+        style="@style/TitleBar_Icon"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/icon_more_black"
+        tools:visibility="visible" />
+    <!-- E 操作图标 -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
