@@ -170,7 +170,7 @@ class TitleBarLayout @JvmOverloads constructor(
         binding.imgBack.setImageTintList(tint)
     }
 
-    fun setBackOnClickListener(listener: OnClickListener) {
+    fun setBackOnClickListener(listener: OnClickListener?) {
         binding.imgBack.setOnClickListener(listener)
     }
     /**** E 返回图标 ****/
@@ -218,7 +218,7 @@ class TitleBarLayout @JvmOverloads constructor(
         binding.tvAction.setTextColor(color)
     }
 
-    fun setActionBtnOnClickListener(listener: OnClickListener) {
+    fun setActionBtnOnClickListener(listener: OnClickListener?) {
         binding.tvAction.setOnClickListener(listener)
     }
     /**** E 操作按钮 ****/
@@ -240,7 +240,7 @@ class TitleBarLayout @JvmOverloads constructor(
         binding.imgAction.setImageTintList(tint)
     }
 
-    fun setActionIconOnClickListener(listener: OnClickListener) {
+    fun setActionIconOnClickListener(listener: OnClickListener?) {
         binding.imgAction.setOnClickListener(listener)
     }
     /**** E 操作图标 ****/
