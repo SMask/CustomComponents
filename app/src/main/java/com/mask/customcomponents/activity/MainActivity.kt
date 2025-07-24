@@ -2,14 +2,35 @@ package com.mask.customcomponents.activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ScrollView
 import androidx.appcompat.app.AppCompatActivity
 import com.mask.customcomponents.R
+import com.mask.customcomponents.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+        initView()
+        setListener()
+        initData()
+    }
+
+    private fun initView() {
+        binding.svContent.post {
+            binding.svContent.fullScroll(ScrollView.FOCUS_DOWN)
+        }
+    }
+
+    private fun setListener() {
+    }
+
+    private fun initData() {
     }
 
     fun onViewClick(view: View) {
@@ -76,6 +97,10 @@ class MainActivity : AppCompatActivity() {
 
             R.id.btn_title_bar_layout -> {
                 TitleBarLayoutActivity.startActivity(this)
+            }
+
+            R.id.btn_fragment_visibility -> {
+                FragmentVisibilityActivity.startActivity(this)
             }
         }
     }

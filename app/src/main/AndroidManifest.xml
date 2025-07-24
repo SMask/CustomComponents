@@ -113,6 +113,11 @@
             android:label="@string/title_activity_title_bar_layout"
             android:theme="@style/AppTheme_TranslucentStatus"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.FragmentVisibilityActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|uiMode"
+            android:label="@string/title_activity_fragment_visibility"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>
