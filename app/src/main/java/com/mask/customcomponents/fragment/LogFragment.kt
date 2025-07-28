@@ -11,7 +11,7 @@ import com.mask.customcomponents.utils.LogUtil
 abstract class LogFragment : BaseFragment() {
 
     protected val name by lazy {
-        arguments?.getString(KEY_NAME)
+        arguments?.getString(KEY_NAME) ?: "name"
     }
 
     companion object {
@@ -20,39 +20,48 @@ abstract class LogFragment : BaseFragment() {
 
     override fun onStart() {
         super.onStart()
-        LogUtil.i("onStart: $name $this")
+        printLog("onStart")
     }
 
     override fun onResume() {
         super.onResume()
-        LogUtil.i("onResume: $name $this")
+        printLog("onResume")
     }
 
     override fun onPause() {
         super.onPause()
-        LogUtil.i("onPause: $name $this")
+        printLog("onPause")
     }
 
     override fun onStop() {
         super.onStop()
-        LogUtil.i("onStop: $name $this")
+        printLog("onStop")
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
         super.onHiddenChanged(hidden)
-        LogUtil.i("onHiddenChanged: $hidden $name $this")
+        printLog("onHiddenChanged", hidden)
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
-        LogUtil.i("setUserVisibleHint: $isVisibleToUser $name $this")
+        printLog("setUserVisibleHint", isVisibleToUser)
     }
 
-    fun setName(name: String) {
+    protected fun setName(name: String) {
         if (arguments == null) {
             arguments = Bundle()
         }
         arguments?.putString(KEY_NAME, name)
+    }
+
+    private fun printLog(key: String, value: Any = "") {
+        val content = StringBuilder()
+        content.append(key.padEnd(18)).append(": ")
+        content.append(value.toString().padEnd(5)).append(" - ")
+        content.append(name.padEnd(12)).append(" ")
+        content.append("$this")
+        LogUtil.i(content.toString())
     }
 
 }
