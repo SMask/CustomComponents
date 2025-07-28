@@ -17,8 +17,8 @@ class ItemFragment : LogFragment() {
     private val binding get() = _binding!!
 
     companion object {
-        fun newInstance(name: String): TabFragment {
-            val fragment = TabFragment()
+        fun newInstance(name: String): ItemFragment {
+            val fragment = ItemFragment()
             fragment.setName(name)
             return fragment
         }
@@ -43,7 +43,7 @@ class ItemFragment : LogFragment() {
     }
 
     private fun initData() {
-        binding.tvContent.text = tag
+        binding.tvContent.text = name
     }
 
 }

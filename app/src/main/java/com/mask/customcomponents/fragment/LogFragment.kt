@@ -10,7 +10,7 @@ import com.mask.customcomponents.utils.LogUtil
  */
 abstract class LogFragment : BaseFragment() {
 
-    private val name by lazy {
+    protected val name by lazy {
         arguments?.getString(KEY_NAME)
     }
 

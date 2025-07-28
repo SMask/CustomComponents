@@ -74,6 +74,7 @@ class TabFragment : LogFragment() {
     }
 
     private fun initData() {
+        setSelectedTab(MainTab.TAB_3)
     }
 
     private fun setSelectedTab(selectedTab: MainTab) {

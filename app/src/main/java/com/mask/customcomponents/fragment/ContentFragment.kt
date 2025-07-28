@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.mask.customcomponents.R
 import com.mask.customcomponents.databinding.FragmentContentBinding
 import com.mask.customcomponents.enums.MainTab
 import com.mask.customcomponents.viewmodel.FragmentVisibilityViewModel
@@ -78,14 +79,22 @@ class ContentFragment : LogFragment() {
     }
 
     private fun switchFragment(selectedTab: MainTab) {
-        val fragment = getFragment(selectedTab)
-        if (fragment.isVisible) {
-            return
-        }
         val currentFragment = currentFragment
-        if (currentFragment === fragment) {
+        val targetFragment = getFragment(selectedTab)
+        if (currentFragment === targetFragment) {
             return
         }
+        this.currentFragment = targetFragment
+        val transaction = childFragmentManager.beginTransaction()
+        if (targetFragment.isAdded) {
+            transaction.show(targetFragment)
+        } else {
+            transaction.add(R.id.layout_content, targetFragment)
+        }
+        if (currentFragment != null) {
+            transaction.hide(currentFragment)
+        }
+        transaction.commitAllowingStateLoss()
     }
 
     private fun getFragment(selectedTab: MainTab): Fragment {
