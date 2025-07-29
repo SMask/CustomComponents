@@ -22,7 +22,6 @@
         android:layout_height="wrap_content"
         android:onClick="onClickStart"
         android:text="@string/start"
-        android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/btn_stop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_ripple" />
@@ -33,7 +32,6 @@
         android:layout_height="wrap_content"
         android:onClick="onClickStop"
         android:text="@string/stop"
-        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_start"
         app:layout_constraintTop_toBottomOf="@+id/layout_ripple" />

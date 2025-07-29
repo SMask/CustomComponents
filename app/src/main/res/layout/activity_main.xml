@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_line_chart_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +29,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_curve_chart_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_line_chart_view" />
@@ -41,7 +39,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_password_input_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_curve_chart_view" />
@@ -52,7 +49,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_clean_edit_text"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_password_input_view" />
@@ -63,7 +59,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_credit_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_clean_edit_text" />
@@ -74,7 +69,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_ripple_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_credit_view" />
@@ -85,7 +79,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_indicator_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_ripple_view" />
@@ -96,7 +89,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_particle_progress_bar"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_indicator_view" />
@@ -107,7 +99,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_caliper_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_particle_progress_bar" />
@@ -118,7 +109,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_number_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_caliper_view" />
@@ -129,7 +119,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_color_picker_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_number_view" />
@@ -140,7 +129,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_gradient_rotate_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_color_picker_view" />
@@ -151,7 +139,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_round_bevel_rect_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_gradient_rotate_view" />
@@ -162,7 +149,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_alphabet_index_bar"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_round_bevel_rect_view" />
@@ -173,7 +159,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_draggable_view"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_alphabet_index_bar" />
@@ -184,7 +169,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_title_bar_layout"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_draggable_view" />
@@ -195,7 +179,6 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"
             android:text="@string/title_activity_fragment_visibility"
-            android:textAllCaps="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_title_bar_layout" />
