@@ -24,19 +24,19 @@ class ContentFragment : LogFragment() {
     private var currentFragment: Fragment? = null
 
     private val tabFragment1 by lazy {
-        ItemFragment.newInstance(MainTab.TAB_1.tabName)
+        ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.NORMAL_HINT)
     }
 
     private val tabFragment2 by lazy {
-        ItemFragment.newInstance(MainTab.TAB_2.tabName)
+        ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.NORMAL_LIFECYCLE)
     }
 
     private val tabFragment3 by lazy {
-        ItemFragment.newInstance(MainTab.TAB_3.tabName)
+        ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.STATE_HINT)
     }
 
     private val tabFragment4 by lazy {
-        ItemFragment.newInstance(MainTab.TAB_4.tabName)
+        ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.STATE_LIFECYCLE)
     }
 
     private val viewModel by lazy {
