@@ -76,4 +76,9 @@
         <item name="android:background">@color/main_line</item>
     </style>
 
+    <!-- TabLayout Tab 文本 -->
+    <style name="TabLayout_Tab_Text" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+    </style>
+
 </resources>
