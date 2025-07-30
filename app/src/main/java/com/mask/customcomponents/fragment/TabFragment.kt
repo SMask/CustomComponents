@@ -9,6 +9,7 @@ import android.widget.RadioGroup
 import androidx.core.view.children
 import androidx.lifecycle.ViewModelProvider
 import com.mask.customcomponents.databinding.FragmentTabBinding
+import com.mask.customcomponents.databinding.ItemRbTabBinding
 import com.mask.customcomponents.enums.MainTab
 import com.mask.customcomponents.viewmodel.FragmentVisibilityViewModel
 
@@ -76,15 +77,9 @@ class TabFragment : LogFragment() {
     }
 
     private fun addRadioButton(rgGroup: RadioGroup, text: String) {
-        val layoutParams = RadioGroup.LayoutParams(0, RadioGroup.LayoutParams.MATCH_PARENT)
-        layoutParams.weight = 1f
-
-        val radioButton = RadioButton(rgGroup.context)
-        radioButton.id = View.generateViewId()
-        radioButton.layoutParams = layoutParams
-        radioButton.text = text
-
-        binding.rgTab.addView(radioButton)
+        val rbBinding = ItemRbTabBinding.inflate(layoutInflater, rgGroup, true)
+        rbBinding.root.id = View.generateViewId()
+        rbBinding.root.text = text
     }
 
     private fun setSelectedTab(selectedTab: MainTab) {
