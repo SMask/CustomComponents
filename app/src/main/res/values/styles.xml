@@ -78,6 +78,7 @@
 
     <!-- TabLayout Tab 文本 -->
     <style name="TabLayout_Tab_Text" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/selector_main_tab_text_color</item>
         <item name="textAllCaps">false</item>
     </style>
 
