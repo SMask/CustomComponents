@@ -23,20 +23,28 @@ class ContentFragment : LogFragment() {
 
     private var currentFragment: Fragment? = null
 
-    private val tabFragment1 by lazy {
+    private val vpNHFragment by lazy {
         ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.NORMAL_HINT)
     }
 
-    private val tabFragment2 by lazy {
+    private val vpNLFragment by lazy {
         ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.NORMAL_LIFECYCLE)
     }
 
-    private val tabFragment3 by lazy {
+    private val vpSHFragment by lazy {
         ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.STATE_HINT)
     }
 
-    private val tabFragment4 by lazy {
+    private val vpSLFragment by lazy {
         ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.STATE_LIFECYCLE)
+    }
+
+    private val normalFragment by lazy {
+        ItemFragment.newInstance("Normal_Item")
+    }
+
+    private val vp2Fragment by lazy {
+        ViewPager2Fragment.newInstance()
     }
 
     private val viewModel by lazy {
@@ -100,19 +108,27 @@ class ContentFragment : LogFragment() {
     private fun getFragment(selectedTab: MainTab): Fragment {
         return when (selectedTab) {
             MainTab.ViewPagerNormalHint -> {
-                tabFragment1
+                vpNHFragment
             }
 
             MainTab.ViewPagerNormalLifecycle -> {
-                tabFragment2
+                vpNLFragment
             }
 
             MainTab.ViewPagerStateHint -> {
-                tabFragment3
+                vpSHFragment
             }
 
             MainTab.ViewPagerStateLifecycle -> {
-                tabFragment4
+                vpSLFragment
+            }
+
+            MainTab.Normal -> {
+                normalFragment
+            }
+
+            MainTab.ViewPager2 -> {
+                vp2Fragment
             }
         }
     }

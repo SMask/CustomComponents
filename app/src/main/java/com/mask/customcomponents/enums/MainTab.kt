@@ -7,15 +7,17 @@ package com.mask.customcomponents.enums
  */
 enum class MainTab(val tabName: String) {
 
-    ViewPagerNormalHint("VP_N_H"), // ViewPager，使用 FragmentPagerAdapter，使用 BEHAVIOR_SET_USER_VISIBLE_HINT
-    ViewPagerNormalLifecycle("VP_N_L"), // ViewPager，使用 FragmentPagerAdapter，使用 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-    ViewPagerStateHint("VP_S_H"), // ViewPager，使用 FragmentStatePagerAdapter，使用 BEHAVIOR_SET_USER_VISIBLE_HINT
-    ViewPagerStateLifecycle("VP_S_L"), // ViewPager，使用 FragmentStatePagerAdapter，使用 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    ViewPagerNormalHint("VPNH"), // ViewPager，使用 FragmentPagerAdapter，使用 BEHAVIOR_SET_USER_VISIBLE_HINT
+    ViewPagerNormalLifecycle("VPNL"), // ViewPager，使用 FragmentPagerAdapter，使用 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    ViewPagerStateHint("VPSH"), // ViewPager，使用 FragmentStatePagerAdapter，使用 BEHAVIOR_SET_USER_VISIBLE_HINT
+    ViewPagerStateLifecycle("VPSL"), // ViewPager，使用 FragmentStatePagerAdapter，使用 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    Normal("Normal"), // 普通 Fragment，不使用特殊容器
+    ViewPager2("VP2"), // ViewPager2
     ;
 
     companion object {
 
-        val DEFAULT = ViewPagerNormalHint
+        val DEFAULT = Normal
 
         fun getInstance(tabName: String?, defaultTab: MainTab? = null): MainTab {
             entries.forEach { item ->
