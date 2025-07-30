@@ -39,12 +39,20 @@ class ContentFragment : LogFragment() {
         ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.STATE_LIFECYCLE)
     }
 
-    private val normalFragment by lazy {
-        ItemFragment.newInstance("Normal_Item")
-    }
-
     private val vp2Fragment by lazy {
         ViewPager2Fragment.newInstance()
+    }
+
+    private val normal1Fragment by lazy {
+        ItemFragment.newInstance(MainTab.Normal1.tabName)
+    }
+
+    private val normal2Fragment by lazy {
+        ItemFragment.newInstance(MainTab.Normal2.tabName)
+    }
+
+    private val normal3Fragment by lazy {
+        ItemFragment.newInstance(MainTab.Normal3.tabName)
     }
 
     private val viewModel by lazy {
@@ -123,12 +131,20 @@ class ContentFragment : LogFragment() {
                 vpSLFragment
             }
 
-            MainTab.Normal -> {
-                normalFragment
-            }
-
             MainTab.ViewPager2 -> {
                 vp2Fragment
+            }
+
+            MainTab.Normal1 -> {
+                normal1Fragment
+            }
+
+            MainTab.Normal2 -> {
+                normal2Fragment
+            }
+
+            MainTab.Normal3 -> {
+                normal3Fragment
             }
         }
     }
