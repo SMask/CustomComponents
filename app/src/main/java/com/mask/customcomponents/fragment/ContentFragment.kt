@@ -99,19 +99,19 @@ class ContentFragment : LogFragment() {
 
     private fun getFragment(selectedTab: MainTab): Fragment {
         return when (selectedTab) {
-            MainTab.TAB_1 -> {
+            MainTab.ViewPagerNormalHint -> {
                 tabFragment1
             }
 
-            MainTab.TAB_2 -> {
+            MainTab.ViewPagerNormalLifecycle -> {
                 tabFragment2
             }
 
-            MainTab.TAB_3 -> {
+            MainTab.ViewPagerStateHint -> {
                 tabFragment3
             }
 
-            MainTab.TAB_4 -> {
+            MainTab.ViewPagerStateLifecycle -> {
                 tabFragment4
             }
         }

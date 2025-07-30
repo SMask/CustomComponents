@@ -72,7 +72,7 @@ class TabFragment : LogFragment() {
     }
 
     private fun initData() {
-        setSelectedTab(MainTab.TAB_3)
+        setSelectedTab(MainTab.ViewPagerStateHint)
     }
 
     private fun addRadioButton(rgGroup: RadioGroup, text: String) {
