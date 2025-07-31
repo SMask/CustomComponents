@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mask.customcomponents.databinding.FragmentViewPager2Binding
+import com.mask.customcomponents.enums.MainTab
 
 /**
  * Fragment ViewPager2
@@ -20,9 +21,11 @@ class ViewPager2Fragment : LogFragment() {
     private val binding get() = _binding!!
 
     companion object {
+        private val tab = MainTab.ViewPager2
+
         fun newInstance(): ViewPager2Fragment {
             val fragment = ViewPager2Fragment()
-            fragment.setName("ViewPager2Root")
+            fragment.setName("${tab.tabName}Root")
             return fragment
         }
     }
@@ -40,7 +43,7 @@ class ViewPager2Fragment : LogFragment() {
     }
 
     private fun initView() {
-        binding.vpContent.adapter = ItemViewPager2Adapter(this)
+        binding.vpContent.adapter = ItemViewPager2Adapter(this, "${tab.tabName}_Item_")
 
         TabLayoutMediator(binding.tabLayout, binding.vpContent) { tab, position ->
             tab.text = "Tab_$position"
@@ -55,10 +58,11 @@ class ViewPager2Fragment : LogFragment() {
 
 }
 
-private class ItemViewPager2Adapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+private class ItemViewPager2Adapter(fragment: Fragment, private val itemNamePre: String) :
+    FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
-        return ItemFragment.newInstance("ViewPager2_Item_$position")
+        return ItemFragment.newInstance("$itemNamePre$position")
     }
 
     override fun getItemCount(): Int {

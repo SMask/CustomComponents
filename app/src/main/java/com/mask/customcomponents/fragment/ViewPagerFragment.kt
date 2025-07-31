@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.mask.customcomponents.databinding.FragmentViewPagerBinding
+import com.mask.customcomponents.enums.MainTab
 
 /**
  * Fragment ViewPager
@@ -17,11 +18,11 @@ import com.mask.customcomponents.databinding.FragmentViewPagerBinding
  */
 class ViewPagerFragment : LogFragment() {
 
-    enum class AdapterType(val typeName: String) {
-        NORMAL_HINT("NormalHint"),
-        NORMAL_LIFECYCLE("NormalLifecycle"),
-        STATE_HINT("StateHint"),
-        STATE_LIFECYCLE("StateLifecycle"),
+    enum class AdapterType(val tab: MainTab) {
+        NORMAL_HINT(MainTab.ViewPagerNormalHint),
+        NORMAL_LIFECYCLE(MainTab.ViewPagerNormalLifecycle),
+        STATE_HINT(MainTab.ViewPagerStateHint),
+        STATE_LIFECYCLE(MainTab.ViewPagerStateLifecycle),
     }
 
     private var _binding: FragmentViewPagerBinding? = null
@@ -36,7 +37,7 @@ class ViewPagerFragment : LogFragment() {
 
         fun newInstance(adapterType: AdapterType): ViewPagerFragment {
             val fragment = ViewPagerFragment()
-            fragment.setName("VPRoot_${adapterType.typeName}")
+            fragment.setName("${adapterType.tab.tabName}Root")
             fragment.arguments?.putSerializable(KEY_ADAPTER_TYPE, adapterType)
             return fragment
         }
@@ -55,32 +56,37 @@ class ViewPagerFragment : LogFragment() {
     }
 
     private fun initView() {
+        val itemNamePre = "${adapterType.tab.tabName}_Item_"
         val adapter = when (adapterType) {
             AdapterType.NORMAL_HINT -> {
                 ItemViewPagerAdapter(
                     childFragmentManager,
-                    FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT
+                    FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT,
+                    itemNamePre
                 )
             }
 
             AdapterType.NORMAL_LIFECYCLE -> {
                 ItemViewPagerAdapter(
                     childFragmentManager,
-                    FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+                    FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+                    itemNamePre
                 )
             }
 
             AdapterType.STATE_HINT -> {
                 ItemStateViewPagerAdapter(
                     childFragmentManager,
-                    FragmentStatePagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT
+                    FragmentStatePagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT,
+                    itemNamePre
                 )
             }
 
             AdapterType.STATE_LIFECYCLE -> {
                 ItemStateViewPagerAdapter(
                     childFragmentManager,
-                    FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+                    FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
+                    itemNamePre
                 )
             }
         }
@@ -97,19 +103,14 @@ class ViewPagerFragment : LogFragment() {
 
 }
 
-private class ItemViewPagerAdapter(fm: FragmentManager, behavior: Int) :
-    FragmentPagerAdapter(fm, behavior) {
-
-    private val itemName by lazy {
-        when (behavior) {
-            BEHAVIOR_SET_USER_VISIBLE_HINT -> "ViewPager_Normal_Hint_Item_"
-            BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT -> "ViewPager_Normal_Lifecycle_Item_"
-            else -> "ViewPager_Normal_Item_"
-        }
-    }
+private class ItemViewPagerAdapter(
+    fm: FragmentManager,
+    behavior: Int,
+    private val itemNamePre: String
+) : FragmentPagerAdapter(fm, behavior) {
 
     override fun getItem(position: Int): Fragment {
-        return ItemFragment.newInstance("$itemName$position")
+        return ItemFragment.newInstance("$itemNamePre$position")
     }
 
     override fun getCount(): Int {
@@ -121,19 +122,14 @@ private class ItemViewPagerAdapter(fm: FragmentManager, behavior: Int) :
     }
 }
 
-private class ItemStateViewPagerAdapter(fm: FragmentManager, behavior: Int) :
-    FragmentStatePagerAdapter(fm, behavior) {
-
-    private val itemName by lazy {
-        when (behavior) {
-            BEHAVIOR_SET_USER_VISIBLE_HINT -> "ViewPager_State_Hint_Item_"
-            BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT -> "ViewPager_State_Lifecycle_Item_"
-            else -> "ViewPager_State_Item_"
-        }
-    }
+private class ItemStateViewPagerAdapter(
+    fm: FragmentManager,
+    behavior: Int,
+    private val itemNamePre: String
+) : FragmentStatePagerAdapter(fm, behavior) {
 
     override fun getItem(position: Int): Fragment {
-        return ItemFragment.newInstance("$itemName$position")
+        return ItemFragment.newInstance("$itemNamePre$position")
     }
 
     override fun getCount(): Int {
