@@ -18,6 +18,7 @@ abstract class BaseFragment : Fragment() {
 
     private val onGlobalLayoutListener by lazy {
         ViewTreeObserver.OnGlobalLayoutListener {
+            handleOnGlobalLayout()
             onGlobalLayout()
         }
     }
@@ -36,10 +37,16 @@ abstract class BaseFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        if (isVisible) {
+            dispatchVisibleToUser(true)
+        }
     }
 
     override fun onPause() {
         super.onPause()
+
+        dispatchVisibleToUser(false)
     }
 
     override fun onStop() {
@@ -73,6 +80,10 @@ abstract class BaseFragment : Fragment() {
     /************************************************************ E 自定义重写方法 ************************************************************/
 
     /************************************************************ S 内部逻辑 ************************************************************/
+
+    private fun handleOnGlobalLayout() {
+        dispatchVisibleToUser(isVisible)
+    }
 
     private fun dispatchVisibleToUser(isVisibleToUser: Boolean) {
         if (this.isVisibleToUser == isVisibleToUser) {
