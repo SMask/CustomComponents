@@ -5,6 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.mask.customcomponents.view.TitleBarLayout
+        android:id="@+id/layout_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:actionBtnText="@string/dialog"
+        app:actionBtnVisibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <FrameLayout
         android:id="@+id/layout_content"
         android:layout_width="0dp"
@@ -12,7 +22,7 @@
         app:layout_constraintBottom_toTopOf="@+id/layout_tab"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title"
         tools:background="#80FF0000" />
 
     <FrameLayout

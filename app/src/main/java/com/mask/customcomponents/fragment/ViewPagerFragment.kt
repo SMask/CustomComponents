@@ -114,7 +114,7 @@ private class ItemViewPagerAdapter(
     }
 
     override fun getCount(): Int {
-        return 7
+        return 9
     }
 
     override fun getPageTitle(position: Int): CharSequence? {

@@ -35,6 +35,9 @@
     <string name="snap_horizontal">水平吸附</string>
     <string name="snap_vertical">垂直吸附</string>
     <string name="out_of_bounds">允许超出边界</string>
+    <string name="save">保存</string>
+    <string name="dialog">弹窗</string>
+    <string name="sure">确定</string>
 
     <string name="constraint_layout">ConstraintLayout</string>
     <string name="frame_layout">FrameLayout</string>
