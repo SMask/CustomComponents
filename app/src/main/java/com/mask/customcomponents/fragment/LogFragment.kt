@@ -59,6 +59,11 @@ abstract class LogFragment : BaseFragment() {
         printLog("setUserVisibleHint", isVisibleToUser)
     }
 
+    override fun onGlobalLayout() {
+        super.onGlobalLayout()
+        printLog("onGlobalLayout")
+    }
+
     protected fun setName(name: String) {
         if (arguments == null) {
             arguments = Bundle()
@@ -84,7 +89,7 @@ abstract class LogFragment : BaseFragment() {
         LogUtil.i(content.toString())
     }
 
-    private fun appendLog(content: StringBuilder, key: String, value: Any, valueLength: Int) {
+    private fun appendLog(content: StringBuilder, key: String, value: Any?, valueLength: Int) {
         content.append(key).append(": ").append(value.toString().padEnd(valueLength)).append(" ; ")
     }
 
