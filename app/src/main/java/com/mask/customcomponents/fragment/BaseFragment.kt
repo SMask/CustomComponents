@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment
  */
 abstract class BaseFragment : Fragment() {
 
+    var isVisibleToUser = false // 是否对用户可见
+        private set
+
     private var viewTreeObserver: ViewTreeObserver? = null
 
     private val onGlobalLayoutListener by lazy {
@@ -18,6 +21,8 @@ abstract class BaseFragment : Fragment() {
             onGlobalLayout()
         }
     }
+
+    /************************************************************ S 系统类重写方法 ************************************************************/
 
     override fun onStart() {
         super.onStart()
@@ -55,7 +60,28 @@ abstract class BaseFragment : Fragment() {
         super.setUserVisibleHint(isVisibleToUser)
     }
 
+    /************************************************************ E 系统类重写方法 ************************************************************/
+
+    /************************************************************ S 自定义重写方法 ************************************************************/
+
     open fun onGlobalLayout() {
     }
+
+    open fun onVisibleToUser(isVisibleToUser: Boolean) {
+    }
+
+    /************************************************************ E 自定义重写方法 ************************************************************/
+
+    /************************************************************ S 内部逻辑 ************************************************************/
+
+    private fun dispatchVisibleToUser(isVisibleToUser: Boolean) {
+        if (this.isVisibleToUser == isVisibleToUser) {
+            return
+        }
+        this.isVisibleToUser = isVisibleToUser
+        onVisibleToUser(isVisibleToUser)
+    }
+
+    /************************************************************ E 内部逻辑 ************************************************************/
 
 }

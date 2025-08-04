@@ -64,6 +64,11 @@ abstract class LogFragment : BaseFragment() {
         printLog("onGlobalLayout")
     }
 
+    override fun onVisibleToUser(isVisibleToUser: Boolean) {
+        super.onVisibleToUser(isVisibleToUser)
+        printLog("onVisibleToUser", isVisibleToUser)
+    }
+
     protected fun setName(name: String) {
         if (arguments == null) {
             arguments = Bundle()
