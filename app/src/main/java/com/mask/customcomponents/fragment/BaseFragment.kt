@@ -65,14 +65,14 @@ abstract class BaseFragment : Fragment() {
     /************************************************************ S 内部逻辑 ************************************************************/
 
     private fun handleOnGlobalLayout() {
-        dispatchVisibleToUser(isVisible)
+        dispatchOnVisibleToUser(isVisible)
 
         onGlobalLayout()
     }
 
     private fun handlerOnResume() {
         if (isVisible) {
-            dispatchVisibleToUser(true)
+            dispatchOnVisibleToUser(true)
         }
 
         addOnGlobalLayoutListener()
@@ -81,7 +81,7 @@ abstract class BaseFragment : Fragment() {
     private fun handleOnPause() {
         removeOnGlobalLayoutListener()
 
-        dispatchVisibleToUser(false)
+        dispatchOnVisibleToUser(false)
     }
 
     private fun addOnGlobalLayoutListener() {
@@ -100,7 +100,7 @@ abstract class BaseFragment : Fragment() {
         this.viewTreeObserver = null
     }
 
-    private fun dispatchVisibleToUser(isVisibleToUser: Boolean) {
+    private fun dispatchOnVisibleToUser(isVisibleToUser: Boolean) {
         if (this.isVisibleToUser == isVisibleToUser) {
             return
         }
