@@ -19,7 +19,6 @@ abstract class BaseFragment : Fragment() {
     private val onGlobalLayoutListener by lazy {
         ViewTreeObserver.OnGlobalLayoutListener {
             handleOnGlobalLayout()
-            onGlobalLayout()
         }
     }
 
@@ -31,20 +30,12 @@ abstract class BaseFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        if (isVisible) {
-            dispatchVisibleToUser(true)
-        }
-
-        addOnGlobalLayoutListener()
+        handlerOnResume()
     }
 
     override fun onPause() {
         super.onPause()
-
-        removeOnGlobalLayoutListener()
-
-        dispatchVisibleToUser(false)
+        handleOnPause()
     }
 
     override fun onStop() {
@@ -73,6 +64,26 @@ abstract class BaseFragment : Fragment() {
 
     /************************************************************ S 内部逻辑 ************************************************************/
 
+    private fun handleOnGlobalLayout() {
+        dispatchVisibleToUser(isVisible)
+
+        onGlobalLayout()
+    }
+
+    private fun handlerOnResume() {
+        if (isVisible) {
+            dispatchVisibleToUser(true)
+        }
+
+        addOnGlobalLayoutListener()
+    }
+
+    private fun handleOnPause() {
+        removeOnGlobalLayoutListener()
+
+        dispatchVisibleToUser(false)
+    }
+
     private fun addOnGlobalLayoutListener() {
         viewTreeObserver = view?.viewTreeObserver
         val viewTreeObserver = viewTreeObserver
@@ -87,10 +98,6 @@ abstract class BaseFragment : Fragment() {
             viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListener)
         }
         this.viewTreeObserver = null
-    }
-
-    private fun handleOnGlobalLayout() {
-        dispatchVisibleToUser(isVisible)
     }
 
     private fun dispatchVisibleToUser(isVisibleToUser: Boolean) {
