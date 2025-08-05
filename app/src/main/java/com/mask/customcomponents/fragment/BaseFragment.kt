@@ -11,8 +11,15 @@ import androidx.fragment.app.Fragment
  */
 abstract class BaseFragment : Fragment() {
 
-    var isVisibleToUser = false // 是否对用户可见
+    // 是否对用户可见
+    var isVisibleToUser = false
         private set
+
+    // Fragment 是否显示
+    private val isShown
+        get() = run {
+            isVisible && (view?.isShown == true)
+        }
 
     private var viewTreeObserver: ViewTreeObserver? = null
 
@@ -42,12 +49,13 @@ abstract class BaseFragment : Fragment() {
         super.onStop()
     }
 
-    override fun onHiddenChanged(hidden: Boolean) {
-        super.onHiddenChanged(hidden)
+    override fun onHiddenChanged(isHidden: Boolean) {
+        super.onHiddenChanged(isHidden)
+        handleOnHiddenChanged(isHidden)
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
+    override fun setUserVisibleHint(isVisibleToUserHint: Boolean) {
+        super.setUserVisibleHint(isVisibleToUserHint)
     }
 
     /************************************************************ E 系统类重写方法 ************************************************************/
@@ -65,13 +73,13 @@ abstract class BaseFragment : Fragment() {
     /************************************************************ S 内部逻辑 ************************************************************/
 
     private fun handleOnGlobalLayout() {
-        dispatchOnVisibleToUser(isVisible)
+        dispatchOnVisibleToUser(isShown)
 
         onGlobalLayout()
     }
 
     private fun handlerOnResume() {
-        if (isVisible) {
+        if (isShown) {
             dispatchOnVisibleToUser(true)
         }
 
@@ -82,6 +90,16 @@ abstract class BaseFragment : Fragment() {
         removeOnGlobalLayoutListener()
 
         dispatchOnVisibleToUser(false)
+    }
+
+    private fun handleOnHiddenChanged(isHidden: Boolean) {
+        if (isHidden) {
+            dispatchOnVisibleToUser(false)
+        } else {
+            if (isShown) {
+                dispatchOnVisibleToUser(true)
+            }
+        }
     }
 
     private fun addOnGlobalLayoutListener() {
