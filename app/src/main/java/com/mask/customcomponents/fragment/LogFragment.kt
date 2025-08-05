@@ -66,6 +66,7 @@ abstract class LogFragment : BaseFragment() {
 
     override fun onVisibleToUser(isVisibleToUser: Boolean) {
         super.onVisibleToUser(isVisibleToUser)
+        LogUtil.i("onVisibleToUser caller: ${getCallerMethodName(2)}")
         printLog("onVisibleToUser", isVisibleToUser)
     }
 
@@ -106,6 +107,19 @@ abstract class LogFragment : BaseFragment() {
             View.GONE -> "GONE"
             else -> "UNKNOWN"
         }
+    }
+
+    /**
+     * 获取调用者的方法名
+     * level 为 0 时，获取当前调用者的方法名
+     * level 为 1 时，获取调用当前方法的调用者的方法名
+     * 以此类推
+     */
+    fun getCallerMethodName(level: Int = 0): String {
+        val stackTrace = Thread.currentThread().stackTrace ?: return "UNKNOWN"
+        val index = 3 + level
+        val caller = stackTrace.getOrNull(index) ?: return "UNKNOWN"
+        return caller.methodName
     }
 
 }
