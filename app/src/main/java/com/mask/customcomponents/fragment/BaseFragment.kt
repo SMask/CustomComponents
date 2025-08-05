@@ -23,6 +23,8 @@ abstract class BaseFragment : Fragment() {
 
     private var viewTreeObserver: ViewTreeObserver? = null
 
+    private var isOnGlobalLayoutListenerAdded = false
+
     private val onGlobalLayoutListener by lazy {
         ViewTreeObserver.OnGlobalLayoutListener {
             handleOnGlobalLayout()
@@ -105,14 +107,16 @@ abstract class BaseFragment : Fragment() {
     private fun addOnGlobalLayoutListener() {
         viewTreeObserver = view?.viewTreeObserver
         val viewTreeObserver = viewTreeObserver
-        if (viewTreeObserver?.isAlive == true) {
+        if (!isOnGlobalLayoutListenerAdded && viewTreeObserver?.isAlive == true) {
+            isOnGlobalLayoutListenerAdded = true
             viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListener)
         }
     }
 
     private fun removeOnGlobalLayoutListener() {
         val viewTreeObserver = viewTreeObserver
-        if (viewTreeObserver?.isAlive == true) {
+        if (isOnGlobalLayoutListenerAdded && viewTreeObserver?.isAlive == true) {
+            isOnGlobalLayoutListenerAdded = false
             viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListener)
         }
         this.viewTreeObserver = null
