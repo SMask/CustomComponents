@@ -71,8 +71,8 @@ class FragmentVisibilityActivity : AppCompatActivity() {
 
     private fun initView() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.layout_content, contentFragment)
             .replace(R.id.layout_tab, tabFragment)
+            .replace(R.id.layout_content, contentFragment)
             .commitAllowingStateLoss()
     }
 

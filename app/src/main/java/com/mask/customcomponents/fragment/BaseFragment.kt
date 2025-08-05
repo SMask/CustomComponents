@@ -27,12 +27,6 @@ abstract class BaseFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
-        viewTreeObserver = view?.viewTreeObserver
-        val viewTreeObserver = viewTreeObserver
-        if (viewTreeObserver?.isAlive == true) {
-            viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListener)
-        }
     }
 
     override fun onResume() {
@@ -41,22 +35,20 @@ abstract class BaseFragment : Fragment() {
         if (isVisible) {
             dispatchVisibleToUser(true)
         }
+
+        addOnGlobalLayoutListener()
     }
 
     override fun onPause() {
         super.onPause()
+
+        removeOnGlobalLayoutListener()
 
         dispatchVisibleToUser(false)
     }
 
     override fun onStop() {
         super.onStop()
-
-        val viewTreeObserver = viewTreeObserver
-        if (viewTreeObserver?.isAlive == true) {
-            viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListener)
-        }
-        this.viewTreeObserver = null
     }
 
     override fun onHiddenChanged(hidden: Boolean) {
@@ -80,6 +72,22 @@ abstract class BaseFragment : Fragment() {
     /************************************************************ E 自定义重写方法 ************************************************************/
 
     /************************************************************ S 内部逻辑 ************************************************************/
+
+    private fun addOnGlobalLayoutListener() {
+        viewTreeObserver = view?.viewTreeObserver
+        val viewTreeObserver = viewTreeObserver
+        if (viewTreeObserver?.isAlive == true) {
+            viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListener)
+        }
+    }
+
+    private fun removeOnGlobalLayoutListener() {
+        val viewTreeObserver = viewTreeObserver
+        if (viewTreeObserver?.isAlive == true) {
+            viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListener)
+        }
+        this.viewTreeObserver = null
+    }
 
     private fun handleOnGlobalLayout() {
         dispatchVisibleToUser(isVisible)
