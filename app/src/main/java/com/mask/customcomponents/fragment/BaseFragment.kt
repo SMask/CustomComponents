@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment
  * Fragment 基类
  * 实现对用户可见回调逻辑
  *
+ * 注意：
+ * 1、AndroidX.Fragment 版本号为 1.3.6 时，父 Fragment onHiddenChanged 方法调用时，不会同步调用子 Fragment 的 onHiddenChanged 方法。在 1.5.4 版本中，可以同步回调。
+ *
  * Create by lishilin on 2025-07-24
  */
 abstract class BaseFragment : Fragment() {
