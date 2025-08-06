@@ -21,7 +21,7 @@ abstract class BaseFragment : Fragment() {
     // Fragment 是否显示
     private val isShown
         get() = run {
-            isVisible && (view?.isShown == true)
+            isVisible && userVisibleHint && (view?.isShown == true)
         }
 
     private var viewTreeObserver: ViewTreeObserver? = null
@@ -61,6 +61,7 @@ abstract class BaseFragment : Fragment() {
 
     override fun setUserVisibleHint(isVisibleToUserHint: Boolean) {
         super.setUserVisibleHint(isVisibleToUserHint)
+        handleSetUserVisibleHint(isVisibleToUserHint)
     }
 
     /************************************************************ E 系统类重写方法 ************************************************************/
@@ -104,6 +105,16 @@ abstract class BaseFragment : Fragment() {
             if (isShown) {
                 dispatchOnVisibleToUser(true)
             }
+        }
+    }
+
+    private fun handleSetUserVisibleHint(isVisibleToUserHint: Boolean) {
+        if (isVisibleToUserHint) {
+            if (isShown) {
+                dispatchOnVisibleToUser(true)
+            }
+        } else {
+            dispatchOnVisibleToUser(false)
         }
     }
 
