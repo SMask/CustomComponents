@@ -142,6 +142,25 @@ abstract class BaseFragment : Fragment() {
         }
         this.isVisibleToUser = isVisibleToUser
         onVisibleToUser(isVisibleToUser)
+        dispatchChildOnVisibleToUser(isVisibleToUser)
+    }
+
+    private fun dispatchChildOnVisibleToUser(isVisibleToUser: Boolean) {
+        if (host == null) {
+            return
+        }
+        for (childFragment in childFragmentManager.fragments) {
+            if (childFragment !is BaseFragment) {
+                continue
+            }
+            if (isVisibleToUser) {
+                if (childFragment.isShown) {
+                    childFragment.dispatchOnVisibleToUser(true)
+                }
+            } else {
+                childFragment.dispatchOnVisibleToUser(false)
+            }
+        }
     }
 
     /************************************************************ E 内部逻辑 ************************************************************/
