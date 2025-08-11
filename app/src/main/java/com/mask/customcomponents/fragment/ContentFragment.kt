@@ -24,23 +24,39 @@ class ContentFragment : LogFragment() {
     private var currentFragment: Fragment? = null
 
     private val vpNHFragment by lazy {
-        ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.NORMAL_HINT)
+        ViewPagerFragment.newInstance(
+            ViewPagerFragment.AdapterType.NORMAL_HINT,
+            hasChildPage = true,
+            isChildPage = false
+        )
     }
 
     private val vpNLFragment by lazy {
-        ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.NORMAL_LIFECYCLE)
+        ViewPagerFragment.newInstance(
+            ViewPagerFragment.AdapterType.NORMAL_LIFECYCLE,
+            hasChildPage = true,
+            isChildPage = false
+        )
     }
 
     private val vpSHFragment by lazy {
-        ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.STATE_HINT)
+        ViewPagerFragment.newInstance(
+            ViewPagerFragment.AdapterType.STATE_HINT,
+            hasChildPage = true,
+            isChildPage = false
+        )
     }
 
     private val vpSLFragment by lazy {
-        ViewPagerFragment.newInstance(ViewPagerFragment.AdapterType.STATE_LIFECYCLE)
+        ViewPagerFragment.newInstance(
+            ViewPagerFragment.AdapterType.STATE_LIFECYCLE,
+            hasChildPage = true,
+            isChildPage = false
+        )
     }
 
     private val vp2Fragment by lazy {
-        ViewPager2Fragment.newInstance()
+        ViewPager2Fragment.newInstance(hasChildPage = true, isChildPage = false)
     }
 
     private val normal1Fragment by lazy {

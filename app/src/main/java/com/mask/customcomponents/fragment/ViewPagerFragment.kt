@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.fragment.app.FragmentStatePagerAdapter
+import com.mask.customcomponents.config.Global
 import com.mask.customcomponents.databinding.FragmentViewPagerBinding
 import com.mask.customcomponents.enums.MainTab
 
@@ -29,16 +30,30 @@ class ViewPagerFragment : LogFragment() {
     private val binding get() = _binding!!
 
     private val adapterType by lazy {
-        arguments?.getSerializable(KEY_ADAPTER_TYPE) as? AdapterType ?: AdapterType.NORMAL_HINT
+        val adapterType = arguments?.getSerializable(Global.Key.KEY_ADAPTER_TYPE)
+        adapterType as? AdapterType ?: AdapterType.NORMAL_HINT
+    }
+
+    private val hasPageChild by lazy {
+        arguments?.getBoolean(Global.Key.KEY_HAS_CHILD_PAGE) ?: false
+    }
+
+    private val isChildPage by lazy {
+        arguments?.getBoolean(Global.Key.KEY_IS_CHILD_PAGE) ?: false
     }
 
     companion object {
-        private const val KEY_ADAPTER_TYPE = "key_adapter_type"
-
-        fun newInstance(adapterType: AdapterType): ViewPagerFragment {
+        fun newInstance(
+            adapterType: AdapterType,
+            hasChildPage: Boolean = false,
+            isChildPage: Boolean = false
+        ): ViewPagerFragment {
             val fragment = ViewPagerFragment()
-            fragment.setName("${adapterType.tab.tabName}Root")
-            fragment.arguments?.putSerializable(KEY_ADAPTER_TYPE, adapterType)
+            val childPlaceholder = if (isChildPage) "Child" else ""
+            fragment.setName("${adapterType.tab.tabName}${childPlaceholder}Root")
+            fragment.arguments?.putSerializable(Global.Key.KEY_ADAPTER_TYPE, adapterType)
+            fragment.arguments?.putBoolean(Global.Key.KEY_HAS_CHILD_PAGE, hasChildPage)
+            fragment.arguments?.putBoolean(Global.Key.KEY_IS_CHILD_PAGE, isChildPage)
             return fragment
         }
     }
@@ -56,13 +71,21 @@ class ViewPagerFragment : LogFragment() {
     }
 
     private fun initView() {
-        val itemNamePre = "${adapterType.tab.tabName}_Item_"
+        val adapterDataProvider = object : VPAdapterDataProvider() {
+            override fun getItem(position: Int): Fragment {
+                if (hasPageChild && position == 4) {
+                    return newInstance(adapterType, hasChildPage = false, isChildPage = true)
+                }
+                val childPlaceholder = if (isChildPage) "_C" else ""
+                return ItemFragment.newInstance("${adapterType.tab.tabName}${childPlaceholder}_Item_$position")
+            }
+        }
         val adapter = when (adapterType) {
             AdapterType.NORMAL_HINT -> {
                 ItemViewPagerAdapter(
                     childFragmentManager,
                     FragmentPagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT,
-                    itemNamePre
+                    adapterDataProvider
                 )
             }
 
@@ -70,7 +93,7 @@ class ViewPagerFragment : LogFragment() {
                 ItemViewPagerAdapter(
                     childFragmentManager,
                     FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
-                    itemNamePre
+                    adapterDataProvider
                 )
             }
 
@@ -78,7 +101,7 @@ class ViewPagerFragment : LogFragment() {
                 ItemStateViewPagerAdapter(
                     childFragmentManager,
                     FragmentStatePagerAdapter.BEHAVIOR_SET_USER_VISIBLE_HINT,
-                    itemNamePre
+                    adapterDataProvider
                 )
             }
 
@@ -86,7 +109,7 @@ class ViewPagerFragment : LogFragment() {
                 ItemStateViewPagerAdapter(
                     childFragmentManager,
                     FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,
-                    itemNamePre
+                    adapterDataProvider
                 )
             }
         }
@@ -103,40 +126,53 @@ class ViewPagerFragment : LogFragment() {
 
 }
 
-private class ItemViewPagerAdapter(
-    fm: FragmentManager,
-    behavior: Int,
-    private val itemNamePre: String
-) : FragmentPagerAdapter(fm, behavior) {
+private abstract class VPAdapterDataProvider() {
 
-    override fun getItem(position: Int): Fragment {
-        return ItemFragment.newInstance("$itemNamePre$position")
-    }
+    abstract fun getItem(position: Int): Fragment
 
-    override fun getCount(): Int {
+    open fun getCount(): Int {
         return 9
     }
 
-    override fun getPageTitle(position: Int): CharSequence? {
+    open fun getPageTitle(position: Int): CharSequence? {
         return "Tab_$position"
+    }
+}
+
+private class ItemViewPagerAdapter(
+    fm: FragmentManager,
+    behavior: Int,
+    private val adapterDataProvider: VPAdapterDataProvider
+) : FragmentPagerAdapter(fm, behavior) {
+
+    override fun getItem(position: Int): Fragment {
+        return adapterDataProvider.getItem(position)
+    }
+
+    override fun getCount(): Int {
+        return adapterDataProvider.getCount()
+    }
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return adapterDataProvider.getPageTitle(position)
     }
 }
 
 private class ItemStateViewPagerAdapter(
     fm: FragmentManager,
     behavior: Int,
-    private val itemNamePre: String
+    private val adapterDataProvider: VPAdapterDataProvider
 ) : FragmentStatePagerAdapter(fm, behavior) {
 
     override fun getItem(position: Int): Fragment {
-        return ItemFragment.newInstance("$itemNamePre$position")
+        return adapterDataProvider.getItem(position)
     }
 
     override fun getCount(): Int {
-        return 9
+        return adapterDataProvider.getCount()
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
-        return "Tab_$position"
+        return adapterDataProvider.getPageTitle(position)
     }
 }

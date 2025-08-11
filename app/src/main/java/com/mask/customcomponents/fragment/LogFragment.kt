@@ -2,6 +2,7 @@ package com.mask.customcomponents.fragment
 
 import android.os.Bundle
 import android.view.View
+import com.mask.customcomponents.config.Global
 import com.mask.customcomponents.utils.LogUtil
 
 /**
@@ -12,11 +13,7 @@ import com.mask.customcomponents.utils.LogUtil
 abstract class LogFragment : BaseFragment() {
 
     protected val name by lazy {
-        arguments?.getString(KEY_NAME) ?: "name"
-    }
-
-    companion object {
-        private const val KEY_NAME = "key_name"
+        arguments?.getString(Global.Key.KEY_NAME) ?: "name"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,14 +71,14 @@ abstract class LogFragment : BaseFragment() {
         if (arguments == null) {
             arguments = Bundle()
         }
-        arguments?.putString(KEY_NAME, name)
+        arguments?.putString(Global.Key.KEY_NAME, name)
     }
 
     private fun printLog(key: String, value: Any = "") {
         val content = StringBuilder()
         content.append(key.padEnd(18)).append(": ").append(value.toString().padEnd(5))
         content.append(" - ")
-        content.append(name.padEnd(12))
+        content.append(name.padEnd(14))
         content.append(" - ")
         val isVisible = isVisible
         appendLog(content, "isShown", view?.isShown, 5)
