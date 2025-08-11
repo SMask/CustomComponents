@@ -63,7 +63,16 @@ abstract class LogFragment : BaseFragment() {
 
     override fun onVisibleToUser(isVisibleToUser: Boolean) {
         super.onVisibleToUser(isVisibleToUser)
-        LogUtil.i("onVisibleToUser caller: ${getCallerMethodName(2)}")
+
+        val content = StringBuilder()
+        content.append("onVisibleToUser caller").append(": ")
+        val callerMethodName = getCallerMethodName(2)
+        content.append(callerMethodName)
+        if (callerMethodName == "dispatchChildOnVisibleToUser") {
+            content.append(" - ").append(getCallerMethodName(4))
+        }
+        LogUtil.i(content.toString())
+
         printLog("onVisibleToUser", isVisibleToUser)
     }
 
