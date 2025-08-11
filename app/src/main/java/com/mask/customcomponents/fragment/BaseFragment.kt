@@ -7,8 +7,15 @@ import androidx.fragment.app.Fragment
  * Fragment 基类
  * 实现对用户可见回调逻辑
  *
- * 注意：
- * 1、AndroidX.Fragment 版本号为 1.3.6 时，父 Fragment onHiddenChanged 方法调用时，不会同步调用子 Fragment 的 onHiddenChanged 方法。在 1.5.4 版本中，可以同步回调。
+ * 兼容 add、remove、replace、show、hide；
+ * 兼容 ViewPager，BEHAVIOR_SET_USER_VISIBLE_HINT 及 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT；
+ * 兼容 ViewPager2；
+ * 兼容 ViewPager 嵌套场景；
+ * 兼容 Fragment 低版本下面的两个问题；
+ *
+ * AndroidX.Fragment 版本号 1.3.6 与 1.5.4 差异点：
+ * 1、在 1.3.6 版本，父 Fragment.onHiddenChanged 方法调用时，不会同步调用子 Fragment.onHiddenChanged 方法。在 1.5.4 版本，可以同步回调。
+ * 2、在 1.3.6 版本，子 Fragment.isHidden 方法调用时，不会同步判断父 Fragment.isHidden 方法。在 1.5.4 版本，可以同步回调。
  *
  * Create by lishilin on 2025-07-24
  */
@@ -21,7 +28,7 @@ abstract class BaseFragment : Fragment() {
     // Fragment 是否显示
     private val isShown
         get() = run {
-            isVisible && userVisibleHint && (view?.isShown == true)
+            isVisible && !isHiddenIncludeParent() && isUserVisibleHintIncludeParent() && (view?.isShown == true) && isResumed
         }
 
     private var viewTreeObserver: ViewTreeObserver? = null
@@ -116,6 +123,36 @@ abstract class BaseFragment : Fragment() {
         } else {
             dispatchOnVisibleToUser(false)
         }
+    }
+
+    private fun isHiddenIncludeParent(): Boolean {
+        return isHidden || isParentHidden()
+    }
+
+    private fun isParentHidden(): Boolean {
+        val parentFragment = parentFragment
+        if (parentFragment == null) {
+            return false
+        }
+        if (parentFragment is BaseFragment) {
+            return parentFragment.isHiddenIncludeParent()
+        }
+        return parentFragment.isHidden
+    }
+
+    private fun isUserVisibleHintIncludeParent(): Boolean {
+        return userVisibleHint && isParentUserVisibleHint()
+    }
+
+    private fun isParentUserVisibleHint(): Boolean {
+        val parentFragment = parentFragment
+        if (parentFragment == null) {
+            return true
+        }
+        if (parentFragment is BaseFragment) {
+            return parentFragment.isUserVisibleHintIncludeParent()
+        }
+        return parentFragment.userVisibleHint
     }
 
     private fun addOnGlobalLayoutListener() {

@@ -82,6 +82,7 @@ abstract class LogFragment : BaseFragment() {
         content.append(" - ")
         val isVisible = isVisible
         appendLog(content, "isShown", view?.isShown, 5)
+        appendLog(content, "isResumed", isResumed, 5)
         appendLog(content, "isVisible", isVisible, 5)
         if (!isVisible) {
             appendLog(content, "ViewVisibility", getVisibilityText(view?.visibility), 9)
