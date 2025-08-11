@@ -4,8 +4,7 @@ import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
 
 /**
- * Fragment 基类
- * 实现对用户可见回调逻辑
+ * Fragment 实现对用户可见回调逻辑基类
  *
  * 兼容 add、remove、replace、show、hide；
  * 兼容 ViewPager，BEHAVIOR_SET_USER_VISIBLE_HINT 及 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT；
@@ -19,7 +18,7 @@ import androidx.fragment.app.Fragment
  *
  * Create by lishilin on 2025-07-24
  */
-abstract class BaseFragment : Fragment() {
+abstract class BaseVisibleCallbackFragment : Fragment() {
 
     // 是否对用户可见
     var isVisibleToUser = false
@@ -134,7 +133,7 @@ abstract class BaseFragment : Fragment() {
         if (parentFragment == null) {
             return false
         }
-        if (parentFragment is BaseFragment) {
+        if (parentFragment is BaseVisibleCallbackFragment) {
             return parentFragment.isHiddenIncludeParent()
         }
         return parentFragment.isHidden
@@ -149,7 +148,7 @@ abstract class BaseFragment : Fragment() {
         if (parentFragment == null) {
             return true
         }
-        if (parentFragment is BaseFragment) {
+        if (parentFragment is BaseVisibleCallbackFragment) {
             return parentFragment.isUserVisibleHintIncludeParent()
         }
         return parentFragment.userVisibleHint
@@ -187,7 +186,7 @@ abstract class BaseFragment : Fragment() {
             return
         }
         for (childFragment in childFragmentManager.fragments) {
-            if (childFragment !is BaseFragment) {
+            if (childFragment !is BaseVisibleCallbackFragment) {
                 continue
             }
             if (isVisibleToUser) {
