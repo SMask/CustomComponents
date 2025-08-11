@@ -10,7 +10,7 @@ import com.mask.customcomponents.utils.LogUtil
  *
  * Create by lishilin on 2025-07-24
  */
-abstract class LogFragment : BaseVisibleCallbackFragment() {
+abstract class LogFragment : BaseFragment() {
 
     protected val name by lazy {
         arguments?.getString(Global.Key.KEY_NAME) ?: "name"
