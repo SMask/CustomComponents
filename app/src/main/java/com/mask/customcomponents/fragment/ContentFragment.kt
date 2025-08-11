@@ -117,14 +117,15 @@ class ContentFragment : LogFragment() {
             return
         }
         this.currentFragment = targetFragment
+
         val transaction = childFragmentManager.beginTransaction()
+        if (currentFragment != null) {
+            transaction.hide(currentFragment)
+        }
         if (targetFragment.isAdded) {
             transaction.show(targetFragment)
         } else {
             transaction.add(R.id.layout_content, targetFragment)
-        }
-        if (currentFragment != null) {
-            transaction.hide(currentFragment)
         }
         transaction.commitAllowingStateLoss()
     }
