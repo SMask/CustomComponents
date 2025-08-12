@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
  * 兼容 ViewPager，BEHAVIOR_SET_USER_VISIBLE_HINT 及 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT；
  * 兼容 ViewPager2；
  * 兼容 ViewPager 嵌套场景；
- * 兼容 Fragment 低版本下面的两个问题；
+ * 兼容 Fragment 低版本的两个问题；
  *
  * AndroidX.Fragment 版本号 1.3.6 与 1.5.4 差异点：
  * 1、在 1.3.6 版本，父 Fragment.onHiddenChanged 方法调用时，不会同步调用子 Fragment.onHiddenChanged 方法。在 1.5.4 版本，可以同步回调。
