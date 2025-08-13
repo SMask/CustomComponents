@@ -12,7 +12,7 @@ import com.mask.customcomponents.fragment.TabFragment
 import com.mask.customcomponents.utils.LogUtil
 
 /**
- * Fragment对用户可见回调
+ * Fragment 对用户可见回调
  */
 class FragmentVisibilityActivity : AppCompatActivity() {
 
