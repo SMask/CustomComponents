@@ -75,8 +75,8 @@ class MainActivity : AppCompatActivity() {
                 NumberViewActivity.startActivity(this)
             }
 
-            R.id.btn_number_anim_view -> {
-                NumberAnimViewActivity.startActivity(this)
+            R.id.btn_number_text_animator -> {
+                NumberTextAnimatorActivity.startActivity(this)
             }
 
             R.id.btn_color_picker_view -> {

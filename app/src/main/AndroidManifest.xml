@@ -83,9 +83,9 @@
             android:label="@string/title_activity_number_view"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
-            android:name=".activity.NumberAnimViewActivity"
+            android:name=".activity.NumberTextAnimatorActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|uiMode"
-            android:label="@string/title_activity_number_anim_view"
+            android:label="@string/title_activity_number_text_animator"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
             android:name=".activity.ColorPickerViewActivity"

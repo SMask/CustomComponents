@@ -11,7 +11,7 @@
     <string name="title_activity_particle_progress_bar">粒子动画进度条</string>
     <string name="title_activity_caliper_view">游标卡尺</string>
     <string name="title_activity_number_view">单个数字边框</string>
-    <string name="title_activity_number_anim_view">数字动画控件</string>
+    <string name="title_activity_number_text_animator">数字动画</string>
     <string name="title_activity_color_picker_view">颜色拾取器</string>
     <string name="title_activity_gradient_rotate_view">渐变旋转</string>
     <string name="title_activity_round_bevel_rect_view">圆角/平角矩形(四个角单独半径)</string>
