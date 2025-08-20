@@ -17,6 +17,9 @@ class CountDownTimerView @JvmOverloads constructor(
     @AttrRes defStyleAttr: Int = android.R.attr.textViewStyle,
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
+    // 是否对用户可见
+    private var isVisibleToUser = false
+
     private val mCountDownTimerHolder by lazy {
         CountDownTimerHolder()
     }
@@ -53,9 +56,33 @@ class CountDownTimerView @JvmOverloads constructor(
         })
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        if (isShown) {
+            dispatchOnVisibleToUser(true)
+        }
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        dispatchOnVisibleToUser(false)
+    }
+
     override fun onVisibilityChanged(changedView: View, visibility: Int) {
         super.onVisibilityChanged(changedView, visibility)
-        if (visibility == View.VISIBLE) {
+        if (isShown) {
+            dispatchOnVisibleToUser(true)
+        } else {
+            dispatchOnVisibleToUser(false)
+        }
+    }
+
+    private fun dispatchOnVisibleToUser(isVisibleToUser: Boolean) {
+        if (this.isVisibleToUser == isVisibleToUser) {
+            return
+        }
+        this.isVisibleToUser = isVisibleToUser
+        if (isVisibleToUser) {
             mCountDownTimerHolder.start()
         } else {
             mCountDownTimerHolder.cancel()
@@ -77,7 +104,7 @@ class CountDownTimerView @JvmOverloads constructor(
      * startTime 使用 SystemClock.elapsedRealtime()
      */
     fun setTime(startTime: Long, remainingTimeForStart: Long) {
-        mCountDownTimerHolder.start(startTime, remainingTimeForStart)
+        mCountDownTimerHolder.setTime(startTime, remainingTimeForStart, false)
     }
 
     /************************************************************ E 外部调用 ************************************************************/

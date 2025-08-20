@@ -22,6 +22,8 @@ class CountDownTimerHolder {
         const val MILLIS_DAY = MILLIS_HOUR * 24
     }
 
+    private var isRunning = false
+
     private var mStartTime: Long? = null // 开始时间
     private var mRemainingTimeForStart: Long? = null // 剩余时间（相对于开始时间）
     private var mCountdownInterval: Long = 1000L // 回调间隔时间
@@ -31,6 +33,10 @@ class CountDownTimerHolder {
     private var mCountDownTimer: CountDownTimer? = null
 
     private fun startInternal() {
+        if (isRunning) {
+            return
+        }
+        isRunning = true
         val mStartTime = mStartTime ?: return
         val mRemainingTimeForStart = mRemainingTimeForStart ?: return
         val millisInFuture = getRemainingTimeForFinish(mStartTime, mRemainingTimeForStart)
@@ -42,12 +48,18 @@ class CountDownTimerHolder {
 
             override fun onFinish() {
                 dispatchAction(Action.FINISH, mStartTime, mRemainingTimeForStart)
-                mCountDownTimer = null
+                this@CountDownTimerHolder.mCountDownTimer = null
+                this@CountDownTimerHolder.mStartTime = null
+                this@CountDownTimerHolder.mRemainingTimeForStart = null
             }
         }.start()
     }
 
     private fun cancelInternal() {
+        if (!isRunning) {
+            return
+        }
+        isRunning = false
         mCountDownTimer?.cancel()
         if (mCountDownTimer != null) {
             dispatchAction(Action.CANCEL, mStartTime, mRemainingTimeForStart)
@@ -119,22 +131,30 @@ class CountDownTimerHolder {
     }
 
     /**
-     * 开始
+     * 设置时间
      * startTime 使用 SystemClock.elapsedRealtime()
      */
-    fun start(startTime: Long, remainingTimeForStart: Long) {
+    fun setTime(startTime: Long, remainingTimeForStart: Long, isStart: Boolean = true) {
         cancelInternal()
         this.mStartTime = startTime
         this.mRemainingTimeForStart = remainingTimeForStart
-        startInternal()
+        if (isStart) {
+            startInternal()
+        }
     }
 
     fun start() {
+        if (isRunning) {
+            return
+        }
         cancelInternal()
         startInternal()
     }
 
     fun cancel() {
+        if (!isRunning) {
+            return
+        }
         cancelInternal()
     }
 

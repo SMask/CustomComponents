@@ -3,6 +3,7 @@ package com.mask.customcomponents.fragment
 import android.os.Bundle
 import android.view.View
 import com.mask.customcomponents.config.Global
+import com.mask.customcomponents.utils.CommonUtils
 import com.mask.customcomponents.utils.LogUtil
 
 /**
@@ -66,10 +67,10 @@ abstract class LogFragment : BaseFragment() {
 
         val content = StringBuilder()
         content.append("onVisibleToUser caller").append(": ")
-        val callerMethodName = getCallerMethodName(2)
+        val callerMethodName = CommonUtils.getCallerMethodName(2)
         content.append(callerMethodName)
         if (callerMethodName == "dispatchChildOnVisibleToUser") {
-            content.append(" - ").append(getCallerMethodName(4))
+            content.append(" - ").append(CommonUtils.getCallerMethodName(4))
         }
         LogUtil.i(content.toString())
 
@@ -94,7 +95,7 @@ abstract class LogFragment : BaseFragment() {
         appendLog(content, "isResumed", isResumed, 5)
         appendLog(content, "isVisible", isVisible, 5)
         if (!isVisible) {
-            appendLog(content, "ViewVisibility", getVisibilityText(view?.visibility), 9)
+            appendLog(content, "ViewVisibility", CommonUtils.getVisibilityText(view?.visibility), 9)
             appendLog(content, "isAdded", isAdded, 5)
             appendLog(content, "isHidden", isHidden, 5)
             appendLog(content, "ViewWindowTokenNonNull", view?.windowToken != null, 5)
@@ -105,28 +106,6 @@ abstract class LogFragment : BaseFragment() {
 
     private fun appendLog(content: StringBuilder, key: String, value: Any?, valueLength: Int) {
         content.append(key).append(": ").append(value.toString().padEnd(valueLength)).append(" ; ")
-    }
-
-    private fun getVisibilityText(visibility: Int?): String {
-        return when (visibility) {
-            View.VISIBLE -> "VISIBLE"
-            View.INVISIBLE -> "INVISIBLE"
-            View.GONE -> "GONE"
-            else -> "UNKNOWN"
-        }
-    }
-
-    /**
-     * 获取调用者的方法名
-     * level 为 0 时，获取当前调用者的方法名
-     * level 为 1 时，获取调用当前方法的调用者的方法名
-     * 以此类推
-     */
-    fun getCallerMethodName(level: Int = 0): String {
-        val stackTrace = Thread.currentThread().stackTrace ?: return "UNKNOWN"
-        val index = 3 + level
-        val caller = stackTrace.getOrNull(index) ?: return "UNKNOWN"
-        return caller.methodName
     }
 
 }

@@ -7,10 +7,12 @@ import android.os.SystemClock
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mask.customcomponents.adapter.CountDownTimerAdapter
+import com.mask.customcomponents.config.Global
 import com.mask.customcomponents.databinding.ActivityCountDownTimerBinding
 import com.mask.customcomponents.decoration.DividerItemDecoration
 import com.mask.customcomponents.utils.LogUtil
 import com.mask.customcomponents.utils.SizeUtils
+import com.mask.customcomponents.view.CountDownTimerHolder
 import com.mask.customcomponents.view.CountDownTimerInfo
 import com.mask.customcomponents.view.CountDownTimerListener
 import com.mask.customcomponents.vo.CountDownTimerVo
@@ -27,7 +29,7 @@ class CountDownTimerActivity : AppCompatActivity() {
     private val dataList by lazy {
         val dataList = mutableListOf<CountDownTimerVo>()
         repeat(100) { index ->
-            dataList.add(CountDownTimerVo(1000L * 10 * index))
+            dataList.add(CountDownTimerVo(CountDownTimerHolder.MILLIS_SECOND * 10 * index))
         }
         dataList
     }
@@ -84,7 +86,12 @@ class CountDownTimerActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-        mBinding.cdtvTime.setTime(SystemClock.elapsedRealtime(), 1000L * 15)
+        mBinding.tvVisible.setTag(Global.Key.KEY_NAME.hashCode(), "Activity")
+
+        mBinding.cdtvTime.setTime(
+            SystemClock.elapsedRealtime(),
+            CountDownTimerHolder.MILLIS_SECOND * 15
+        )
         mAdapter.setDataList(dataList)
     }
 }

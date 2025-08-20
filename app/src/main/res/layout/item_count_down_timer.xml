@@ -6,7 +6,7 @@
     android:layout_height="40dp"
     android:background="#80FF0000">
 
-    <TextView
+    <com.mask.customcomponents.view.VisibleView
         android:id="@+id/tv_index"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,14 +17,15 @@
         tools:text="Index" />
 
     <TextView
+        android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
-        android:text="@string/count_down"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cdtv_time"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/count_down" />
 
     <com.mask.customcomponents.view.CountDownTimerView
         android:id="@+id/cdtv_time"
