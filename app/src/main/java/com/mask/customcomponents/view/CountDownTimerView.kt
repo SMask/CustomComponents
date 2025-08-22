@@ -24,7 +24,7 @@ class CountDownTimerView @JvmOverloads constructor(
         CountDownTimerHolder()
     }
 
-    private var mProvider: CountDownTimerProvider = CountDownTimerProvider()
+    private var mProvider: CountDownTimerProvider = DefaultCountDownTimerProvider()
 
     private var mListener: CountDownTimerListener? = null
 
@@ -32,25 +32,25 @@ class CountDownTimerView @JvmOverloads constructor(
         mCountDownTimerHolder.setListener(object : CountDownTimerListener() {
             override fun onStart(info: CountDownTimerInfo) {
                 super.onStart(info)
-                text = mProvider.formatTime(info)
+                setTimeText(info)
                 mListener?.onStart(info)
             }
 
             override fun onTick(info: CountDownTimerInfo) {
                 super.onTick(info)
-                text = mProvider.formatTime(info)
+                setTimeText(info)
                 mListener?.onTick(info)
             }
 
             override fun onCancel(info: CountDownTimerInfo) {
                 super.onCancel(info)
-                text = mProvider.formatTime(info)
+                setTimeText(info)
                 mListener?.onCancel(info)
             }
 
             override fun onFinish(info: CountDownTimerInfo) {
                 super.onFinish(info)
-                text = mProvider.formatTime(info)
+                setTimeText(info)
                 mListener?.onFinish(info)
             }
         })
@@ -89,6 +89,15 @@ class CountDownTimerView @JvmOverloads constructor(
         }
     }
 
+    private fun setTimeText(info: CountDownTimerInfo) {
+        val timeText = mProvider.formatTime(info)
+        val timePlaceholder = mProvider.formatTimePlaceholder(info)
+        if (hint != timePlaceholder) {
+            hint = timePlaceholder
+        }
+        text = timeText
+    }
+
     /************************************************************ S 外部调用 ************************************************************/
 
     fun setProvider(provider: CountDownTimerProvider) {
@@ -103,25 +112,60 @@ class CountDownTimerView @JvmOverloads constructor(
      * 设置时间
      * startTime 使用 SystemClock.elapsedRealtime()
      */
-    fun setTime(startTime: Long, remainingTimeForStart: Long) {
-        mCountDownTimerHolder.setTime(startTime, remainingTimeForStart, false)
+    fun setTime(
+        startTime: Long,
+        remainingTimeForStart: Long,
+        countDownInterval: Long = CountDownTimerHolder.MILLIS_SECOND,
+        isStart: Boolean = true
+    ) {
+        mCountDownTimerHolder.setTime(
+            startTime,
+            remainingTimeForStart,
+            countDownInterval,
+            isStart && isShown
+        )
     }
 
     /************************************************************ E 外部调用 ************************************************************/
 
 }
 
-open class CountDownTimerProvider {
-    open fun formatTime(info: CountDownTimerInfo): CharSequence {
+abstract class CountDownTimerProvider {
+
+    /**
+     * 格式化时间
+     */
+    abstract fun formatTime(info: CountDownTimerInfo): CharSequence
+
+    /**
+     * 格式化时间 占位
+     * 解决部分机型绘制数字宽度不一致，导致依赖该控件的控件位置抖动问题。
+     */
+    abstract fun formatTimePlaceholder(info: CountDownTimerInfo): CharSequence
+}
+
+class DefaultCountDownTimerProvider : CountDownTimerProvider() {
+
+    override fun formatTime(info: CountDownTimerInfo): CharSequence {
         val remainingDays = info.remainingDays
         val remainingDaysStr = remainingDays.toString()
         val remainingHoursStr = info.remainingHours.toString().padStart(2, '0')
         val remainingMinutesStr = info.remainingMinutes.toString().padStart(2, '0')
         val remainingSecondsStr = info.remainingSeconds.toString().padStart(2, '0')
         return if (remainingDays > 0) {
-            "${remainingDaysStr}天${remainingHoursStr}:${remainingMinutesStr}"
+            "${remainingDaysStr}天${remainingHoursStr}:${remainingMinutesStr}:${remainingSecondsStr}"
         } else {
             "${remainingHoursStr}:${remainingMinutesStr}:${remainingSecondsStr}"
+        }
+    }
+
+    override fun formatTimePlaceholder(info: CountDownTimerInfo): CharSequence {
+        val remainingDays = info.remainingDays
+        return if (remainingDays > 0) {
+            val remainingDaysStr = "9".padEnd(remainingDays.toString().length, '9')
+            "${remainingDaysStr}天99:99:99"
+        } else {
+            "99:99:99"
         }
     }
 }

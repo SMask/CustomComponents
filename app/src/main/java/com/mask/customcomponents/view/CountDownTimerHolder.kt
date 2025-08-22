@@ -26,7 +26,7 @@ class CountDownTimerHolder {
 
     private var mStartTime: Long? = null // 开始时间
     private var mRemainingTimeForStart: Long? = null // 剩余时间（相对于开始时间）
-    private var mCountdownInterval: Long = 1000L // 回调间隔时间
+    private var mCountDownInterval: Long = MILLIS_SECOND // 回调间隔时间
 
     private var mListener: CountDownTimerListener? = null
 
@@ -41,7 +41,7 @@ class CountDownTimerHolder {
         val mRemainingTimeForStart = mRemainingTimeForStart ?: return
         val millisInFuture = getRemainingTimeForFinish(mStartTime, mRemainingTimeForStart)
         dispatchAction(Action.START, mStartTime, mRemainingTimeForStart)
-        mCountDownTimer = object : CountDownTimer(millisInFuture, mCountdownInterval) {
+        mCountDownTimer = object : CountDownTimer(millisInFuture, mCountDownInterval) {
             override fun onTick(millisUntilFinished: Long) {
                 dispatchAction(Action.TICK, mStartTime, mRemainingTimeForStart, millisUntilFinished)
             }
@@ -134,10 +134,16 @@ class CountDownTimerHolder {
      * 设置时间
      * startTime 使用 SystemClock.elapsedRealtime()
      */
-    fun setTime(startTime: Long, remainingTimeForStart: Long, isStart: Boolean = true) {
+    fun setTime(
+        startTime: Long,
+        remainingTimeForStart: Long,
+        countDownInterval: Long = MILLIS_SECOND,
+        isStart: Boolean = true
+    ) {
         cancelInternal()
         this.mStartTime = startTime
         this.mRemainingTimeForStart = remainingTimeForStart
+        this.mCountDownInterval = countDownInterval
         if (isStart) {
             startInternal()
         }
