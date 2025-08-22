@@ -92,10 +92,10 @@ class CountDownTimerView @JvmOverloads constructor(
     private fun setTimeText(info: CountDownTimerInfo) {
         val timeText = mProvider.formatTime(info)
         val timePlaceholder = mProvider.formatTimePlaceholder(info)
+        text = timeText
         if (hint != timePlaceholder) {
             hint = timePlaceholder
         }
-        text = timeText
     }
 
     /************************************************************ S 外部调用 ************************************************************/
@@ -162,10 +162,10 @@ class DefaultCountDownTimerProvider : CountDownTimerProvider() {
     override fun formatTimePlaceholder(info: CountDownTimerInfo): CharSequence {
         val remainingDays = info.remainingDays
         return if (remainingDays > 0) {
-            val remainingDaysStr = "9".padEnd(remainingDays.toString().length, '9')
-            "${remainingDaysStr}天99:99:99"
+            val remainingDaysStr = "0".padEnd(remainingDays.toString().length, '0')
+            "${remainingDaysStr}天00:00:00"
         } else {
-            "99:99:99"
+            "00:00:00"
         }
     }
 }
