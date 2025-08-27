@@ -96,8 +96,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_bar_3"
-        app:titleText="自定义样式"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/white"
+        app:titleVisibility="gone" />
 
     <TextView
         android:id="@+id/tv_title_bar_4"

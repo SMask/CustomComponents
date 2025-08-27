@@ -74,6 +74,10 @@ class TitleBarLayout @JvmOverloads constructor(
                 // E 返回图标
 
                 // S 标题
+                val titleVisibility =
+                    typedArray.getInt(R.styleable.TitleBarLayout_titleVisibility, View.VISIBLE)
+                binding.tvTitle.visibility = titleVisibility
+
                 val titleText = typedArray.getText(R.styleable.TitleBarLayout_titleText)
                 setTitleText(
                     if (titleText.isNullOrEmpty()) {
@@ -176,6 +180,10 @@ class TitleBarLayout @JvmOverloads constructor(
     /**** E 返回图标 ****/
 
     /**** S 标题 ****/
+    fun setTitleVisible(isVisible: Boolean) {
+        binding.tvTitle.isVisible = isVisible
+    }
+
     fun setTitleText(text: CharSequence?) {
         binding.tvTitle.text = text
     }

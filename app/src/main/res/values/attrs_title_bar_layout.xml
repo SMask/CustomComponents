@@ -16,6 +16,11 @@
         <!-- E 返回图标 -->
 
         <!-- S 标题 -->
+        <attr name="titleVisibility">
+            <enum name="visible" value="0x00000000" />
+            <enum name="invisible" value="0x00000004" />
+            <enum name="gone" value="0x00000008" />
+        </attr>
         <attr name="titleText" format="string|reference" />
         <attr name="titleTextColor" format="color|reference" />
         <!-- E 标题 -->
