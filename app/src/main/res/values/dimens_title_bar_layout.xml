@@ -2,6 +2,8 @@
 <resources>
 
     <dimen name="title_bar_height">44dp</dimen>
+    <dimen name="title_bar_width_icon">52dp</dimen>
+    <dimen name="title_bar_padding_horizontal_icon">16dp</dimen>
     <dimen name="title_bar_text_size_title">16dp</dimen>
     <dimen name="title_bar_text_size_action">16dp</dimen>
 

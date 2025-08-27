@@ -9,10 +9,10 @@
 
     <!-- 标题栏 Icon -->
     <style name="TitleBar_Icon">
-        <item name="android:layout_width">52dp</item>
+        <item name="android:layout_width">@dimen/title_bar_width_icon</item>
         <item name="android:layout_height">@dimen/title_bar_height</item>
-        <item name="android:paddingStart">16dp</item>
-        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingStart">@dimen/title_bar_padding_horizontal_icon</item>
+        <item name="android:paddingEnd">@dimen/title_bar_padding_horizontal_icon</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
 
@@ -30,5 +30,5 @@
         <item name="android:textSize">@dimen/title_bar_text_size_title</item>
         <item name="android:textStyle">bold</item>
     </style>
-    
+
 </resources>
