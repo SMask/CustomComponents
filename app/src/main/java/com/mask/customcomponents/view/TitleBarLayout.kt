@@ -33,7 +33,7 @@ class TitleBarLayout @JvmOverloads constructor(
 
     private val RES_NULL = -1
 
-    private val binding by lazy {
+    private val mBinding by lazy {
         LayoutTitleBarLayoutBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
@@ -59,7 +59,7 @@ class TitleBarLayout @JvmOverloads constructor(
                 // S 返回图标
                 val backVisibility =
                     typedArray.getInt(R.styleable.TitleBarLayout_backVisibility, View.VISIBLE)
-                binding.imgBack.visibility = backVisibility
+                mBinding.imgBack.visibility = backVisibility
 
                 val backRes = typedArray.getResourceId(R.styleable.TitleBarLayout_backRes, RES_NULL)
                 if (backRes != RES_NULL) {
@@ -76,7 +76,7 @@ class TitleBarLayout @JvmOverloads constructor(
                 // S 标题
                 val titleVisibility =
                     typedArray.getInt(R.styleable.TitleBarLayout_titleVisibility, View.VISIBLE)
-                binding.tvTitle.visibility = titleVisibility
+                mBinding.tvTitle.visibility = titleVisibility
 
                 val titleText = typedArray.getText(R.styleable.TitleBarLayout_titleText)
                 setTitleText(
@@ -97,7 +97,7 @@ class TitleBarLayout @JvmOverloads constructor(
                 // S 操作按钮
                 val actionBtnVisibility =
                     typedArray.getInt(R.styleable.TitleBarLayout_actionBtnVisibility, View.GONE)
-                binding.tvAction.visibility = actionBtnVisibility
+                mBinding.tvAction.visibility = actionBtnVisibility
 
                 val actionBtnText = typedArray.getText(R.styleable.TitleBarLayout_actionBtnText)
                 setActionBtnText(actionBtnText)
@@ -112,7 +112,7 @@ class TitleBarLayout @JvmOverloads constructor(
                 // S 操作图标
                 val actionIconVisibility =
                     typedArray.getInt(R.styleable.TitleBarLayout_actionIconVisibility, View.GONE)
-                binding.imgAction.visibility = actionIconVisibility
+                mBinding.imgAction.visibility = actionIconVisibility
 
                 val actionIconRes =
                     typedArray.getResourceId(R.styleable.TitleBarLayout_actionIconRes, RES_NULL)
@@ -159,11 +159,11 @@ class TitleBarLayout @JvmOverloads constructor(
 
     /**** S 返回图标 ****/
     fun setBackVisible(isVisible: Boolean) {
-        binding.imgBack.isVisible = isVisible
+        mBinding.imgBack.isVisible = isVisible
     }
 
     fun setBackImageRes(@DrawableRes resId: Int) {
-        binding.imgBack.setImageResource(resId)
+        mBinding.imgBack.setImageResource(resId)
     }
 
     fun setBackTint(@ColorInt color: Int) {
@@ -171,73 +171,73 @@ class TitleBarLayout @JvmOverloads constructor(
     }
 
     fun setBackTint(tint: ColorStateList?) {
-        binding.imgBack.setImageTintList(tint)
+        mBinding.imgBack.setImageTintList(tint)
     }
 
     fun setBackOnClickListener(listener: OnClickListener?) {
-        binding.imgBack.setOnClickListener(listener)
+        mBinding.imgBack.setOnClickListener(listener)
     }
     /**** E 返回图标 ****/
 
     /**** S 标题 ****/
     fun setTitleVisible(isVisible: Boolean) {
-        binding.tvTitle.isVisible = isVisible
+        mBinding.tvTitle.isVisible = isVisible
     }
 
     fun setTitleText(text: CharSequence?) {
-        binding.tvTitle.text = text
+        mBinding.tvTitle.text = text
     }
 
     fun setTitleText(@StringRes resId: Int) {
-        binding.tvTitle.setText(resId)
+        mBinding.tvTitle.setText(resId)
     }
 
     fun setTitleTextColor(@ColorInt color: Int) {
-        binding.tvTitle.setTextColor(color)
+        mBinding.tvTitle.setTextColor(color)
     }
 
     fun setTitleTextColor(color: ColorStateList) {
-        binding.tvTitle.setTextColor(color)
+        mBinding.tvTitle.setTextColor(color)
     }
     /****  E 标题 ****/
 
     /**** S 操作按钮 ****/
     fun setActionBtnVisible(isVisible: Boolean) {
-        binding.tvAction.isVisible = isVisible
+        mBinding.tvAction.isVisible = isVisible
     }
 
     fun setActionBtnEnabled(isEnabled: Boolean) {
-        binding.tvAction.isEnabled = isEnabled
+        mBinding.tvAction.isEnabled = isEnabled
     }
 
     fun setActionBtnText(text: CharSequence?) {
-        binding.tvAction.text = text
+        mBinding.tvAction.text = text
     }
 
     fun setActionBtnText(@StringRes resId: Int) {
-        binding.tvAction.setText(resId)
+        mBinding.tvAction.setText(resId)
     }
 
     fun setActionBtnTextColor(@ColorInt color: Int) {
-        binding.tvAction.setTextColor(color)
+        mBinding.tvAction.setTextColor(color)
     }
 
     fun setActionBtnTextColor(color: ColorStateList) {
-        binding.tvAction.setTextColor(color)
+        mBinding.tvAction.setTextColor(color)
     }
 
     fun setActionBtnOnClickListener(listener: OnClickListener?) {
-        binding.tvAction.setOnClickListener(listener)
+        mBinding.tvAction.setOnClickListener(listener)
     }
     /**** E 操作按钮 ****/
 
     /**** S 操作图标 ****/
     fun setActionIconVisible(isVisible: Boolean) {
-        binding.imgAction.isVisible = isVisible
+        mBinding.imgAction.isVisible = isVisible
     }
 
     fun setActionIconImageRes(@DrawableRes resId: Int) {
-        binding.imgAction.setImageResource(resId)
+        mBinding.imgAction.setImageResource(resId)
     }
 
     fun setActionIconTint(@ColorInt color: Int) {
@@ -245,11 +245,11 @@ class TitleBarLayout @JvmOverloads constructor(
     }
 
     fun setActionIconTint(tint: ColorStateList?) {
-        binding.imgAction.setImageTintList(tint)
+        mBinding.imgAction.setImageTintList(tint)
     }
 
     fun setActionIconOnClickListener(listener: OnClickListener?) {
-        binding.imgAction.setOnClickListener(listener)
+        mBinding.imgAction.setOnClickListener(listener)
     }
     /**** E 操作图标 ****/
 
