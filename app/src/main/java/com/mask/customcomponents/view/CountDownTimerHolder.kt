@@ -25,7 +25,7 @@ class CountDownTimerHolder {
     private var isRunning = false
 
     private var mStartTime: Long? = null // 开始时间
-    private var mRemainingTimeForStart: Long? = null // 剩余时间（相对于开始时间）
+    private var mRemainingTimeForStart: Long? = null // 剩余时间（相对于开始时间，倒计时总时长）
     private var mCountDownInterval: Long = MILLIS_SECOND // 回调间隔时间
 
     private var mListener: CountDownTimerListener? = null
@@ -39,7 +39,7 @@ class CountDownTimerHolder {
         isRunning = true
         val mStartTime = mStartTime ?: return
         val mRemainingTimeForStart = mRemainingTimeForStart ?: return
-        val millisInFuture = getRemainingTimeForFinish(mStartTime, mRemainingTimeForStart)
+        val millisInFuture = getRemainingTime(mStartTime, mRemainingTimeForStart)
         dispatchAction(Action.START, mStartTime, mRemainingTimeForStart)
         mCountDownTimer = object : CountDownTimer(millisInFuture, mCountDownInterval) {
             override fun onTick(millisUntilFinished: Long) {
@@ -67,7 +67,7 @@ class CountDownTimerHolder {
         mCountDownTimer = null
     }
 
-    private fun getRemainingTimeForFinish(startTime: Long, remainingTimeForStart: Long): Long {
+    private fun getRemainingTime(startTime: Long, remainingTimeForStart: Long): Long {
         return (startTime + remainingTimeForStart - SystemClock.elapsedRealtime()).coerceAtLeast(0L)
     }
 
@@ -81,10 +81,12 @@ class CountDownTimerHolder {
         if (startTime == null || remainingTimeForStart == null) {
             return
         }
-        val remainingTimeForFinish =
-            millisUntilFinished ?: getRemainingTimeForFinish(startTime, remainingTimeForStart)
-        val countDownTimerInfo =
-            createCountDownTimerInfo(startTime, remainingTimeForStart, remainingTimeForFinish)
+        val remainingTime = millisUntilFinished ?: getRemainingTime(
+            startTime, remainingTimeForStart
+        )
+        val countDownTimerInfo = createCountDownTimerInfo(
+            startTime, remainingTimeForStart, remainingTime
+        )
         when (action) {
             Action.START -> {
                 mListener.onStart(countDownTimerInfo)
@@ -107,16 +109,16 @@ class CountDownTimerHolder {
     private fun createCountDownTimerInfo(
         startTime: Long,
         remainingTimeForStart: Long,
-        remainingTimeForFinish: Long
+        remainingTime: Long
     ): CountDownTimerInfo {
-        val remainingDays = remainingTimeForFinish / MILLIS_DAY
-        val remainingHours = remainingTimeForFinish % MILLIS_DAY / MILLIS_HOUR
-        val remainingMinutes = remainingTimeForFinish % MILLIS_HOUR / MILLIS_MINUTE
-        val remainingSeconds = remainingTimeForFinish % MILLIS_MINUTE / MILLIS_SECOND
+        val remainingDays = remainingTime / MILLIS_DAY
+        val remainingHours = remainingTime % MILLIS_DAY / MILLIS_HOUR
+        val remainingMinutes = remainingTime % MILLIS_HOUR / MILLIS_MINUTE
+        val remainingSeconds = remainingTime % MILLIS_MINUTE / MILLIS_SECOND
         return CountDownTimerInfo(
             startTime,
             remainingTimeForStart,
-            remainingTimeForFinish,
+            remainingTime,
             remainingDays,
             remainingHours,
             remainingMinutes,
@@ -170,8 +172,8 @@ class CountDownTimerHolder {
 
 data class CountDownTimerInfo(
     val startTime: Long, // 开始时间
-    val remainingTimeForStart: Long, // 剩余时间（相对于开始时间）
-    val remainingTimeForFinish: Long, // 剩余时间（相对于结束时间）
+    val remainingTimeForStart: Long, // 剩余时间（相对于开始时间，倒计时总时长）
+    val remainingTime: Long, // 剩余时间（相对于结束时间，倒计时剩余时长）
     val remainingDays: Long, // 剩余天数
     val remainingHours: Long, // 剩余小时数
     val remainingMinutes: Long, // 剩余分钟数

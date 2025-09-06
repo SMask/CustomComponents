@@ -48,7 +48,7 @@ abstract class BaseVisibleCallbackFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        handlerOnResume()
+        handleOnResume()
     }
 
     override fun onPause() {
@@ -90,7 +90,7 @@ abstract class BaseVisibleCallbackFragment : Fragment() {
         onGlobalLayout()
     }
 
-    private fun handlerOnResume() {
+    private fun handleOnResume() {
         if (isShown) {
             dispatchOnVisibleToUser(true)
         }
