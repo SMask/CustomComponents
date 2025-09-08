@@ -44,19 +44,19 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
     private boolean includeEdge;// 是否包含边缘(垂直布局 - 是否有上下间距，水平布局 - 是否有左右间距)
 
-    public static DividerItemDecoration getInstance() {
-        return getInstance(dividerSizeDefault);
+    public static DividerItemDecoration newInstance() {
+        return newInstance(dividerSizeDefault);
     }
 
-    public static DividerItemDecoration getInstance(int size) {
-        return getInstance(size, dividerDefault);
+    public static DividerItemDecoration newInstance(int size) {
+        return newInstance(size, dividerDefault);
     }
 
-    public static DividerItemDecoration getInstance(int size, @ColorInt int color) {
-        return getInstance(size, new ColorDrawable(color));
+    public static DividerItemDecoration newInstance(int size, @ColorInt int color) {
+        return newInstance(size, new ColorDrawable(color));
     }
 
-    public static DividerItemDecoration getInstance(int size, Drawable divider) {
+    public static DividerItemDecoration newInstance(int size, Drawable divider) {
         final DividerItemDecoration decoration = new DividerItemDecoration();
         decoration.setDivider(divider);
         decoration.setDividerWidth(size);

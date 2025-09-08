@@ -56,7 +56,7 @@ class CountDownTimerActivity : AppCompatActivity() {
     private fun initView() {
         mBinding.rvContent.layoutManager = LinearLayoutManager(this)
         mBinding.rvContent.addItemDecoration(
-            DividerItemDecoration.getInstance(SizeUtils.dpToPx(8))
+            DividerItemDecoration.newInstance(SizeUtils.dpToPx(8))
         )
         mBinding.rvContent.adapter = mAdapter
     }

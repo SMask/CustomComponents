@@ -98,7 +98,7 @@ class AlphabetIndexBarActivity : AppCompatActivity() {
 
     private fun initView() {
         binding.rvUser.layoutManager = layoutManager
-        binding.rvUser.addItemDecoration(DividerItemDecoration.getInstance(SizeUtils.dpToPx(0.5f).toInt(), Color.LTGRAY))
+        binding.rvUser.addItemDecoration(DividerItemDecoration.newInstance(SizeUtils.dpToPx(0.5f).toInt(), Color.LTGRAY))
         binding.rvUser.addItemDecoration(hoverDecoration)
         binding.rvUser.addItemDecoration(totalFooterDecoration)
         binding.rvUser.adapter = userAdapter
