@@ -46,6 +46,10 @@ class NumberTextAnimator {
         }
     }
 
+    private val numberFormat by lazy {
+        NumberFormat.getNumberInstance(Locale.US)
+    }
+
     private var startValue: Long? = null
 
     private fun startAnim(tvContent: TextView, targetValue: Long) {
@@ -80,7 +84,7 @@ class NumberTextAnimator {
     }
 
     private fun setText(tvContent: TextView, currentValue: Long) {
-        tvContent.text = NumberFormat.getNumberInstance(Locale.US).format(currentValue)
+        tvContent.text = numberFormat.format(currentValue)
     }
 
     /************************************************************ S 外部调用 ************************************************************/

@@ -50,15 +50,17 @@ class TitleBarLayout @JvmOverloads constructor(
         try {
             val typedArray = context.obtainStyledAttributes(attrs, R.styleable.TitleBarLayout)
             typedArray.use {
-                val isFitStatusBar =
-                    typedArray.getBoolean(R.styleable.TitleBarLayout_fitStatusBar, true)
+                val isFitStatusBar = typedArray.getBoolean(
+                    R.styleable.TitleBarLayout_fitStatusBar, true
+                )
                 if (isFitStatusBar && !isInEditMode) {
                     StatusBarHelper.setPaddingTop(this)
                 }
 
                 // S 返回图标
-                val backVisibility =
-                    typedArray.getInt(R.styleable.TitleBarLayout_backVisibility, View.VISIBLE)
+                val backVisibility = typedArray.getInt(
+                    R.styleable.TitleBarLayout_backVisibility, View.VISIBLE
+                )
                 mBinding.imgBack.visibility = backVisibility
 
                 val backRes = typedArray.getResourceId(R.styleable.TitleBarLayout_backRes, RES_NULL)
@@ -66,16 +68,18 @@ class TitleBarLayout @JvmOverloads constructor(
                     setBackImageRes(backRes)
                 }
 
-                val backTint =
-                    typedArray.getColorStateList(R.styleable.TitleBarLayout_backTint)
+                val backTint = typedArray.getColorStateList(
+                    R.styleable.TitleBarLayout_backTint
+                )
                 if (backTint != null) {
                     setBackTint(backTint)
                 }
                 // E 返回图标
 
                 // S 标题
-                val titleVisibility =
-                    typedArray.getInt(R.styleable.TitleBarLayout_titleVisibility, View.VISIBLE)
+                val titleVisibility = typedArray.getInt(
+                    R.styleable.TitleBarLayout_titleVisibility, View.VISIBLE
+                )
                 mBinding.tvTitle.visibility = titleVisibility
 
                 val titleText = typedArray.getText(R.styleable.TitleBarLayout_titleText)
@@ -87,41 +91,47 @@ class TitleBarLayout @JvmOverloads constructor(
                     }
                 )
 
-                val titleTextColor =
-                    typedArray.getColorStateList(R.styleable.TitleBarLayout_titleTextColor)
+                val titleTextColor = typedArray.getColorStateList(
+                    R.styleable.TitleBarLayout_titleTextColor
+                )
                 if (titleTextColor != null) {
                     setTitleTextColor(titleTextColor)
                 }
                 // E 标题
 
                 // S 操作按钮
-                val actionBtnVisibility =
-                    typedArray.getInt(R.styleable.TitleBarLayout_actionBtnVisibility, View.GONE)
+                val actionBtnVisibility = typedArray.getInt(
+                    R.styleable.TitleBarLayout_actionBtnVisibility, View.GONE
+                )
                 mBinding.tvAction.visibility = actionBtnVisibility
 
                 val actionBtnText = typedArray.getText(R.styleable.TitleBarLayout_actionBtnText)
                 setActionBtnText(actionBtnText)
 
-                val actionBtnTextColor =
-                    typedArray.getColorStateList(R.styleable.TitleBarLayout_actionBtnTextColor)
+                val actionBtnTextColor = typedArray.getColorStateList(
+                    R.styleable.TitleBarLayout_actionBtnTextColor
+                )
                 if (actionBtnTextColor != null) {
                     setActionBtnTextColor(actionBtnTextColor)
                 }
                 // E 操作按钮
 
                 // S 操作图标
-                val actionIconVisibility =
-                    typedArray.getInt(R.styleable.TitleBarLayout_actionIconVisibility, View.GONE)
+                val actionIconVisibility = typedArray.getInt(
+                    R.styleable.TitleBarLayout_actionIconVisibility, View.GONE
+                )
                 mBinding.imgAction.visibility = actionIconVisibility
 
-                val actionIconRes =
-                    typedArray.getResourceId(R.styleable.TitleBarLayout_actionIconRes, RES_NULL)
+                val actionIconRes = typedArray.getResourceId(
+                    R.styleable.TitleBarLayout_actionIconRes, RES_NULL
+                )
                 if (actionIconRes != RES_NULL) {
                     setActionIconImageRes(actionIconRes)
                 }
 
-                val actionIconTint =
-                    typedArray.getColorStateList(R.styleable.TitleBarLayout_actionIconTint)
+                val actionIconTint = typedArray.getColorStateList(
+                    R.styleable.TitleBarLayout_actionIconTint
+                )
                 if (actionIconTint != null) {
                     setActionIconTint(actionIconTint)
                 }
@@ -142,8 +152,9 @@ class TitleBarLayout @JvmOverloads constructor(
         try {
             val componentName = ActivityUtils.getActivity(context)?.componentName ?: return ""
             val packageManager = context.packageManager ?: return ""
-            val activityInfo =
-                packageManager.getActivityInfo(componentName, PackageManager.GET_META_DATA)
+            val activityInfo = packageManager.getActivityInfo(
+                componentName, PackageManager.GET_META_DATA
+            )
             return activityInfo.loadLabel(packageManager).toString()
         } catch (e: Exception) {
             e.printStackTrace()
