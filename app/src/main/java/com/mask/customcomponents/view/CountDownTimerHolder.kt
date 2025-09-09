@@ -36,10 +36,10 @@ class CountDownTimerHolder {
         if (isRunning) {
             return
         }
-        isRunning = true
         val mStartTime = mStartTime ?: return
         val mRemainingTimeForStart = mRemainingTimeForStart ?: return
         val millisInFuture = getRemainingTime(mStartTime, mRemainingTimeForStart)
+        isRunning = true
         dispatchAction(Action.START, mStartTime, mRemainingTimeForStart)
         mCountDownTimer = object : CountDownTimer(millisInFuture, mCountDownInterval) {
             override fun onTick(millisUntilFinished: Long) {

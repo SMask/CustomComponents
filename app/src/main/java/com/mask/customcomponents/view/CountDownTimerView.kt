@@ -92,7 +92,9 @@ class CountDownTimerView @JvmOverloads constructor(
     private fun setTimeText(info: CountDownTimerInfo) {
         val timeText = mProvider.formatTime(info)
         val timePlaceholder = mProvider.formatTimePlaceholder(info)
-        text = timeText
+        if (text != timeText) {
+            text = timeText
+        }
         if (hint != timePlaceholder) {
             hint = timePlaceholder
         }
