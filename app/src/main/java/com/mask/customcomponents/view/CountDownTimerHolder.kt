@@ -28,9 +28,9 @@ class CountDownTimerHolder {
     private var mRemainingTimeForStart: Long? = null // 剩余时间（相对于开始时间，倒计时总时长）
     private var mCountDownInterval: Long = MILLIS_SECOND // 回调间隔时间
 
-    private var mListener: CountDownTimerListener? = null
-
     private var mCountDownTimer: CountDownTimer? = null
+
+    private var mListener: CountDownTimerListener? = null
 
     private fun startInternal() {
         if (isRunning) {
@@ -47,10 +47,7 @@ class CountDownTimerHolder {
             }
 
             override fun onFinish() {
-                dispatchAction(Action.FINISH, mStartTime, mRemainingTimeForStart)
-                this@CountDownTimerHolder.mCountDownTimer = null
-                this@CountDownTimerHolder.mStartTime = null
-                this@CountDownTimerHolder.mRemainingTimeForStart = null
+                finishInternal()
             }
         }.start()
     }
@@ -65,6 +62,14 @@ class CountDownTimerHolder {
             dispatchAction(Action.CANCEL, mStartTime, mRemainingTimeForStart)
         }
         mCountDownTimer = null
+    }
+
+    private fun finishInternal() {
+        dispatchAction(Action.FINISH, mStartTime, mRemainingTimeForStart)
+        isRunning = false
+        mCountDownTimer = null
+        mStartTime = null
+        mRemainingTimeForStart = null
     }
 
     private fun getRemainingTime(startTime: Long, remainingTimeForStart: Long): Long {

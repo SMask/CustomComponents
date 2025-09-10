@@ -124,7 +124,7 @@ class CountDownTimerView @JvmOverloads constructor(
             startTime,
             remainingTimeForStart,
             countDownInterval,
-            isStart && isShown
+            isStart && isVisibleToUser
         )
     }
 
