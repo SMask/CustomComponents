@@ -24,6 +24,10 @@ abstract class BaseVisibleCallbackFragment : Fragment() {
     var isVisibleToUser = false
         private set
 
+    // 是否第一次对用户可见
+    var isFirstOnVisibleToUser = true
+        private set
+
     // Fragment 是否显示
     private val isShown
         get() = run {
@@ -178,6 +182,9 @@ abstract class BaseVisibleCallbackFragment : Fragment() {
         }
         this.isVisibleToUser = isVisibleToUser
         onVisibleToUser(isVisibleToUser)
+        if (isVisibleToUser) {
+            isFirstOnVisibleToUser = false
+        }
         dispatchChildOnVisibleToUser(isVisibleToUser)
     }
 
