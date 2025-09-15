@@ -2,10 +2,7 @@ package com.mask.customcomponents.utils
 
 import android.os.Handler
 import android.os.Looper
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
-import android.widget.TextView
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -110,79 +107,4 @@ object DebounceThrottleUtils {
         debounceMap.clear()
         throttleMap.clear()
     }
-}
-
-fun View.setOnDebounceClickListener(
-    delayMillis: Long = DebounceThrottleUtils.DEFAULT_TIME_DELAY,
-    listener: View.OnClickListener?
-) {
-    setOnDebounceClickListener(listener, delayMillis)
-}
-
-fun View.setOnDebounceClickListener(
-    listener: View.OnClickListener?,
-    delayMillis: Long = DebounceThrottleUtils.DEFAULT_TIME_DELAY
-) {
-    if (listener == null) {
-        setOnClickListener(listener)
-        return
-    }
-    setOnClickListener { view ->
-        DebounceThrottleUtils.debounce(view, delayMillis) {
-            listener.onClick(view)
-        }
-    }
-}
-
-fun View.setOnThrottleClickListener(
-    intervalMillis: Long = DebounceThrottleUtils.DEFAULT_TIME_INTERVAL,
-    listener: View.OnClickListener?
-) {
-    setOnThrottleClickListener(listener, intervalMillis)
-}
-
-fun View.setOnThrottleClickListener(
-    listener: View.OnClickListener?,
-    intervalMillis: Long = DebounceThrottleUtils.DEFAULT_TIME_INTERVAL
-) {
-    if (listener == null) {
-        setOnClickListener(listener)
-        return
-    }
-    setOnClickListener { view ->
-        DebounceThrottleUtils.throttle(view, intervalMillis) {
-            listener.onClick(view)
-        }
-    }
-}
-
-fun TextView.addDebounceTextChangedListener(
-    textWatcher: TextWatcher?,
-    delayMillis: Long = DebounceThrottleUtils.DEFAULT_TIME_DELAY
-): TextWatcher? {
-    if (textWatcher == null) {
-        return null
-    }
-    val view = this
-    val textWatcherInternal = object : TextWatcher {
-        override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) {
-            DebounceThrottleUtils.debounce(view, delayMillis) {
-                textWatcher.beforeTextChanged(text, start, count, after)
-            }
-        }
-
-        override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-            DebounceThrottleUtils.debounce(view, delayMillis) {
-                textWatcher.onTextChanged(text, start, before, count)
-            }
-        }
-
-        override fun afterTextChanged(text: Editable?) {
-            DebounceThrottleUtils.debounce(view, delayMillis) {
-                textWatcher.afterTextChanged(text)
-            }
-        }
-    }
-    addTextChangedListener(textWatcherInternal)
-    return textWatcherInternal
 }
