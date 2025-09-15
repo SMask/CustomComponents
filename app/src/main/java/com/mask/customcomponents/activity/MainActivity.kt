@@ -110,6 +110,10 @@ class MainActivity : AppCompatActivity() {
             R.id.btn_count_down_timer -> {
                 CountDownTimerActivity.startActivity(this)
             }
+
+            R.id.btn_debounce_throttle -> {
+                DebounceThrottleActivity.startActivity(this)
+            }
         }
     }
 }

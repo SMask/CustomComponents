@@ -20,6 +20,7 @@
     <string name="title_activity_title_bar_layout">标题栏</string>
     <string name="title_activity_fragment_visibility">Fragment 对用户可见回调</string>
     <string name="title_activity_count_down_timer">倒计时（天时分秒）</string>
+    <string name="title_activity_debounce_throttle">防抖、节流</string>
 
     <string name="hint_indicator_view_limit">每次移动的个数</string>
     <string name="hint_progress_bar_limit">每次增减的进度</string>

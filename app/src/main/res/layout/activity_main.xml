@@ -203,6 +203,16 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_fragment_visibility" />
 
+        <Button
+            android:id="@+id/btn_debounce_throttle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"
+            android:text="@string/title_activity_debounce_throttle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_count_down_timer" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
