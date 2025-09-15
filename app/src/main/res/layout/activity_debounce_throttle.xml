@@ -12,4 +12,70 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/layout_debounce"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_title">
+
+        <Button
+            android:id="@+id/btn_debounce_500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="防抖 500ms" />
+
+        <Button
+            android:id="@+id/btn_debounce_1000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="防抖 1000ms" />
+
+        <Button
+            android:id="@+id/btn_debounce_2000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="防抖 2000ms" />
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/layout_throttle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_debounce">
+
+        <Button
+            android:id="@+id/btn_throttle_500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="节流 500ms" />
+
+        <Button
+            android:id="@+id/btn_throttle_1000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="节流 1000ms" />
+
+        <Button
+            android:id="@+id/btn_throttle_2000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="节流 2000ms" />
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <EditText
+        android:id="@+id/edt_debounce_500"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="防抖 500ms"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_throttle" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

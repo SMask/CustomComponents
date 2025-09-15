@@ -19,15 +19,25 @@ object CommonUtils {
     }
 
     /**
+     * 获取调用者的方法
+     * level 为 0 时，获取当前调用者的方法
+     * level 为 1 时，获取调用当前方法的调用者的方法
+     * 以此类推
+     */
+    fun getCallerMethod(level: Int = 0): StackTraceElement? {
+        val stackTrace = Thread.currentThread().stackTrace ?: return null
+        val index = 3 + level
+        return stackTrace.getOrNull(index)
+    }
+
+    /**
      * 获取调用者的方法名
      * level 为 0 时，获取当前调用者的方法名
      * level 为 1 时，获取调用当前方法的调用者的方法名
      * 以此类推
      */
     fun getCallerMethodName(level: Int = 0): String {
-        val stackTrace = Thread.currentThread().stackTrace ?: return "UNKNOWN"
-        val index = 3 + level
-        val caller = stackTrace.getOrNull(index) ?: return "UNKNOWN"
+        val caller = getCallerMethod(level) ?: return "UNKNOWN"
         return caller.methodName
     }
 }

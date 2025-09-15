@@ -1,11 +1,8 @@
 package com.mask.customcomponents.utils;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.mask.customcomponents.BuildConfig;
-
-import java.util.Locale;
 
 /**
  * Log工具，类似android.util.Log。
@@ -25,13 +22,15 @@ public class LogUtil {
     }
 
     private static String generateTag() {
-        StackTraceElement caller = new Throwable().getStackTrace()[2];
-        String tag = "%s.%s(L:%d)";
-        String callerClazzName = caller.getClassName();
-        callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1);
-        tag = String.format(Locale.getDefault(), tag, callerClazzName, caller.getMethodName(), caller.getLineNumber());
-        tag = TextUtils.isEmpty(customTagPrefix) ? tag : customTagPrefix + ":" + tag;
-        return tag;
+        // 部分 Lambda 表达式内打印日志时，生成方法行数相关信息时，无法在 AndroidStudio Logcat 中显示。
+//        StackTraceElement caller = new Throwable().getStackTrace()[2];
+//        String tag = "%s.%s(L:%d)";
+//        String callerClazzName = caller.getClassName();
+//        callerClazzName = callerClazzName.substring(callerClazzName.lastIndexOf(".") + 1);
+//        tag = String.format(Locale.getDefault(), tag, callerClazzName, caller.getMethodName(), caller.getLineNumber());
+//        tag = TextUtils.isEmpty(customTagPrefix) ? tag : customTagPrefix + ":" + tag;
+//        return tag;
+        return customTagPrefix;
     }
 
     public static void d(String content) {
