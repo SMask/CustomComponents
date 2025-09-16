@@ -23,21 +23,6 @@ private class OnDebounceThrottleClickListener(
     private val listener: View.OnClickListener
 ) : View.OnClickListener {
 
-    companion object {
-        fun setOnDebounceThrottleClickListener(
-            type: DebounceThrottleType,
-            view: View,
-            timeMillis: Long,
-            listener: View.OnClickListener?
-        ) {
-            if (listener == null) {
-                view.setOnClickListener(listener)
-                return
-            }
-            view.setOnClickListener(OnDebounceThrottleClickListener(type, timeMillis, listener))
-        }
-    }
-
     override fun onClick(view: View?) {
         if (view == null) {
             return
@@ -66,6 +51,18 @@ private class OnDebounceThrottleClickListener(
     }
 }
 
+private fun View.setOnDebounceThrottleClickListener(
+    type: DebounceThrottleType,
+    timeMillis: Long,
+    listener: View.OnClickListener?
+) {
+    if (listener == null) {
+        setOnClickListener(listener)
+        return
+    }
+    setOnClickListener(OnDebounceThrottleClickListener(type, timeMillis, listener))
+}
+
 fun View.setOnDebounceClickListener(
     delayMillis: Long = DebounceThrottleUtils.DEFAULT_TIME_DELAY,
     listener: View.OnClickListener?
@@ -77,12 +74,7 @@ fun View.setOnDebounceClickListener(
     listener: View.OnClickListener?,
     delayMillis: Long = DebounceThrottleUtils.DEFAULT_TIME_DELAY
 ) {
-    OnDebounceThrottleClickListener.setOnDebounceThrottleClickListener(
-        DebounceThrottleType.DEBOUNCE,
-        this,
-        delayMillis,
-        listener
-    )
+    setOnDebounceThrottleClickListener(DebounceThrottleType.DEBOUNCE, delayMillis, listener)
 }
 
 fun View.setOnThrottleClickListener(
@@ -96,12 +88,7 @@ fun View.setOnThrottleClickListener(
     listener: View.OnClickListener?,
     intervalMillis: Long = DebounceThrottleUtils.DEFAULT_TIME_INTERVAL
 ) {
-    OnDebounceThrottleClickListener.setOnDebounceThrottleClickListener(
-        DebounceThrottleType.THROTTLE,
-        this,
-        intervalMillis,
-        listener
-    )
+    setOnDebounceThrottleClickListener(DebounceThrottleType.THROTTLE, intervalMillis, listener)
 }
 
 /************************************************************ E View.OnClickListener ************************************************************/
