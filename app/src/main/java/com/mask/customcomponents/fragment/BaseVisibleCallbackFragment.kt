@@ -31,7 +31,10 @@ abstract class BaseVisibleCallbackFragment : Fragment() {
     // Fragment 是否显示
     private val isShown
         get() = run {
-            isVisible && !isHiddenIncludeParent() && isUserVisibleHintIncludeParent() && (view?.isShown == true) && isResumed
+            isResumed
+                    && isVisible
+                    && !isHiddenIncludeParent()
+                    && isUserVisibleHintIncludeParent()
         }
 
     private var viewTreeObserver: ViewTreeObserver? = null

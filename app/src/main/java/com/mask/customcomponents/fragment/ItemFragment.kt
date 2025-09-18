@@ -1,14 +1,12 @@
 package com.mask.customcomponents.fragment
 
 import android.os.Bundle
-import android.os.SystemClock
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.mask.customcomponents.config.Global
 import com.mask.customcomponents.databinding.FragmentItemBinding
 import com.mask.customcomponents.utils.LogUtil
-import com.mask.customcomponents.view.CountDownTimerHolder
 import com.mask.customcomponents.view.CountDownTimerInfo
 import com.mask.customcomponents.view.CountDownTimerListener
 
@@ -73,10 +71,10 @@ class ItemFragment : LogFragment() {
         binding.tvContent.text = name
         binding.tvContent.setTag(Global.Key.KEY_NAME.hashCode(), name)
 
-        binding.cdtvTime.setTime(
-            SystemClock.elapsedRealtime(),
-            CountDownTimerHolder.MILLIS_DAY * 1 + CountDownTimerHolder.MILLIS_SECOND * 8
-        )
+//        binding.cdtvTime.setTime(
+//            SystemClock.elapsedRealtime(),
+//            CountDownTimerHolder.MILLIS_DAY * 1 + CountDownTimerHolder.MILLIS_SECOND * 8
+//        )
     }
 
 }
