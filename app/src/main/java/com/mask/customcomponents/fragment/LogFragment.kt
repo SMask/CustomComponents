@@ -67,10 +67,25 @@ abstract class LogFragment : BaseFragment() {
 
         val content = StringBuilder()
         content.append("onVisibleToUser caller").append(": ")
-        val callerMethodName = CommonUtils.getCallerMethodName(3)
-        content.append(callerMethodName)
-        if (callerMethodName == "dispatchChildOnVisibleToUser") {
-            content.append(" - ").append(CommonUtils.getCallerMethodName(5))
+        var level = 2
+        while (true) {
+            when (val callerMethodName = CommonUtils.getCallerMethodName(level)) {
+                "dispatchOnVisibleToUser" -> {
+                    level++
+                }
+
+                "dispatchChildOnVisibleToUser" -> {
+                    content.append(callerMethodName)
+                    content.append(" - ")
+                    content.append(CommonUtils.getCallerMethodName(level + 2))
+                    break
+                }
+
+                else -> {
+                    content.append(callerMethodName)
+                    break
+                }
+            }
         }
         LogUtil.i(content.toString())
 

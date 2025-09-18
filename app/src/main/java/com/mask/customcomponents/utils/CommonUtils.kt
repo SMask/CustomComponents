@@ -37,7 +37,7 @@ object CommonUtils {
      * 以此类推
      */
     fun getCallerMethodName(level: Int = 0): String {
-        val caller = getCallerMethod(level) ?: return "UNKNOWN"
+        val caller = getCallerMethod(level + 1) ?: return "UNKNOWN"
         return caller.methodName
     }
 }
