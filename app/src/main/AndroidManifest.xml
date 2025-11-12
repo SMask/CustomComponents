@@ -10,6 +10,12 @@
         android:resizeable="true"
         android:smallScreens="true" />
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+    <uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -19,6 +25,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|uiMode"
@@ -142,6 +149,22 @@
             android:label="@string/title_activity_app_widget"
             android:theme="@style/AppTheme_TranslucentStatus"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+
+        <receiver
+            android:name=".widget.provider.TimeAppWidgetProvider"
+            android:exported="true"
+            android:label="@string/app_widget_time_title">
+
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_provider_info_time" />
+
+        </receiver>
+
     </application>
 
 </manifest>

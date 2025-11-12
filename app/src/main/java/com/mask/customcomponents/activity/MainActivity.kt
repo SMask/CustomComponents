@@ -15,6 +15,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (!isTaskRoot) {
+            finish()
+            return
+        }
         setContentView(binding.root)
         initView()
         setListener()

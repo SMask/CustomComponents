@@ -54,4 +54,8 @@
     <dimen name="horizontal_space_smallest">3dp</dimen><!-- APP水平间距最小 -->
     <dimen name="vertical_space_smallest">@dimen/horizontal_space_smallest</dimen><!-- APP垂直间距最小 -->
 
+    <!-- AppWidget -->
+    <dimen name="app_widget_time_width">220dp</dimen>
+    <dimen name="app_widget_time_height">220dp</dimen>
+
 </resources>

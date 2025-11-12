@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/app_widget_time_description"
+    android:initialLayout="@layout/layout_app_widget_time"
+    android:minWidth="@dimen/app_widget_time_width"
+    android:minHeight="@dimen/app_widget_time_height"
+    android:previewImage="@drawable/icon_more_white"
+    android:updatePeriodMillis="10000" /><!-- updatePeriodMillis 系统限制最低 30 分钟 -->

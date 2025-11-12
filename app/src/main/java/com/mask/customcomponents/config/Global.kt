@@ -5,6 +5,10 @@ package com.mask.customcomponents.config
  */
 object Global {
 
+    object Tag {
+        const val APP_WIDGET = "AppWidget"
+    }
+
     object Key {
         const val KEY_NAME = "key_name"
         const val KEY_ADAPTER_TYPE = "key_adapter_type"
