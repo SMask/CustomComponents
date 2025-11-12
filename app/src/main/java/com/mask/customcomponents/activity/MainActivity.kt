@@ -114,6 +114,10 @@ class MainActivity : AppCompatActivity() {
             R.id.btn_debounce_throttle -> {
                 DebounceThrottleActivity.startActivity(this)
             }
+
+            R.id.btn_app_widget -> {
+                AppWidgetActivity.startActivity(this)
+            }
         }
     }
 }

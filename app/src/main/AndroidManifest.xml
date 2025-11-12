@@ -136,6 +136,12 @@
             android:label="@string/title_activity_debounce_throttle"
             android:theme="@style/AppTheme_TranslucentStatus"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
+            android:name=".activity.AppWidgetActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|uiMode"
+            android:label="@string/title_activity_app_widget"
+            android:theme="@style/AppTheme_TranslucentStatus"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
     </application>
 
 </manifest>
