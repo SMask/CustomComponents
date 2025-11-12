@@ -37,9 +37,13 @@ object AppWidgetHelper {
             return false
         }
 
+        val appWidgetManager = AppWidgetManager.getInstance(context)
+        if (!appWidgetManager.isRequestPinAppWidgetSupported) {
+            return false
+        }
+
         return try {
-            AppWidgetManager.getInstance(context)
-                .requestPinAppWidget(TimeAppWidgetProvider.componentName, null, null)
+            appWidgetManager.requestPinAppWidget(TimeAppWidgetProvider.componentName, null, null)
         } catch (e: Exception) {
             e.printStackTrace()
             false
