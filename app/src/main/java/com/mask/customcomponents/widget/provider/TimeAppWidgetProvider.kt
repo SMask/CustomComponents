@@ -11,6 +11,7 @@ import com.mask.customcomponents.config.Global
 import com.mask.customcomponents.utils.CommonUtils
 import com.mask.customcomponents.utils.LogUtil
 import com.mask.customcomponents.widget.AppWidgetHelper
+import com.mask.customcomponents.widget.worker.AppWidgetWorker
 
 /**
  * AppWidget 桌面小组件 Time
@@ -58,6 +59,10 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
             return
         }
         AppWidgetHelper.updateAppWidget(context, "Provider onUpdate")
+
+        AppWidgetWorker.enqueueRefreshWork(context)
+
+        AppWidgetWorker.enqueuePeriodicWork(context) // 为了防止周期任务没加上，这里再添加一次，底层逻辑不会重复添加任务。
     }
 
     override fun onAppWidgetOptionsChanged(
@@ -78,11 +83,19 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
     override fun onEnabled(context: Context?) {
         super.onEnabled(context)
         printLog(context)
+        if (context == null) {
+            return
+        }
+        AppWidgetWorker.enqueuePeriodicWork(context)
     }
 
     override fun onDisabled(context: Context?) {
         super.onDisabled(context)
         printLog(context)
+        if (context == null) {
+            return
+        }
+        AppWidgetWorker.cancelPeriodicWork(context)
     }
 
     override fun onRestored(context: Context?, oldWidgetIds: IntArray?, newWidgetIds: IntArray?) {
