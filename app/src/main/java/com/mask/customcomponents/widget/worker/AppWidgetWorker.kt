@@ -58,7 +58,7 @@ class AppWidgetWorker(
                 .setInputData(workDataOf(KEY_SOURCE_TAG to "$sourceTag PeriodicWork"))
                 .build()
             WorkManager.getInstance(context.applicationContext).enqueueUniquePeriodicWork(
-                WORK_NAME_UNIQUE, ExistingPeriodicWorkPolicy.KEEP, request
+                WORK_NAME_UNIQUE, ExistingPeriodicWorkPolicy.UPDATE, request
             )
         }
 
