@@ -11,6 +11,8 @@ import androidx.work.WorkManager
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
+import com.mask.customcomponents.config.Global
+import com.mask.customcomponents.utils.LogHelper
 import com.mask.customcomponents.widget.AppWidgetHelper
 import java.util.concurrent.TimeUnit
 
@@ -35,6 +37,8 @@ class AppWidgetWorker(
          * 期望立即执行
          */
         fun enqueueRefreshWork(context: Context, sourceTag: String) {
+            LogHelper.i(Global.Tag.APP_WIDGET, context, sourceTag)
+
             val request = OneTimeWorkRequestBuilder<AppWidgetWorker>()
                 .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
                 .setConstraints(Constraints.NONE)
@@ -48,6 +52,8 @@ class AppWidgetWorker(
          * 添加 周期循环任务
          */
         fun enqueuePeriodicWork(context: Context, sourceTag: String) {
+            LogHelper.i(Global.Tag.APP_WIDGET, context, sourceTag)
+
             val request = PeriodicWorkRequestBuilder<AppWidgetWorker>(
                 15, TimeUnit.MINUTES,
                 5, TimeUnit.MINUTES
@@ -66,6 +72,8 @@ class AppWidgetWorker(
          * 取消 周期循环任务
          */
         fun cancelPeriodicWork(context: Context, sourceTag: String) {
+            LogHelper.i(Global.Tag.APP_WIDGET, context, sourceTag)
+
             WorkManager.getInstance(context.applicationContext).cancelUniqueWork(WORK_NAME_UNIQUE)
         }
     }

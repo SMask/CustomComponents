@@ -11,7 +11,13 @@ object LogHelper {
         val content = StringBuilder(tag).append(" ")
 
         // 方法名
-        val callerMethodName = CommonUtils.getCallerMethodName(1)
+        val callerMethod = CommonUtils.getCallerMethod(1)
+        val callerClassName = callerMethod?.className ?: "UNKNOWN"
+        val callerSimpleClassName = callerClassName.substring(
+            callerClassName.lastIndexOf(".") + 1
+        )
+        val callerMethodName = callerMethod?.methodName ?: "UNKNOWN"
+        content.append(callerSimpleClassName.padEnd(25)).append(" - ")
         content.append(callerMethodName.padEnd(25)).append(" : ")
 
         // 额外信息
