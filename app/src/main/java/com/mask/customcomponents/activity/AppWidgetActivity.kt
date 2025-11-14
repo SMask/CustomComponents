@@ -8,6 +8,7 @@ import com.mask.customcomponents.config.Global
 import com.mask.customcomponents.databinding.ActivityAppWidgetBinding
 import com.mask.customcomponents.utils.LogUtil
 import com.mask.customcomponents.widget.AppWidgetHelper
+import com.mask.customcomponents.widget.worker.AppWidgetWorker
 
 /**
  * AppWidget 桌面小组件
@@ -42,7 +43,10 @@ class AppWidgetActivity : AppCompatActivity() {
             LogUtil.i("${Global.Tag.APP_WIDGET} requestPinAppWidget: $result")
         }
         mBinding.btnRefresh.setOnClickListener {
-            AppWidgetHelper.updateAppWidget(this, "App Activity Btn")
+            AppWidgetHelper.updateAppWidget(this, "Activity Btn")
+        }
+        mBinding.btnRefreshWorkManager.setOnClickListener {
+            AppWidgetWorker.enqueueRefreshWork(this, "Activity Btn")
         }
     }
 

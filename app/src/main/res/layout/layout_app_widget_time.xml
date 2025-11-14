@@ -7,21 +7,24 @@
     android:background="@drawable/bg_app_widget_time"
     android:gravity="center"
     android:orientation="vertical"
+    android:padding="12dp"
     tools:layout_height="@dimen/app_widget_time_height"
     tools:layout_width="@dimen/app_widget_time_width">
 
     <TextView
         android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="yyyy-MM-dd HH:mm:ss"
         android:textColor="@color/white" />
 
     <TextView
         android:id="@+id/tv_source"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center"
         android:text="Source"
         android:textColor="@color/white" />
 

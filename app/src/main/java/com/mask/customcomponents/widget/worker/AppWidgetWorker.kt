@@ -12,7 +12,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.mask.customcomponents.widget.AppWidgetHelper
-import java.time.Duration
+import java.util.concurrent.TimeUnit
 
 /**
  * AppWidget 桌面小组件 Worker
@@ -28,18 +28,18 @@ class AppWidgetWorker(
 
         private const val WORK_NAME_UNIQUE = "app_widget_worker_unique"
 
-        private const val KEY_SOURCE = "source"
+        private const val KEY_SOURCE_TAG = "source_tag"
 
         /**
          * 添加 刷新任务
          * 期望立即执行
          */
-        fun enqueueRefreshWork(context: Context) {
+        fun enqueueRefreshWork(context: Context, sourceTag: String) {
             val request = OneTimeWorkRequestBuilder<AppWidgetWorker>()
                 .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
                 .setConstraints(Constraints.NONE)
-                .setBackoffCriteria(BackoffPolicy.LINEAR, Duration.ofSeconds(10))
-                .setInputData(workDataOf(KEY_SOURCE to "OneTimeWork"))
+                .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
+                .setInputData(workDataOf(KEY_SOURCE_TAG to "$sourceTag OneTimeWork"))
                 .build()
             WorkManager.getInstance(context.applicationContext).enqueue(request)
         }
@@ -47,14 +47,15 @@ class AppWidgetWorker(
         /**
          * 添加 周期循环任务
          */
-        fun enqueuePeriodicWork(context: Context) {
+        fun enqueuePeriodicWork(context: Context, sourceTag: String) {
             val request = PeriodicWorkRequestBuilder<AppWidgetWorker>(
-                Duration.ofMinutes(15), Duration.ofMinutes(5)
+                15, TimeUnit.MINUTES,
+                5, TimeUnit.MINUTES
             )
                 .setConstraints(Constraints.NONE)
-                .setBackoffCriteria(BackoffPolicy.LINEAR, Duration.ofSeconds(10))
-                .setInitialDelay(Duration.ofMinutes(15))
-                .setInputData(workDataOf(KEY_SOURCE to "PeriodicWork"))
+                .setBackoffCriteria(BackoffPolicy.LINEAR, 10, TimeUnit.SECONDS)
+                .setInitialDelay(15, TimeUnit.MINUTES)
+                .setInputData(workDataOf(KEY_SOURCE_TAG to "$sourceTag PeriodicWork"))
                 .build()
             WorkManager.getInstance(context.applicationContext).enqueueUniquePeriodicWork(
                 WORK_NAME_UNIQUE, ExistingPeriodicWorkPolicy.KEEP, request
@@ -64,14 +65,14 @@ class AppWidgetWorker(
         /**
          * 取消 周期循环任务
          */
-        fun cancelPeriodicWork(context: Context) {
+        fun cancelPeriodicWork(context: Context, sourceTag: String) {
             WorkManager.getInstance(context.applicationContext).cancelUniqueWork(WORK_NAME_UNIQUE)
         }
     }
 
     override fun doWork(): Result {
-        val source = inputData.getString(KEY_SOURCE)
-        AppWidgetHelper.updateAppWidget(context, "WorkManager $source doWork")
+        val sourceTag = inputData.getString(KEY_SOURCE_TAG)
+        AppWidgetHelper.updateAppWidget(context, "$sourceTag WorkManager doWork")
         return Result.success()
     }
 }

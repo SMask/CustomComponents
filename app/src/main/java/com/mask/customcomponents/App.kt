@@ -1,6 +1,8 @@
 package com.mask.customcomponents
 
 import android.app.Application
+import com.mask.customcomponents.config.Global
+import com.mask.customcomponents.utils.LogUtil
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.HttpsURLConnection
@@ -24,6 +26,8 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         context = this
+
+        LogUtil.i("${Global.Tag.APP} onCreate $this")
 
         handleSSLHandshake()
     }

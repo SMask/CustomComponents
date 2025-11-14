@@ -6,6 +6,7 @@ package com.mask.customcomponents.config
 object Global {
 
     object Tag {
+        const val APP = "App"
         const val APP_WIDGET = "AppWidget"
     }
 

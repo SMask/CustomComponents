@@ -60,9 +60,10 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
         }
         AppWidgetHelper.updateAppWidget(context, "Provider onUpdate")
 
-        AppWidgetWorker.enqueueRefreshWork(context)
+        AppWidgetWorker.enqueueRefreshWork(context, "Provider onUpdate")
 
-        AppWidgetWorker.enqueuePeriodicWork(context) // 为了防止周期任务没加上，这里再添加一次，底层逻辑不会重复添加任务。
+        // 为了防止周期任务没加上，这里再添加一次，底层逻辑不会重复添加任务。
+        AppWidgetWorker.enqueuePeriodicWork(context, "Provider onUpdate")
     }
 
     override fun onAppWidgetOptionsChanged(
@@ -86,7 +87,7 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
         if (context == null) {
             return
         }
-        AppWidgetWorker.enqueuePeriodicWork(context)
+        AppWidgetWorker.enqueuePeriodicWork(context, "Provider onEnabled")
     }
 
     override fun onDisabled(context: Context?) {
@@ -95,7 +96,7 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
         if (context == null) {
             return
         }
-        AppWidgetWorker.cancelPeriodicWork(context)
+        AppWidgetWorker.cancelPeriodicWork(context, "Provider onDisabled")
     }
 
     override fun onRestored(context: Context?, oldWidgetIds: IntArray?, newWidgetIds: IntArray?) {
