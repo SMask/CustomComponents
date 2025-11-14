@@ -72,7 +72,7 @@ class AppWidgetWorker(
 
     override fun doWork(): Result {
         val sourceTag = inputData.getString(KEY_SOURCE_TAG)
-        AppWidgetHelper.updateAppWidget(applicationContext, "$sourceTag WorkManager doWork")
+        AppWidgetHelper.updateAppWidget(applicationContext, "$sourceTag doWork")
         return Result.success()
     }
 }

@@ -37,7 +37,7 @@
             android:id="@+id/btn_refresh_work_manager"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="WorkManager刷新小组件数据" />
+            android:text="WorkManager 刷新小组件数据" />
 
     </com.google.android.flexbox.FlexboxLayout>
 

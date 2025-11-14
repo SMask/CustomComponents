@@ -78,6 +78,19 @@ object AppWidgetHelper {
         )
         remoteViews.setOnClickPendingIntent(R.id.btn_refresh, refreshPendingIntent)
 
+        val refreshWorkManagerIntent = Intent()
+            .setComponent(TimeAppWidgetProvider.componentName)
+            .setAction(TimeAppWidgetProvider.ACTION_REFRESH_WORK_MANAGER)
+        val refreshWorkManagerPendingIntent = PendingIntent.getBroadcast(
+            context,
+            0,
+            refreshWorkManagerIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        remoteViews.setOnClickPendingIntent(
+            R.id.btn_refresh_work_manager, refreshWorkManagerPendingIntent
+        )
+
         val rootPendingIntent = PendingIntent.getActivity(
             context,
             0,

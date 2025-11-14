@@ -7,7 +7,7 @@
     android:background="@drawable/bg_app_widget_time"
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="12dp"
+    android:padding="8dp"
     tools:layout_height="@dimen/app_widget_time_height"
     tools:layout_width="@dimen/app_widget_time_width">
 
@@ -23,7 +23,7 @@
         android:id="@+id/tv_source"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="Source"
         android:textColor="@color/white" />
@@ -32,16 +32,21 @@
         android:id="@+id/btn_open"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Open"
+        android:text="打开 AppWidget 页"
         android:textAllCaps="false" />
 
     <Button
         android:id="@+id/btn_refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Refresh"
+        android:text="刷新数据"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btn_refresh_work_manager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WorkManager 刷新数据"
         android:textAllCaps="false" />
 
 </LinearLayout>

@@ -22,6 +22,8 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
     companion object {
 
         const val ACTION_REFRESH = "com.mask.customcomponents.widget.action.REFRESH"
+        const val ACTION_REFRESH_WORK_MANAGER =
+            "com.mask.customcomponents.widget.action.REFRESH_WORK_MANAGER"
 
         val componentName: ComponentName
             get() {
@@ -38,6 +40,10 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
         when (intent?.action) {
             ACTION_REFRESH -> {
                 AppWidgetHelper.updateAppWidget(context, "Widget Btn Broadcast")
+            }
+
+            ACTION_REFRESH_WORK_MANAGER -> {
+                AppWidgetWorker.enqueueRefreshWork(context, "Widget Btn Broadcast")
             }
 
             else -> {
