@@ -63,7 +63,7 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
         if (context == null) {
             return
         }
-        AppWidgetHelper.updateAppWidget(context, "Provider onUpdate")
+//        AppWidgetHelper.updateAppWidget(context, "Provider onUpdate")
 
         AppWidgetWorker.enqueueRefreshWork(context, "Provider onUpdate")
 
