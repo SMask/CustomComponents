@@ -10,7 +10,7 @@ import com.mask.customcomponents.R
 import com.mask.customcomponents.activity.AppWidgetActivity
 import com.mask.customcomponents.activity.MainActivity
 import com.mask.customcomponents.config.Global
-import com.mask.customcomponents.utils.LogUtil
+import com.mask.customcomponents.utils.LogHelper
 import com.mask.customcomponents.widget.provider.TimeAppWidgetProvider
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -33,6 +33,8 @@ object AppWidgetHelper {
         }
 
     fun requestPinAppWidget(context: Context): Boolean {
+        LogHelper.i(Global.Tag.APP_WIDGET, context)
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             return false
         }
@@ -51,7 +53,7 @@ object AppWidgetHelper {
     }
 
     fun updateAppWidget(context: Context, sourceTag: String) {
-        LogUtil.i("${Global.Tag.APP_WIDGET} updateAppWidget: $sourceTag")
+        LogHelper.i(Global.Tag.APP_WIDGET, context, sourceTag)
 
         val remoteViews = RemoteViews(context.packageName, R.layout.layout_app_widget_time)
         remoteViews.setTextViewText(R.id.tv_time, currentTimeFormat)

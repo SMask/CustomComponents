@@ -8,8 +8,7 @@ import android.content.Intent
 import android.os.Bundle
 import com.mask.customcomponents.App
 import com.mask.customcomponents.config.Global
-import com.mask.customcomponents.utils.CommonUtils
-import com.mask.customcomponents.utils.LogUtil
+import com.mask.customcomponents.utils.LogHelper
 import com.mask.customcomponents.widget.AppWidgetHelper
 import com.mask.customcomponents.widget.worker.AppWidgetWorker
 
@@ -31,7 +30,7 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
-//        printLog(context, intent)
+//        LogHelper.i(Global.Tag.APP_WIDGET, context, intent)
         if (context == null) {
             super.onReceive(context, intent)
             return
@@ -53,7 +52,7 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
         appWidgetIds: IntArray?
     ) {
         super.onUpdate(context, appWidgetManager, appWidgetIds)
-        printLog(context, appWidgetManager, appWidgetIds)
+        LogHelper.i(Global.Tag.APP_WIDGET, context, appWidgetManager, appWidgetIds)
 
         if (context == null) {
             return
@@ -73,17 +72,17 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
         newOptions: Bundle?
     ) {
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
-        printLog(context, appWidgetManager, appWidgetId, newOptions)
+        LogHelper.i(Global.Tag.APP_WIDGET, context, appWidgetManager, appWidgetId, newOptions)
     }
 
     override fun onDeleted(context: Context?, appWidgetIds: IntArray?) {
         super.onDeleted(context, appWidgetIds)
-        printLog(context, appWidgetIds)
+        LogHelper.i(Global.Tag.APP_WIDGET, context, appWidgetIds)
     }
 
     override fun onEnabled(context: Context?) {
         super.onEnabled(context)
-        printLog(context)
+        LogHelper.i(Global.Tag.APP_WIDGET, context)
         if (context == null) {
             return
         }
@@ -92,7 +91,7 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
 
     override fun onDisabled(context: Context?) {
         super.onDisabled(context)
-        printLog(context)
+        LogHelper.i(Global.Tag.APP_WIDGET, context)
         if (context == null) {
             return
         }
@@ -101,33 +100,6 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
 
     override fun onRestored(context: Context?, oldWidgetIds: IntArray?, newWidgetIds: IntArray?) {
         super.onRestored(context, oldWidgetIds, newWidgetIds)
-        printLog(context, oldWidgetIds, newWidgetIds)
-    }
-
-    private fun printLog(vararg extraMsgArr: Any?) {
-        val content = StringBuilder(Global.Tag.APP_WIDGET).append(" ")
-
-        // 方法名
-        val callerMethodName = CommonUtils.getCallerMethodName(1)
-        content.append(callerMethodName.padEnd(25)).append(" : ")
-
-        // 额外信息
-        extraMsgArr.forEachIndexed { index, extraMsg ->
-            if (index > 0) {
-                content.append(" ; ")
-            }
-            val extraMsgStr = when (extraMsg) {
-                is IntArray -> {
-                    extraMsg.contentToString()
-                }
-
-                else -> {
-                    extraMsg?.toString()
-                }
-            }
-            content.append(extraMsgStr)
-        }
-
-        LogUtil.i(content.toString())
+        LogHelper.i(Global.Tag.APP_WIDGET, context, oldWidgetIds, newWidgetIds)
     }
 }

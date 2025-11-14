@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
  * Create by lishilin on 2025-11-13
  */
 class AppWidgetWorker(
-    private val context: Context,
+    context: Context,
     workerParams: WorkerParameters
 ) : Worker(context, workerParams) {
 
@@ -72,7 +72,7 @@ class AppWidgetWorker(
 
     override fun doWork(): Result {
         val sourceTag = inputData.getString(KEY_SOURCE_TAG)
-        AppWidgetHelper.updateAppWidget(context, "$sourceTag WorkManager doWork")
+        AppWidgetHelper.updateAppWidget(applicationContext, "$sourceTag WorkManager doWork")
         return Result.success()
     }
 }
