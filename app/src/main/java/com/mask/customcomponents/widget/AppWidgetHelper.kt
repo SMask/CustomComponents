@@ -53,7 +53,7 @@ object AppWidgetHelper {
     }
 
     fun updateAppWidget(context: Context, sourceTag: String) {
-        LogHelper.i(Global.Tag.APP_WIDGET, context, sourceTag)
+        LogHelper.i(Global.Tag.APP_WIDGET, context, sourceTag, TimeAppWidgetProvider.appWidgetIds)
 
         val remoteViews = RemoteViews(context.packageName, R.layout.layout_app_widget_time)
         remoteViews.setTextViewText(R.id.tv_time, currentTimeFormat)

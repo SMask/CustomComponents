@@ -29,6 +29,21 @@ class TimeAppWidgetProvider : AppWidgetProvider() {
             get() {
                 return ComponentName(App.context, TimeAppWidgetProvider::class.java)
             }
+
+        val appWidgetIds: IntArray
+            get() {
+                return AppWidgetManager.getInstance(App.context).getAppWidgetIds(componentName)
+            }
+
+        val instanceCount: Int
+            get() {
+                return appWidgetIds.size
+            }
+
+        val hasInstance: Boolean
+            get() {
+                return instanceCount > 0
+            }
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {
