@@ -5,4 +5,5 @@
     android:minWidth="@dimen/app_widget_time_width"
     android:minHeight="@dimen/app_widget_time_height"
     android:previewImage="@drawable/icon_more_white"
-    android:updatePeriodMillis="1800000" /><!-- updatePeriodMillis 系统限制最低 30 分钟 -->
+    android:updatePeriodMillis="1800000"
+    android:widgetCategory="home_screen|keyguard|searchbox" /><!-- updatePeriodMillis 系统限制最低 30 分钟 -->
