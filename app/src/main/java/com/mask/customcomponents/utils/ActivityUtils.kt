@@ -2,7 +2,8 @@ package com.mask.customcomponents.utils
 
 import android.app.Activity
 import android.content.Context
-import android.content.ContextWrapper
+import com.zhuanzhuan.heroclub.common.utils.getActivity
+import com.zhuanzhuan.heroclub.common.utils.isAvailable
 
 /**
  * ActivityUtils
@@ -14,18 +15,14 @@ object ActivityUtils {
     /**
      * 根据 Context 获取 Activity
      */
-    fun getActivity(context: Context): Activity? {
-        var currentContext: Context = context
-        while (true) {
-            if (currentContext is Activity) {
-                return currentContext
-            }
+    fun getActivity(context: Context?): Activity? {
+        return context.getActivity()
+    }
 
-            if (currentContext is ContextWrapper) {
-                currentContext = currentContext.baseContext
-            } else {
-                return null
-            }
-        }
+    /**
+     * Activity 是否可用
+     */
+    fun isActivityAvailable(activity: Activity?): Boolean {
+        return activity.isAvailable()
     }
 }
