@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 /**
  * Fragment 实现对用户可见回调逻辑基类
  *
- * 兼容 add、remove、replace、show、hide；
+ * 兼容 xml、add、remove、detach、replace、show、hide；
  * 兼容 ViewPager，BEHAVIOR_SET_USER_VISIBLE_HINT 及 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT；
  * 兼容 ViewPager2；
  * 兼容 ViewPager 嵌套场景；
@@ -136,10 +136,7 @@ abstract class BaseVisibleCallbackFragment : Fragment() {
     }
 
     private fun isParentHidden(): Boolean {
-        val parentFragment = parentFragment
-        if (parentFragment == null) {
-            return false
-        }
+        val parentFragment = parentFragment ?: return false
         if (parentFragment is BaseVisibleCallbackFragment) {
             return parentFragment.isHiddenIncludeParent()
         }
@@ -151,10 +148,7 @@ abstract class BaseVisibleCallbackFragment : Fragment() {
     }
 
     private fun isParentUserVisibleHint(): Boolean {
-        val parentFragment = parentFragment
-        if (parentFragment == null) {
-            return true
-        }
+        val parentFragment = parentFragment ?: return true
         if (parentFragment is BaseVisibleCallbackFragment) {
             return parentFragment.isUserVisibleHintIncludeParent()
         }
