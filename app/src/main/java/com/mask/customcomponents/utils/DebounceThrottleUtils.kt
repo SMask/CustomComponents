@@ -26,7 +26,7 @@ object DebounceThrottleUtils {
     const val DEFAULT_TIME_INTERVAL = 500L
 
     private fun getKey(view: View): String {
-        return view.id.toString()
+        return "${view.id}_${view.hashCode()}"
     }
 
     fun debounce(view: View, delayMillis: Long = DEFAULT_TIME_DELAY, action: () -> Unit) {
@@ -38,7 +38,7 @@ object DebounceThrottleUtils {
      *
      * 无论用户触发多少次事件，回调函数只会在事件停止触发指定时间间隔后执行。（即：回调函数在事件停止触发指定时间后被调用）
      *
-     * @param key 唯一标识符（建议使用 ViewID）
+     * @param key 唯一标识符（建议使用 ViewID、hashCode）
      * @param delayMillis 时间间隔（毫秒）
      * @param action 要执行的操作
      */
@@ -67,7 +67,7 @@ object DebounceThrottleUtils {
      *
      * 无论用户触发多少次事件，回调函数第一次会立即执行，在指定时间间隔后才会再次执行。（即：回调函数在规定时间内最多执行一次）
      *
-     * @param key 唯一标识符（建议使用 ViewID）
+     * @param key 唯一标识符（建议使用 ViewID、hashCode）
      * @param intervalMillis 时间间隔（毫秒）
      * @param action 要执行的操作
      */
