@@ -25,7 +25,7 @@ object DebounceThrottleUtils {
     const val DEFAULT_TIME_DELAY = 500L
     const val DEFAULT_TIME_INTERVAL = 500L
 
-    private fun getKey(view: View): String {
+    fun getKey(view: View): String {
         return "${view.id}_${view.hashCode()}"
     }
 

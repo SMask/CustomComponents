@@ -116,11 +116,11 @@ class DebounceThrottleActivity : AppCompatActivity() {
                 count: Int,
                 after: Int
             ) {
-//                LogUtil.i("beforeTextChanged text: $text, start: $start, count: $count, after: $after")
+                LogUtil.i("beforeTextChanged text: $text, start: $start, count: $count, after: $after")
             }
 
             override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-//                LogUtil.i("onTextChanged text: $text, start: $start, before: $before, count: $count")
+                LogUtil.i("onTextChanged text: $text, start: $start, before: $before, count: $count")
             }
 
             override fun afterTextChanged(text: Editable?) {

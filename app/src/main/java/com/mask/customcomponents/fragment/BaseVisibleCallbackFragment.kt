@@ -4,7 +4,7 @@ import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
 
 /**
- * Fragment 实现对用户可见回调逻辑基类
+ * Fragment 基类 对用户可见/不可见回调
  *
  * 兼容 xml、add、remove、detach、replace、show、hide；
  * 兼容 ViewPager，BEHAVIOR_SET_USER_VISIBLE_HINT 及 BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT；

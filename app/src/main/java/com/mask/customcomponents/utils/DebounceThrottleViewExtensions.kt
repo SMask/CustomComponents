@@ -102,22 +102,25 @@ fun TextView.addDebounceTextChangedListener(
     if (textWatcher == null) {
         return null
     }
-    val view = this
+    val keyView = DebounceThrottleUtils.getKey(this)
+    val keyBeforeTextChanged = "${keyView}_beforeTextChanged"
+    val keyOnTextChanged = "${keyView}_onTextChanged"
+    val keyAfterTextChanged = "${keyView}_afterTextChanged"
     val textWatcherInternal = object : TextWatcher {
         override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) {
-            DebounceThrottleUtils.debounce(view, delayMillis) {
+            DebounceThrottleUtils.debounce(keyBeforeTextChanged, delayMillis) {
                 textWatcher.beforeTextChanged(text, start, count, after)
             }
         }
 
         override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
-            DebounceThrottleUtils.debounce(view, delayMillis) {
+            DebounceThrottleUtils.debounce(keyOnTextChanged, delayMillis) {
                 textWatcher.onTextChanged(text, start, before, count)
             }
         }
 
         override fun afterTextChanged(text: Editable?) {
-            DebounceThrottleUtils.debounce(view, delayMillis) {
+            DebounceThrottleUtils.debounce(keyAfterTextChanged, delayMillis) {
                 textWatcher.afterTextChanged(text)
             }
         }
