@@ -23,19 +23,20 @@ import com.mask.customcomponents.vo.CountDownTimerVo
  */
 class CountDownTimerAdapter : RecyclerView.Adapter<CountDownTimerAdapter.ViewHolder>() {
 
-    private val dataList = mutableListOf<CountDownTimerVo>()
+    private val mDataList = mutableListOf<CountDownTimerVo>()
 
     private fun getItem(position: Int): CountDownTimerVo? {
-        return dataList.getOrNull(position)
+        return mDataList.getOrNull(position)
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        return mDataList.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding =
-            ItemCountDownTimerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemCountDownTimerBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
         return ViewHolder(binding)
     }
 
@@ -107,8 +108,8 @@ class CountDownTimerAdapter : RecyclerView.Adapter<CountDownTimerAdapter.ViewHol
     /************************************************************ S 外部调用 ************************************************************/
 
     fun setDataList(dataList: MutableList<CountDownTimerVo>) {
-        this.dataList.clear()
-        this.dataList.addAll(dataList)
+        this.mDataList.clear()
+        this.mDataList.addAll(dataList)
         notifyDataSetChanged()
     }
 
