@@ -23,24 +23,26 @@ class RecyclerViewDividerActivity : AppCompatActivity() {
     }
 
     private val mLinearDivider by lazy {
-        DividerItemDecoration.newInstance(SizeUtils.dpToPx(8), 0x800000FF.toInt())
+        val size = SizeUtils.dpToPx(8)
+        DividerItemDecoration.newInstance(size, 0x800000FF.toInt())
     }
     private val mLinearLayoutManager by lazy {
         LinearLayoutManager(this)
     }
 
     private val mGridDivider by lazy {
-        val size = SizeUtils.dpToPx(8)
-        DividerGridItemDecoration.newInstance(size, size, 0x800000FF.toInt())
+        val width = SizeUtils.dpToPx(8)
+        val height = SizeUtils.dpToPx(16)
+        DividerGridItemDecoration.newInstance(width, height, 0x800000FF.toInt())
     }
     private val mGridLayoutManager by lazy {
-        GridLayoutManager(this, 4)
+        GridLayoutManager(this, 5)
     }
 
     private val mAdapter by lazy {
         val adapter = RecyclerViewDividerAdapter()
         val dataList = mutableListOf<Any>()
-        repeat(50) {
+        repeat(52) {
             dataList.add(it)
         }
         adapter.setDataList(dataList)
