@@ -95,6 +95,10 @@ class MainActivity : AppCompatActivity() {
                 RoundBevelRectActivity.startActivity(this)
             }
 
+            R.id.btn_recycler_view_divider -> {
+                RecyclerViewDividerActivity.startActivity(this)
+            }
+
             R.id.btn_alphabet_index_bar -> {
                 AlphabetIndexBarActivity.startActivity(this)
             }

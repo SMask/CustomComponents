@@ -110,6 +110,11 @@
             android:label="@string/title_activity_round_bevel_rect_view"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity
+            android:name=".activity.RecyclerViewDividerActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|uiMode"
+            android:label="@string/title_activity_recycler_view_divider"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
+        <activity
             android:name=".activity.AlphabetIndexBarActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|uiMode"
             android:label="@string/title_activity_alphabet_index_bar"

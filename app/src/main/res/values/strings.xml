@@ -15,6 +15,7 @@
     <string name="title_activity_color_picker_view">颜色拾取器</string>
     <string name="title_activity_gradient_rotate_view">渐变旋转</string>
     <string name="title_activity_round_bevel_rect_view">圆角/平角矩形(四个角单独半径)</string>
+    <string name="title_activity_recycler_view_divider">RecyclerView Divider</string>
     <string name="title_activity_alphabet_index_bar">字母索引栏(仿微信通讯录)</string>
     <string name="title_activity_draggable_view">可拖拽控件</string>
     <string name="title_activity_title_bar_layout">标题栏</string>
