@@ -1,4 +1,4 @@
-package com.zhuanzhuan.heroclub.common.utils
+package com.mask.customcomponents.utils
 
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -10,7 +10,6 @@ import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import com.mask.customcomponents.App
-import com.mask.customcomponents.utils.isAvailable
 
 /**
  * 扩展函数 Fragment
