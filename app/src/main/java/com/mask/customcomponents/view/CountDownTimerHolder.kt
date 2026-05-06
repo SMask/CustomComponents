@@ -22,7 +22,7 @@ class CountDownTimerHolder {
         const val MILLIS_DAY = MILLIS_HOUR * 24
     }
 
-    private var isRunning = false
+    private var mIsRunning = false
 
     private var mStartTime: Long? = null // 开始时间
     private var mRemainingTimeForStart: Long? = null // 剩余时间（相对于开始时间，倒计时总时长）
@@ -33,13 +33,13 @@ class CountDownTimerHolder {
     private var mListener: CountDownTimerListener? = null
 
     private fun startInternal() {
-        if (isRunning) {
+        if (mIsRunning) {
             return
         }
         val mStartTime = mStartTime ?: return
         val mRemainingTimeForStart = mRemainingTimeForStart ?: return
         val millisInFuture = getRemainingTime(mStartTime, mRemainingTimeForStart)
-        isRunning = true
+        mIsRunning = true
         dispatchAction(Action.START, mStartTime, mRemainingTimeForStart)
         mCountDownTimer = object : CountDownTimer(millisInFuture, mCountDownInterval) {
             override fun onTick(millisUntilFinished: Long) {
@@ -53,10 +53,10 @@ class CountDownTimerHolder {
     }
 
     private fun cancelInternal() {
-        if (!isRunning) {
+        if (!mIsRunning) {
             return
         }
-        isRunning = false
+        mIsRunning = false
         mCountDownTimer?.cancel()
         if (mCountDownTimer != null) {
             dispatchAction(Action.CANCEL, mStartTime, mRemainingTimeForStart)
@@ -66,7 +66,7 @@ class CountDownTimerHolder {
 
     private fun finishInternal() {
         dispatchAction(Action.FINISH, mStartTime, mRemainingTimeForStart)
-        isRunning = false
+        mIsRunning = false
         mCountDownTimer = null
         mStartTime = null
         mRemainingTimeForStart = null
@@ -157,7 +157,7 @@ class CountDownTimerHolder {
     }
 
     fun start() {
-        if (isRunning) {
+        if (mIsRunning) {
             return
         }
         cancelInternal()
@@ -165,7 +165,7 @@ class CountDownTimerHolder {
     }
 
     fun cancel() {
-        if (!isRunning) {
+        if (!mIsRunning) {
             return
         }
         cancelInternal()

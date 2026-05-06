@@ -10,6 +10,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import com.mask.customcomponents.App
+import com.mask.customcomponents.utils.isAvailable
 
 /**
  * 扩展函数 Fragment
@@ -106,6 +107,20 @@ fun Fragment.getDrawableSafely(@DrawableRes resId: Int): Drawable? {
         e.printStackTrace()
         return null
     }
+}
+
+/**
+ * 获取 指定类型的父 Fragment
+ */
+inline fun <reified T> Fragment.getParentFragmentOfType(): T? {
+    var current: Fragment? = this
+    while (current != null) {
+        if (current is T) {
+            return current
+        }
+        current = current.parentFragment
+    }
+    return null
 }
 
 /**

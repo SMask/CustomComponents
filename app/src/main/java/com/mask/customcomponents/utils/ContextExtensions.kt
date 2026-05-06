@@ -1,4 +1,4 @@
-package com.zhuanzhuan.heroclub.common.utils
+package com.mask.customcomponents.utils
 
 import android.app.Activity
 import android.content.Context
@@ -25,5 +25,19 @@ fun Context?.getActivity(): Activity? {
         } else {
             return null
         }
+    }
+}
+
+/**
+ * 根据 Context 获取可用的 Activity
+ *
+ * 不保证对用户可见。
+ */
+fun Context?.getAvailableActivity(): Activity? {
+    val activity = getActivity()
+    return if (activity.isAvailable()) {
+        activity
+    } else {
+        null
     }
 }

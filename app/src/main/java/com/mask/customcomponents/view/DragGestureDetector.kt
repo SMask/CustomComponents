@@ -41,72 +41,72 @@ class DragGestureDetector(val view: View) {
         LEFT_TOP, LEFT_BOTTOM, RIGHT_TOP, RIGHT_BOTTOM
     }
 
-    // 手势操作中数据
-    private var lastRawX = 0f
-    private var lastRawY = 0f
-    private var isDragging = false // 是否正在拖拽
-
     // 内部配置项
-    private val touchSlop by lazy { // 拖拽阈值（系统默认触摸敏感度）
+    private val mTouchSlop by lazy { // 拖拽阈值（系统默认触摸敏感度）
         ViewConfiguration.get(view.context).scaledTouchSlop
     }
-    private val animDuration = 150L // 动画时长
+    private val mAnimDuration = 150L // 动画时长
+
+    // 手势操作中数据
+    private var mLastRawX = 0f
+    private var mLastRawY = 0f
+    private var mIsDragging = false // 是否正在拖拽
 
     // 外部可修改配置项
-    private var boundMarginLeft = 0 // 距离边界的间距
-    private var boundMarginTop = 0 // 距离边界的间距
-    private var boundMarginRight = 0 // 距离边界的间距
-    private var boundMarginBottom = 0 // 距离边界的间距
-    private var isOutOfBoundsEnabled = false // 是否允许超出边界
-    private var isHorizontalSnapEnabled = true // 是否开启水平吸附
-    private var isVerticalSnapEnabled = false // 是否开启垂直吸附
-    private var isAnimEnabled = true // 是否开启动画
+    private var mBoundMarginLeft = 0 // 距离边界的间距
+    private var mBoundMarginTop = 0 // 距离边界的间距
+    private var mBoundMarginRight = 0 // 距离边界的间距
+    private var mBoundMarginBottom = 0 // 距离边界的间距
+    private var mIsOutOfBoundsEnabled = false // 是否允许超出边界
+    private var mIsHorizontalSnapEnabled = true // 是否开启水平吸附
+    private var mIsVerticalSnapEnabled = false // 是否开启垂直吸附
+    private var mIsAnimEnabled = true // 是否开启动画
 
-    private var onDragListener: OnDragListener? = null // 监听器
+    private var mOnDragListener: OnDragListener? = null // 监听器
 
     private fun onTouchEvent(event: MotionEvent): Boolean {
         val rawX = event.rawX
         val rawY = event.rawY
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-                lastRawX = rawX
-                lastRawY = rawY
-                isDragging = false
+                mLastRawX = rawX
+                mLastRawY = rawY
+                mIsDragging = false
             }
 
             MotionEvent.ACTION_MOVE -> {
-                val dx = rawX - lastRawX
-                val dy = rawY - lastRawY
+                val dx = rawX - mLastRawX
+                val dy = rawY - mLastRawY
 
-                if (!isDragging && ((dx * dx + dy * dy) > touchSlop * touchSlop)) {
-                    isDragging = true
-                    onDragListener?.onDragStart(view, rawX, rawY)
+                if (!mIsDragging && ((dx * dx + dy * dy) > mTouchSlop * mTouchSlop)) {
+                    mIsDragging = true
+                    mOnDragListener?.onDragStart(view, rawX, rawY)
                 }
 
-                if (isDragging) {
+                if (mIsDragging) {
                     onDragging(dx, dy)
-                    onDragListener?.onDragging(view, rawX, rawY, dx, dy)
-                    lastRawX = rawX
-                    lastRawY = rawY
+                    mOnDragListener?.onDragging(view, rawX, rawY, dx, dy)
+                    mLastRawX = rawX
+                    mLastRawY = rawY
                 }
             }
 
             MotionEvent.ACTION_UP -> {
-                if (isDragging) {
+                if (mIsDragging) {
                     onDragEnd(event)
-                    isDragging = false
+                    mIsDragging = false
                     return true
                 }
             }
 
             MotionEvent.ACTION_CANCEL -> {
-                if (isDragging) {
+                if (mIsDragging) {
                     onDragEnd(event)
-                    isDragging = false
+                    mIsDragging = false
                 }
             }
         }
-        return isDragging
+        return mIsDragging
     }
 
     /**
@@ -115,7 +115,7 @@ class DragGestureDetector(val view: View) {
     private fun onDragging(dx: Float, dy: Float) {
         val x = view.x + dx
         val y = view.y + dy
-        if (isOutOfBoundsEnabled) {
+        if (mIsOutOfBoundsEnabled) {
             view.x = x
             view.y = y
         } else {
@@ -131,7 +131,7 @@ class DragGestureDetector(val view: View) {
         // 获取 View 最终的位置
         // 吸附需要贴边
         val location = getLocation()
-        val x = if (isHorizontalSnapEnabled) {
+        val x = if (mIsHorizontalSnapEnabled) {
             if (location == Location.LEFT_TOP || location == Location.LEFT_BOTTOM) {
                 getBoundHorizontalMin()
             } else {
@@ -140,7 +140,7 @@ class DragGestureDetector(val view: View) {
         } else {
             view.x
         }
-        val y = if (isVerticalSnapEnabled) {
+        val y = if (mIsVerticalSnapEnabled) {
             if (location == Location.LEFT_TOP || location == Location.RIGHT_TOP) {
                 getBoundVerticalMin()
             } else {
@@ -150,7 +150,7 @@ class DragGestureDetector(val view: View) {
             view.y
         }
 
-        onDragListener?.onDragEnd(view, event.rawX, event.rawY)
+        mOnDragListener?.onDragEnd(view, event.rawX, event.rawY)
 
         // 判断是否需要移动 View
         if (x == view.x && y == view.y) {
@@ -158,11 +158,11 @@ class DragGestureDetector(val view: View) {
             updateLayoutParams()
             return
         }
-        if (isAnimEnabled) {
+        if (mIsAnimEnabled) {
             // 执行移动动画，完毕后更新 LayoutParams
             view.animate()
                 .setInterpolator(DecelerateInterpolator())
-                .setDuration(animDuration)
+                .setDuration(mAnimDuration)
                 .x(x)
                 .y(y)
                 .setListener(object : AnimatorListenerAdapter() {
@@ -185,7 +185,7 @@ class DragGestureDetector(val view: View) {
      */
     private fun getBoundHorizontalMin(): Float {
         val parentView = view.parent as? ViewGroup ?: return 0f
-        return (parentView.paddingLeft + boundMarginLeft).toFloat()
+        return (parentView.paddingLeft + mBoundMarginLeft).toFloat()
     }
 
     /**
@@ -193,7 +193,7 @@ class DragGestureDetector(val view: View) {
      */
     private fun getBoundHorizontalMax(): Float {
         val parentView = view.parent as? ViewGroup ?: return 0f
-        return (parentView.width - parentView.paddingRight - boundMarginRight - view.width).toFloat()
+        return (parentView.width - parentView.paddingRight - mBoundMarginRight - view.width).toFloat()
     }
 
     /**
@@ -201,7 +201,7 @@ class DragGestureDetector(val view: View) {
      */
     private fun getBoundVerticalMin(): Float {
         val parentView = view.parent as? ViewGroup ?: return 0f
-        return (parentView.paddingTop + boundMarginTop).toFloat()
+        return (parentView.paddingTop + mBoundMarginTop).toFloat()
     }
 
     /**
@@ -209,7 +209,7 @@ class DragGestureDetector(val view: View) {
      */
     private fun getBoundVerticalMax(): Float {
         val parentView = view.parent as? ViewGroup ?: return 0f
-        return (parentView.height - parentView.paddingBottom - boundMarginBottom - view.height).toFloat()
+        return (parentView.height - parentView.paddingBottom - mBoundMarginBottom - view.height).toFloat()
     }
 
     /**
@@ -272,7 +272,7 @@ class DragGestureDetector(val view: View) {
         // 重新设置 LayoutParams，不然 ConstraintLayout 布局不会生效
         view.layoutParams = layoutParams
 
-        onDragListener?.onUpdateLayoutParamsComplete(view, generateLayoutParams())
+        mOnDragListener?.onUpdateLayoutParamsComplete(view, generateLayoutParams())
     }
 
     private fun updateLayoutParamsGravity(layoutParams: FrameLayout.LayoutParams) {
@@ -435,35 +435,35 @@ class DragGestureDetector(val view: View) {
     }
 
     fun setBoundMargin(left: Int, top: Int, right: Int, bottom: Int): DragGestureDetector {
-        this.boundMarginLeft = left
-        this.boundMarginTop = top
-        this.boundMarginRight = right
-        this.boundMarginBottom = bottom
+        this.mBoundMarginLeft = left
+        this.mBoundMarginTop = top
+        this.mBoundMarginRight = right
+        this.mBoundMarginBottom = bottom
         return this
     }
 
     fun setOutOfBoundsEnabled(isOutOfBoundsEnabled: Boolean): DragGestureDetector {
-        this.isOutOfBoundsEnabled = isOutOfBoundsEnabled
+        this.mIsOutOfBoundsEnabled = isOutOfBoundsEnabled
         return this
     }
 
     fun setHorizontalSnapEnabled(isHorizontalSnapEnabled: Boolean): DragGestureDetector {
-        this.isHorizontalSnapEnabled = isHorizontalSnapEnabled
+        this.mIsHorizontalSnapEnabled = isHorizontalSnapEnabled
         return this
     }
 
     fun setVerticalSnapEnabled(isVerticalSnapEnabled: Boolean): DragGestureDetector {
-        this.isVerticalSnapEnabled = isVerticalSnapEnabled
+        this.mIsVerticalSnapEnabled = isVerticalSnapEnabled
         return this
     }
 
     fun setAnimEnabled(isAnimEnabled: Boolean): DragGestureDetector {
-        this.isAnimEnabled = isAnimEnabled
+        this.mIsAnimEnabled = isAnimEnabled
         return this
     }
 
     fun setOnDragListener(onDragListener: OnDragListener): DragGestureDetector {
-        this.onDragListener = onDragListener
+        this.mOnDragListener = onDragListener
         return this
     }
 

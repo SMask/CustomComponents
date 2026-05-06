@@ -1,4 +1,4 @@
-package com.zhuanzhuan.heroclub.common.utils
+package com.mask.customcomponents.utils
 
 import android.app.Activity
 

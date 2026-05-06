@@ -12,13 +12,13 @@ import java.util.concurrent.ConcurrentHashMap
  */
 object DebounceThrottleUtils {
 
-    private val handler by lazy {
+    private val mHandler by lazy {
         Handler(Looper.getMainLooper())
     }
-    private val debounceMap by lazy {
+    private val mDebounceMap by lazy {
         ConcurrentHashMap<String, Runnable>()
     }
-    private val throttleMap by lazy {
+    private val mThrottleMap by lazy {
         ConcurrentHashMap<String, Long>()
     }
 
@@ -44,18 +44,18 @@ object DebounceThrottleUtils {
      */
     fun debounce(key: String, delayMillis: Long = DEFAULT_TIME_DELAY, action: () -> Unit) {
         // 移除之前的任务
-        debounceMap[key]?.let {
-            handler.removeCallbacks(it)
-            debounceMap.remove(key)
+        mDebounceMap[key]?.let {
+            mHandler.removeCallbacks(it)
+            mDebounceMap.remove(key)
         }
         // 创建新任务
         val runnable = Runnable {
             action()
-            debounceMap.remove(key)
+            mDebounceMap.remove(key)
         }
-        debounceMap[key] = runnable
+        mDebounceMap[key] = runnable
         // 延迟执行任务
-        handler.postDelayed(runnable, delayMillis)
+        mHandler.postDelayed(runnable, delayMillis)
     }
 
     fun throttle(view: View, intervalMillis: Long = DEFAULT_TIME_INTERVAL, action: () -> Unit) {
@@ -73,9 +73,9 @@ object DebounceThrottleUtils {
      */
     fun throttle(key: String, intervalMillis: Long = DEFAULT_TIME_INTERVAL, action: () -> Unit) {
         val now = System.currentTimeMillis()
-        val lastTime = throttleMap[key] ?: 0
+        val lastTime = mThrottleMap[key] ?: 0
         if (now - lastTime >= intervalMillis) {
-            throttleMap[key] = now
+            mThrottleMap[key] = now
             action()
         }
     }
@@ -90,11 +90,11 @@ object DebounceThrottleUtils {
      * 主要避免防抖导致的内存泄漏，节流不涉及
      */
     fun clear(key: String) {
-        debounceMap[key]?.let {
-            handler.removeCallbacks(it)
-            debounceMap.remove(key)
+        mDebounceMap[key]?.let {
+            mHandler.removeCallbacks(it)
+            mDebounceMap.remove(key)
         }
-        throttleMap.remove(key)
+        mThrottleMap.remove(key)
     }
 
     /**
@@ -103,8 +103,8 @@ object DebounceThrottleUtils {
      * 主要避免防抖导致的内存泄漏，节流不涉及
      */
     fun clear() {
-        handler.removeCallbacksAndMessages(null)
-        debounceMap.clear()
-        throttleMap.clear()
+        mHandler.removeCallbacksAndMessages(null)
+        mDebounceMap.clear()
+        mThrottleMap.clear()
     }
 }

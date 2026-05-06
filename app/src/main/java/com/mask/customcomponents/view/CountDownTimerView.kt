@@ -17,12 +17,12 @@ class CountDownTimerView @JvmOverloads constructor(
     @AttrRes defStyleAttr: Int = android.R.attr.textViewStyle,
 ) : AppCompatTextView(context, attrs, defStyleAttr) {
 
-    // 是否对用户可见
-    private var isVisibleToUser = false
-
     private val mCountDownTimerHolder by lazy {
         CountDownTimerHolder()
     }
+
+    // 是否对用户可见
+    private var mIsVisibleToUser = false
 
     private var mProvider: CountDownTimerProvider = DefaultCountDownTimerProvider()
 
@@ -78,10 +78,10 @@ class CountDownTimerView @JvmOverloads constructor(
     }
 
     private fun dispatchOnVisibleToUser(isVisibleToUser: Boolean) {
-        if (this.isVisibleToUser == isVisibleToUser) {
+        if (this.mIsVisibleToUser == isVisibleToUser) {
             return
         }
-        this.isVisibleToUser = isVisibleToUser
+        this.mIsVisibleToUser = isVisibleToUser
         if (isVisibleToUser) {
             mCountDownTimerHolder.start()
         } else {
@@ -124,7 +124,7 @@ class CountDownTimerView @JvmOverloads constructor(
             startTime,
             remainingTimeForStart,
             countDownInterval,
-            isStart && isVisibleToUser
+            isStart && mIsVisibleToUser
         )
     }
 

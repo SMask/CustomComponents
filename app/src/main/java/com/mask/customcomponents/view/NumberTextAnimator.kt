@@ -6,6 +6,7 @@ import android.view.View
 import android.view.animation.DecelerateInterpolator
 import android.widget.TextView
 import androidx.core.animation.addListener
+import androidx.core.view.isVisible
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -16,16 +17,16 @@ import java.util.Locale
  */
 class NumberTextAnimator {
 
-    private val animDuration = 2000L
+    private val mAnimDuration = 2000L
 
-    private val animator by lazy {
+    private val mAnimator by lazy {
         ValueAnimator().apply {
             interpolator = DecelerateInterpolator()
-            duration = animDuration
+            duration = mAnimDuration
         }
     }
 
-    private val longTypeEvaluator by lazy {
+    private val mLongTypeEvaluator by lazy {
         object : TypeEvaluator<Long> {
             override fun evaluate(fraction: Float, startValue: Long?, endValue: Long?): Long? {
                 if (startValue == null || endValue == null) {
@@ -36,55 +37,53 @@ class NumberTextAnimator {
         }
     }
 
-    private val attachStateChangeListener by lazy {
+    private val mAttachStateChangeListener by lazy {
         object : View.OnAttachStateChangeListener {
             override fun onViewAttachedToWindow(v: View) {}
 
             override fun onViewDetachedFromWindow(v: View) {
-                animator.cancel()
+                mAnimator.cancel()
             }
         }
     }
 
-    private val numberFormat by lazy {
+    private val mNumberFormat by lazy {
         NumberFormat.getNumberInstance(Locale.US)
     }
 
-    private var startValue: Long? = null
+    private var mStartValue: Long? = null
 
     private fun startAnim(tvContent: TextView, targetValue: Long) {
-        if (startValue == null) {
-            startValue = targetValue
-        }
-        if (startValue == targetValue) {
+        val startValue = mStartValue ?: targetValue
+        this.mStartValue = targetValue
+
+        if (startValue == targetValue || !tvContent.isVisible) {
             setText(tvContent, targetValue)
             return
         }
 
-        animator.cancel()
-        animator.addUpdateListener {
+        mAnimator.cancel()
+        mAnimator.addUpdateListener {
             val currentValue = it.animatedValue as? Long ?: targetValue
             setText(tvContent, currentValue)
         }
-        animator.addListener(
+        mAnimator.addListener(
             onEnd = {
                 setText(tvContent, targetValue)
-                tvContent.removeOnAttachStateChangeListener(attachStateChangeListener)
-                animator.removeAllUpdateListeners()
-                animator.removeAllListeners()
+                tvContent.removeOnAttachStateChangeListener(mAttachStateChangeListener)
+                mAnimator.removeAllUpdateListeners()
+                mAnimator.removeAllListeners()
             }
         )
-        animator.setObjectValues(startValue, targetValue)
-        animator.setEvaluator(longTypeEvaluator)
-        animator.start()
+        mAnimator.setObjectValues(startValue, targetValue)
+        mAnimator.setEvaluator(mLongTypeEvaluator)
+        mAnimator.start()
 
-        tvContent.addOnAttachStateChangeListener(attachStateChangeListener)
-
-        startValue = targetValue
+        tvContent.addOnAttachStateChangeListener(mAttachStateChangeListener)
     }
 
     private fun setText(tvContent: TextView, currentValue: Long) {
-        tvContent.text = numberFormat.format(currentValue)
+        tvContent.text = mNumberFormat.format(currentValue)
     }
 
     /************************************************************ S 外部调用 ************************************************************/
