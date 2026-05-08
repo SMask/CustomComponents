@@ -46,6 +46,7 @@
     <string name="count_down">倒计时</string>
     <string name="is_horizontal">是否水平</string>
     <string name="is_include_edge">是否包含边缘</string>
+    <string name="is_ignore_divider">是否忽略偶数分隔线</string>
 
     <string name="constraint_layout">ConstraintLayout</string>
     <string name="frame_layout">FrameLayout</string>

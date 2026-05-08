@@ -3,6 +3,7 @@ package com.mask.customcomponents.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -75,17 +76,42 @@ class RecyclerViewDividerActivity : AppCompatActivity() {
     }
 
     private fun setListener() {
+        mLinearDivider.setIgnoreStrategy(object : DividerItemDecoration.IIgnoreStrategy {
+            override fun shouldIgnoreDivider(
+                parent: RecyclerView,
+                view: View,
+                position: Int
+            ): Boolean {
+                return shouldDecorationIgnoreDivider(parent, view, position)
+            }
+        })
+
         mBinding.cbHorizontal.setOnCheckedChangeListener { _, isChecked ->
             switchOrientation(isChecked)
         }
         mBinding.cbIncludeEdge.setOnCheckedChangeListener { _, isChecked ->
             switchIncludeEdge(isChecked)
         }
+        mBinding.cbIgnoreDivider.setOnCheckedChangeListener { _, isChecked ->
+            switchIgnoreDivider(isChecked)
+        }
     }
 
     private fun initData() {
         switchOrientation(false)
         switchIncludeEdge(false)
+        switchIgnoreDivider(false)
+    }
+
+    private fun shouldDecorationIgnoreDivider(
+        parent: RecyclerView,
+        view: View,
+        position: Int
+    ): Boolean {
+        if (!mBinding.cbIgnoreDivider.isChecked) {
+            return false
+        }
+        return position % 2 == 0
     }
 
     private fun switchOrientation(isHorizontal: Boolean) {
@@ -102,6 +128,10 @@ class RecyclerViewDividerActivity : AppCompatActivity() {
     private fun switchIncludeEdge(isIncludeEdge: Boolean) {
         mLinearDivider.isIncludeEdge = isIncludeEdge
         mGridDivider.isIncludeEdge = isIncludeEdge
+        mAdapter.notifyDataSetChanged()
+    }
+
+    private fun switchIgnoreDivider(isIgnoreDivider: Boolean) {
         mAdapter.notifyDataSetChanged()
     }
 }

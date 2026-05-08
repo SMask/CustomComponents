@@ -27,8 +27,6 @@ class DividerItemDecoration private constructor(
     private val mDividerWidth = dividerWidth
     private val mDividerHeight = dividerHeight
 
-    private val mIgnoredPositionList = mutableListOf<Int>() // 忽略分隔线的位置集合
-
     var isIncludeEdge = false // 是否包含边缘(垂直布局：是否有上下分隔线； 水平布局：是否有左右分隔线；)
 
     companion object {
@@ -207,14 +205,6 @@ class DividerItemDecoration private constructor(
     }
 
     /**
-     * 是否是 忽略的位置
-     */
-    private fun isViewIgnored(parent: RecyclerView, view: View): Boolean {
-        val position = getViewPosition(parent, view)
-        return mIgnoredPositionList.contains(position)
-    }
-
-    /**
      * 是否需要 绘制分隔线(左/上)
      *
      * 是第一排 且 包含边缘
@@ -237,18 +227,32 @@ class DividerItemDecoration private constructor(
         return (isIncludeEdge || !isViewLast) && !isViewIgnored
     }
 
-    /************************************************************ S 外部调用 ************************************************************/
+    /************************************************************ S 忽略分隔线 ************************************************************/
 
-    fun clearIgnoredPositionList() {
-        mIgnoredPositionList.clear()
+    /**
+     * 忽略策略接口
+     */
+    interface IIgnoreStrategy {
+
+        /**
+         * 判断是否应该忽略分隔线
+         */
+        fun shouldIgnoreDivider(parent: RecyclerView, view: View, position: Int): Boolean
     }
 
-    fun setIgnoredPositionList(ignoredPositionList: List<Int>?) {
-        clearIgnoredPositionList()
-        if (!ignoredPositionList.isNullOrEmpty()) {
-            mIgnoredPositionList.addAll(ignoredPositionList)
-        }
+    private var mIgnoreStrategy: IIgnoreStrategy? = null
+
+    /**
+     * 是否是 忽略的位置
+     */
+    private fun isViewIgnored(parent: RecyclerView, view: View): Boolean {
+        val position = getViewPosition(parent, view)
+        return mIgnoreStrategy?.shouldIgnoreDivider(parent, view, position) ?: false
     }
 
-    /************************************************************ E 外部调用 ************************************************************/
+    fun setIgnoreStrategy(ignoreStrategy: IIgnoreStrategy?) {
+        mIgnoreStrategy = ignoreStrategy
+    }
+
+    /************************************************************ E 忽略分隔线 ************************************************************/
 }
